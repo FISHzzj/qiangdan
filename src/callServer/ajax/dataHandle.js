@@ -648,5 +648,24 @@ export default {
 
         return list
 
+    },
+
+
+
+    auctionauction1login(data){
+        if ( mistake(data) ) return false
+        return {
+            openid: data.result.openid,
+            // ip: data.newclientip
+        }
+
     }
+
+
+
+
+
+
+
+
 }

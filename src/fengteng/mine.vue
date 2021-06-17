@@ -1,7 +1,7 @@
 <template>
     <div class="index">
         <div class="header">
-            <div class="top flex ali_center flex_between">
+            <div class="top flex ali_center flex_between" @click="tuichu">
                 <span></span>
                 <img src="@/assets/images/logout.png" alt="" />
             </div>
@@ -116,6 +116,14 @@ export default {
                 },
             }
         };
+    },
+    mounted(){},
+    methods:{
+        tuichu(){
+            this.$router.push({
+                name: 'ft_login'
+            })
+        }
     }
 };
 </script>

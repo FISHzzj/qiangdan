@@ -16,7 +16,7 @@ export default [
                 props: false,//1111,
                 meta:{
                     index: 1,
-                    mustLogin: false,//
+                    mustLogin: true,//
                 }
             },
         ]
@@ -28,7 +28,7 @@ export default [
         props: false,//1111,
         meta:{
             index: 1,
-            mustLogin: false,//
+            mustLogin: true,//
         }
     },
     {
@@ -38,7 +38,7 @@ export default [
         props: false,//1111,
         meta:{
             index: 1,
-            mustLogin: false,//
+            mustLogin: true,//
         }
     },
     {
@@ -48,7 +48,7 @@ export default [
         props: false,//1111,
         meta:{
             index: 1,
-            mustLogin: false,//
+            mustLogin: true,//
         }
     },
     {
@@ -58,7 +58,7 @@ export default [
         props: false,//1111,
         meta:{
             index: 1,
-            mustLogin: false,//
+            mustLogin: true,//
         }
     },
     {
@@ -68,7 +68,7 @@ export default [
         props: false,//1111,
         meta:{
             index: 1,
-            mustLogin: false,//
+            mustLogin: true,//
         }
     },
     {
@@ -78,7 +78,7 @@ export default [
         props: false,//1111,
         meta:{
             index: 1,
-            mustLogin: false,//
+            mustLogin: true,//
         }
     },
     {
@@ -88,7 +88,7 @@ export default [
         props: false,//1111,
         meta:{
             index: 1,
-            mustLogin: false,//
+            mustLogin: true,//
         }
     },
     {
@@ -98,7 +98,7 @@ export default [
         props: false,//1111,
         meta:{
             index: 1,
-            mustLogin: false,//
+            mustLogin: true,//
         }
     },
     {
@@ -108,7 +108,7 @@ export default [
         props: false,//1111,
         meta:{
             index: 1,
-            mustLogin: false,//
+            mustLogin: true,//
         }
     },
     {
@@ -118,7 +118,7 @@ export default [
         props: false,//1111,
         meta:{
             index: 1,
-            mustLogin: false,//
+            mustLogin: true,//
         }
     },
     {
@@ -128,7 +128,7 @@ export default [
         props: false,//1111,
         meta:{
             index: 1,
-            mustLogin: false,//
+            mustLogin: true,//
         }
     },
     {
@@ -138,7 +138,7 @@ export default [
         props: false,//1111,
         meta:{
             index: 1,
-            mustLogin: false,//
+            mustLogin: true,//
         }
     },
     {
@@ -148,7 +148,7 @@ export default [
         props: false,//1111,
         meta:{
             index: 1,
-            mustLogin: false,//
+            mustLogin: true,//
         }
     },
     {
@@ -158,7 +158,7 @@ export default [
         props: false,//1111,
         meta:{
             index: 1,
-            mustLogin: false,//
+            mustLogin: true,//
         }
     },
     {
@@ -168,7 +168,7 @@ export default [
         props: false,//1111,
         meta:{
             index: 1,
-            mustLogin: false,//
+            mustLogin: true,//
         }
     },
     {
@@ -178,7 +178,7 @@ export default [
         props: false,//1111,
         meta:{
             index: 1,
-            mustLogin: false,//
+            mustLogin: true,//
         }
     },
     {
@@ -188,7 +188,7 @@ export default [
         props: false,//1111,
         meta:{
             index: 1,
-            mustLogin: false,//
+            mustLogin: true,//
         }
     },
     {
@@ -198,7 +198,7 @@ export default [
         props: false,//1111,
         meta:{
             index: 1,
-            mustLogin: false,//
+            mustLogin: true,//
         }
     },
     {
@@ -208,7 +208,7 @@ export default [
         props: false,//1111,
         meta:{
             index: 1,
-            mustLogin: false,//
+            mustLogin: true,//
         }
     },
     {
@@ -218,7 +218,7 @@ export default [
         props: false,//1111,
         meta:{
             index: 1,
-            mustLogin: false,//
+            mustLogin: true,//
         }
     },
     {
@@ -228,7 +228,7 @@ export default [
         props: false,//1111,
         meta:{
             index: 1,
-            mustLogin: false,//
+            mustLogin: true,//
         }
     }
 ]

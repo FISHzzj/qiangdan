@@ -56,4 +56,8 @@ export default {
     feedbackList: `${common}do=mobile&r=points.feedback.details`, // 反饋列表
     get_qq: `${common}do=mobile&r=points.feedback.get_qq`, // 获取QQ
     sdcustomerService: `${common}do=mobile&r=points.sd_customer_service`, //联系我们
+
+    auctionauction1login: `${common}do=mobile&r=auction.auction1.login`, // 登录
+
+
 }

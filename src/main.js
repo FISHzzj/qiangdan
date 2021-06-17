@@ -53,16 +53,18 @@ window.apiready = async function() {
 // 进行路由 之前, 进行 判断
 router.beforeEach((to,from,next) => {
     let isLogin = localStorage.getItem("openid") || false //獲取本地存儲的openid, 判斷狀態
+    console.log(isLogin)
+    console.log(to.meta.mustLogin)
     window.scroll(0, 0) //每次切換頁面, 都滾動到頂部
     // 如果 必須登錄, 且 未登錄, 則 跳轉 登錄界面
     if (to.meta.mustLogin && !isLogin) {
         next({
-            name:'login'
+            name:'ft_login'
         })
     } else if ( isLogin && !to.meta.mustLogin ) {
         // 已經登錄 且 頁面無需登錄, 跳轉 資產頁面
         next({
-            name: 'capital'
+            name: 'ft_index'
         })
     } else if ( !to.meta.mustLogin || (to.meta.mustLogin && isLogin) ) {
         // 如果 無需登錄 或者 必須登錄且 已經 登錄, 則直接跳轉

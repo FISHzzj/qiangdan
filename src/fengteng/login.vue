@@ -14,7 +14,7 @@
                 </div>
             </div>
             <div class="tips" @click="$router.push('/ft_register')">暂无账号？去注册</div>
-            <div class="submit">
+            <div class="submit" @click="login">
                 完成并登录
             </div>
         </div>
@@ -53,6 +53,46 @@ export default {
                     this.second = 60;
                 }
             }, 1000)
+        },
+        async login(){
+            let {phone, code} = this
+            if (!phone || !code) {
+				return Toast({
+					message: '请填写账号和验证码',
+					duration: 1000,
+				})
+			}
+			if (phone.length < 11) {
+				return Toast({
+					message: '请填写正确的手机号',
+					duration: 1000,
+				})
+			}
+            // 進行登錄 提示
+            const toast = Toast.loading({
+                message: '登入中...',
+                forbidClick: true, // 禁用背景点击
+                loadingType: 'spinner',
+                position: 'bottom',
+                duration: 0
+            })
+            // 發送 ajax
+            let res = await $ajax('auctionauction1login',{
+                mobile:phone,
+                verifycode: code
+            }, () => {
+                toast.clear()
+            })
+            // 如果返回爲 false ,則中斷函數
+            if (!res) return false
+            console.log(res)
+            // 保存 openid 以及 ip 到本地
+            localStorage.setItem('openid', res.openid)
+            // localStorage.setItem('ip', res.ip)
+            localStorage.setItem('mobile', phone)
+            this.$router.push({
+                name: 'ft_index'
+            })
         }
     },
     destroyed() {
