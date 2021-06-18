@@ -46,12 +46,32 @@ export default {
     data() {
         return {
             status: 0,
-            title: this.$route.query.title,
-            type: this.$route.params.type,
-            detail: ""
+            // title: this.$route.query.title,
+            // type: this.$route.params.type,
+            detail: "",
+            qishu: "", 
+            gid: "",
+            id: "",
+            title:"",
+            money: "",
+            money1: "",
+            wx_img: "",
+            zfb_img: "",
+            thumb: "",
         }
     },
+    created(){
+        let {qishu, gid, id} = this.$route.query
+        this.getData()
+    },
     methods: {
+        async getData(){
+            let res = await $ajax('auctionauction1get_auction_order', {id: this.id, gid: this.goodid, qishu: this.qishu})
+            if(!res) return false
+            Object.keys(keys).forEach((key) => {
+                this[key] = res[key]
+            })
+        },
         changenav(status) {
             this.status = status;
         }

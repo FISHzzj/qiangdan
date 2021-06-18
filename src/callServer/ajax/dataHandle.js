@@ -659,7 +659,86 @@ export default {
             // ip: data.newclientip
         }
 
-    }
+    },
+    auctionauction1(data){
+        if ( mistake(data) ) return false
+        let {remai, lunbo} = data.result
+        return{
+            remai,
+            lunbo
+        }
+
+    },
+    auctionauction1getCategory(data){
+        if ( mistake(data) ) return false
+        let {category, lunbo} = data.result
+        return{
+            category,
+            lunbo
+        }
+    },
+    auctionauction1get_goods(data){
+        if ( mistake(data) ) return false
+        let {goods} = data.result
+        return{
+            goods
+        }
+    },
+    auctionauction1auction_yy(data){
+        if ( mistake(data) ) return false
+        return {
+            msg: data.result.message
+        }
+    },
+    auctionauction1goodsdetail(data){
+        if ( mistake(data) ) return false
+        let {goods} = data.result
+        return {
+            goods
+        }
+    },
+    auctionauction1get_auction(data){
+        if ( mistake(data) ) return false
+        let {qishu, gid, id} = data.result
+        return{
+            qishu,
+            gid,
+            id
+        }
+    },
+    auctionauction1get_auction_order(data){
+        if ( mistake(data) ) return false
+        let {title, money, money1, wx_img, zfb_img, thumb} = data.result
+        return{
+            title, 
+            money, 
+            money1, 
+            wx_img, 
+            zfb_img, 
+            thumb
+        }
+    },
+    auctionauction1pay_order(data){
+        if ( mistake(data) ) return false
+        return {
+            msg: data.result.message
+        }
+
+
+    },
+    auctionauction1createimg(data){
+        if ( mistake(data) ) return false
+        let {imgurl} = data.result
+        return {
+            imgurl
+        }
+    },
+    auctionauction1sk_set(data){
+        if ( mistake(data) ) return false
+        return {
+            msg: data.result.message
+        }
+    },
 
 
 

@@ -15,8 +15,8 @@
         </div>
         <!-- 首页轮播 -->
         <swiper ref="mySwiper" class="mySwiper" :options="swiperOptions">
-            <swiper-slide v-for="(item, index) in 5" :key="index">
-                <img src="@/assets/images/vip3.png" alt="">
+            <swiper-slide v-for="(item, index) in lunbo" :key="index">
+                <img :src="item.thumb" alt="">
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
@@ -25,7 +25,19 @@
                 <img src="@/assets/images/chuizi.png" alt="" />
                 <div>热门拍卖</div>
             </div>
-            <div class="item" @click="$router.push('/ft_goodsList/top?title=上午场')">
+            <div class="item" @click="gonext(item.id)" v-for="(item, index) in category" :key="index">
+                <div class="status">风腾优品</div>
+                <img :src="item.advimg" alt="" class="cover" />
+                <div class="storeInfo flex ali_center">
+                    <div class="name flex ali_center">
+                        <span></span>
+                        <p>{{item.name}}</p>
+                        <span></span>
+                    </div>
+                    <!-- <p class="time">(00:00:00-00:00:00)</p> -->
+                </div>
+            </div>
+            <!-- <div class="item" @click="$router.push('/ft_goodsList/bottom?title=下午场')">
                 <div class="status">风腾优品</div>
                 <img src="@/assets/images/getOrdersHeader.png" alt="" class="cover" />
                 <div class="storeInfo flex ali_center">
@@ -36,19 +48,7 @@
                     </div>
                     <p class="time">(00:00:00-00:00:00)</p>
                 </div>
-            </div>
-            <div class="item" @click="$router.push('/ft_goodsList/bottom?title=下午场')">
-                <div class="status">风腾优品</div>
-                <img src="@/assets/images/getOrdersHeader.png" alt="" class="cover" />
-                <div class="storeInfo flex ali_center">
-                    <div class="name flex ali_center">
-                        <span></span>
-                        <p>上午场</p>
-                        <span></span>
-                    </div>
-                    <p class="time">(00:00:00-00:00:00)</p>
-                </div>
-            </div>
+            </div> -->
         </div>
         <bottom-nav></bottom-nav>
     </div>
@@ -105,8 +105,34 @@ export default {
                     el: ".swiper-pagination",
                     clickable: true, //允许分页点击跳转
                 },
-            }
+            },
+            category:[],
+            lunbo:[],
         };
+    },
+    mounted(){
+        this.getData()
+    },
+    methods:{
+        async getData(){
+            let res = await $ajax('auctionauction1getCategory', {})
+            if(!res) return false
+            let {category, lunbo} = res
+            this.category = category.parent[0]
+            console.log( this.category )
+            this.lunbo = lunbo
+
+        },
+        gonext(id){
+            console.log(id)
+            // return
+            this.$router.push({
+                name: 'ft_goodslist',
+                query:{
+                    id: id
+                }
+            })
+        },
     }
 };
 </script>

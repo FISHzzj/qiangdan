@@ -1,7 +1,7 @@
 <template>
     <div class="index">
         <div class="header">
-            <div class="top flex ali_center flex_between" @click="tuichu">
+            <div class="top flex ali_center flex_between" @click="logout">
                 <span></span>
                 <img src="@/assets/images/logout.png" alt="" />
             </div>
@@ -119,11 +119,26 @@ export default {
     },
     mounted(){},
     methods:{
-        tuichu(){
-            this.$router.push({
-                name: 'ft_login'
-            })
-        }
+        logout() {
+            Dialog.confirm({
+                title: '温馨提示',
+                message: '是否退出登录？',
+            }).then(async () => {
+                // on close
+                // let res = await $ajax('logout', {})
+                // if(!res) return false
+                
+                // Toast(res.msg)
+                localStorage.removeItem('openid')
+                localStorage.removeItem('mobile')
+
+                this.$router.push({
+                    name: "ft_login"
+                })
+               
+            });
+        },
+        
     }
 };
 </script>

@@ -58,6 +58,18 @@ export default {
     sdcustomerService: `${common}do=mobile&r=points.sd_customer_service`, //联系我们
 
     auctionauction1login: `${common}do=mobile&r=auction.auction1.login`, // 登录
+    auctionauction1: `${common}do=mobile&r=auction.auction1`, // 首页
+    auctionauction1getCategory: `${common}do=mobile&r=auction.auction1.getCategory`, // 传家
+    auctionauction1get_goods: `${common}do=mobile&r=auction.auction1.get_goods`, // 商品列表
+    auctionauction1auction_yy: `${common}do=mobile&r=auction.auction1.auction_yy`, // 商品预约
+    auctionauction1goodsdetail: `${common}do=mobile&r=auction.auction1.goodsdetail`, // 商品详情
+    auctionauction1get_auction: `${common}do=mobile&r=auction.auction1.get_auction`, // 竞拍下单扣除手续费
+    auctionauction1get_auction_order: `${common}do=mobile&r=auction.auction1.get_auction_order`, // 获取竞拍页面数据
+    auctionauction1pay_order: `${common}do=mobile&r=auction.auction1.pay_order`, // 支付竞拍订单
+    auctionauction1createimg: `${common}do=mobile&r=auction.auction1.createimg`, // 上传图片
+    auctionauction1sk_set: `${common}do=mobile&r=auction.auction1.createimg`, // 上传图片
+
+
 
 
 }

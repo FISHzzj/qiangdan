@@ -6,8 +6,8 @@
         </div>
         <!-- 首页轮播 -->
         <swiper ref="mySwiper" class="mySwiper" :options="swiperOptions">
-            <swiper-slide v-for="(item, index) in 5" :key="index">
-                <img src="@/assets/images/vip3.png" alt="">
+            <swiper-slide v-for="(item, index) in lunbo" :key="index">
+                <img :src="item.thumb" alt="">
             </swiper-slide>
         </swiper>
         <!-- 公告 -->
@@ -29,9 +29,9 @@
                 <div>热门拍卖</div>
                 <span></span>
             </div>
-            <div class="item" v-for="item in 5" :key="item">
+            <div class="item" v-for="(item, index) in remai" :key="index">
                 <div class="status">拍卖中</div>
-                <img src="@/assets/images/getOrdersHeader.png" alt="" class="cover" />
+                <img :src="item.thumb" alt="" class="cover" />
                 <div class="storeInfo flex ali_center">
                     <img class="logo" src="@/assets/images/defaultAvatar.jpg" alt="" />
                     <span class="name">盛世和田玉</span>
@@ -88,10 +88,23 @@ export default {
                     stopOnLastSlide: false,
                     disableOnInteraction: false,
                 },
-            }
+            },
+            remai:[],
+            lunbo: [],
         };
     },
+    created(){
+        this.getData()
+    },
     methods: {
+        async getData(){
+            let res = await $ajax('auctionauction1', {})
+            if(!res) return false
+            let {remai, lunbo} = res
+            this.remai = remai
+            this.lunbo = lunbo
+
+        },
         goitem(e) {
             this.$router.push({
                 path: e.url

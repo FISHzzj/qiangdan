@@ -15,20 +15,20 @@
         <div class="goodsInfo">
             <div class="list">
                 <div class="item flex ali_center">
-                    <img src="@/assets/images/vip2.png" class="proimg" alt="">
+                    <img :src="thumb" class="proimg" alt="">
                     <div class="right flex flex_between">
-                        <p class="name">这里是名字这里是名字这里是名字</p>
-                        <p class="price_num">￥300.00</p>
+                        <p class="name">{{title}}</p>
+                        <p class="price_num">￥{{money1}}</p>
                     </div>
                 </div>
                 <div class="flex flex_between item1 ali_center">
                     <div class="left_1">实付金额</div>
-                    <div class="right_1">￥200</div>
+                    <div class="right_1">￥{{money}}</div>
                 </div>
-                <div class="flex flex_between item1 ali_center">
+                <!-- <div class="flex flex_between item1 ali_center">
                     <div class="left_1">运费</div>
                     <div class="right_1 on">5</div>
-                </div>
+                </div> -->
             </div>
         </div>
         <!-- 积分商品显示 -->
@@ -89,10 +89,11 @@
             />
         </div>
         <div style="height:12vw;"></div>
-        <div class="footer">提交结算</div>
+        <div class="footer" @click="pay">提交结算</div>
     </div>
 </template>
 <script>
+import { Toast } from 'vant';
 export default {
     name: "orderSubmit",
     data() {
@@ -106,19 +107,50 @@ export default {
             fileList: [
                 { url: 'https://img01.yzcdn.cn/vant/leaf.jpg' },
             ],
+            qishu: "", 
+            gid: "",
+            id: "",
+            title:"",
+            money: "",
+            money1: "",
+            wx_img: "",
+            zfb_img: "",
+            thumb: "",
         };
     },
     mounted() {
+        let {qishu, gid, id} = this.$route.query
+        this.getData()
     },
     methods:{
+        async getData(){
+            let res = await $ajax('auctionauction1get_auction_order', {id: this.id, gid: this.goodid, qishu: this.qishu})
+            if(!res) return false
+            Object.keys(keys).forEach((key) => {
+                this[key] = res[key]
+            })
+        },
         change(type) {
             this.payType = type;
-            this.img = 'https://img.yzcdn.cn/vant/cat.jpeg'
+            if(type == 'zhifubao'){
+                this.img = this.zfb_img
+            }else {
+                this.img = this.wx_img
+            }
+            
         },
-        afterRead(file) {
+        async afterRead(file) {
             // 此时可以自行将文件上传至服务器
             console.log(file);
+             let res = await $ajax('auctionauction1createimg', {img: file })
+            if(!res) return false
+            this.fileList[0].url = res.imgurl
         },
+        async pay(){
+             let res = await $ajax('auctionauction1get_auction_order', {id: this.id, gid: this.goodid, qishu: this.qishu, img: ''})
+            if(!res) return false
+            Toast(res.msg)
+        }
     }
 };
 </script>

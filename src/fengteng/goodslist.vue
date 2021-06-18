@@ -2,19 +2,27 @@
     <div class="goodslist">
         <div class="header">
             <van-icon @click="$router.go(-1)" name="arrow-left" />
-            <p>{{title}}</p>
+            <p>商品列表</p>
         </div>
         <div style="height:12vw"></div>
-        <div class="list flex flex_between">
-            <div v-for="item in 20" :key="item" class="item" @click="$router.push('/ft_goodsdetail/1')">
-                <img src="@/assets/images/getOrdersHeader.png" alt="">
-                <div class="name">DF-2222</div>
-                <div class="bottom flex flex_between">
-                    <span class="price">￥300.00</span>
-                    <span class="status">已锁定</span>
-                </div>
+        
+         <van-list
+            v-model="loading"
+            :finished="finished"
+            :finished-text="'我是有底线的'"
+            @load="getData"
+            >
+            <div class="list flex flex_between">
+                <router-link  :to="{name: 'ft_goodsdetail', query:{id:`${item.id}`}}"  tag="div"  v-for="(item, index ) in goods" :key="index" class="item  ">
+                    <img :src="item.thumb" alt="">
+                    <div class="name">{{item.title}}</div>
+                    <div class="bottom flex flex_between">
+                        <span class="price">￥{{item.marketprice}}</span>
+                        <span class="status">{{item.status_s == 1 ? '售卖中' : '售窑'}}</span>
+                    </div>
+                </router-link>
             </div>
-        </div>
+        </van-list>
     </div>
 </template>
 <script>
@@ -22,10 +30,36 @@ export default {
     name: "ft_goodslist",
     data() {
         return {
-            title: this.$route.query.title,
-            type: this.$route.params.type,
-            detail: ""
+            // title: this.$route.query.title,
+            // type: this.$route.params.type,
+            detail: "",
+            id: "",
+            goods:[],
+            page: 1,
+            limit: 10,
+            finished: false,
+            loading: false,
         }
+    },
+    created(){
+        this.id = this.$route.query.id
+        // this.getData()
+    },
+    methods:{
+        async getData(){
+            let res = await $ajax('auctionauction1get_goods', {id: this.id, page: this.page})
+            if(!res) return false
+            this.page++
+            
+            this.goods.push(...res.goods)
+            // // // 加载状态结束
+            this.loading = false
+            if (res.goods.length === 0) {
+                this.finished = true //加载完成
+            } 
+            // this.lunbo = lunbo
+
+        },
     }
 }
 </script>
@@ -37,6 +71,7 @@ export default {
         left: 0;
         width: 100%;
         height: 12vw;
+        background: #fff;
         p {
             text-align: center;
             line-height: 12vw;
@@ -61,7 +96,7 @@ export default {
             .name {
                 font-size: 3.2vw;
                 color: #666;
-                line-height: 8.5vw;
+                line-height: 4.5vw;
                 padding: 0 2vw;
             }
             .bottom {

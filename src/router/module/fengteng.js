@@ -21,16 +21,16 @@ export default [
             },
         ]
     },
-    {
-        path: '/ft_index', // 首页
-        name: 'ft_index',
-        component: () => import("@/fengteng/index.vue"),
-        props: false,//1111,
-        meta:{
-            index: 1,
-            mustLogin: true,//
-        }
-    },
+    // {
+    //     path: '/ft_index', // 首页
+    //     name: 'ft_index',
+    //     component: () => import("@/fengteng/index.vue"),
+    //     props: false,//1111,
+    //     meta:{
+    //         index: 1,
+    //         mustLogin: false,//
+    //     }
+    // },
     {
         path: '/ft_login', // 登录
         name: 'ft_login',
@@ -38,7 +38,7 @@ export default [
         props: false,//1111,
         meta:{
             index: 1,
-            mustLogin: true,//
+            mustLogin: false,//
         }
     },
     {
@@ -48,11 +48,11 @@ export default [
         props: false,//1111,
         meta:{
             index: 1,
-            mustLogin: true,//
+            mustLogin: false,//
         }
     },
     {
-        path: '/ft_mine', // 注册
+        path: '/ft_mine', // 个人中心
         name: 'ft_mine',
         component: () => import("@/fengteng/mine.vue"),
         props: false,//1111,
@@ -122,7 +122,7 @@ export default [
         }
     },
     {
-        path: '/ft_goodsdetail/:id?', // 商品详情
+        path: '/ft_goodsdetail', // 商品详情
         name: 'ft_goodsdetail',
         component: () => import("@/fengteng/goodsdetail.vue"),
         props: false,//1111,
