@@ -25,8 +25,14 @@ export default {
                     name: "传家",
                     img:  require('@/assets/images/home/home.png'),
                     img_sel:  require('@/assets/images/home/home_sel.png'),
-                    url: "/ft_store/1"
+                    url: "/ft_store"
                 },
+                // {
+                //     name: "商城",
+                //     img:  require('@/assets/images/home/home.png'),
+                //     img_sel:  require('@/assets/images/home/home_sel.png'),
+                //     url: "/ft_market"
+                // },
                 {
                     name: "团队",
                     img:  require('@/assets/images/home/home.png'),

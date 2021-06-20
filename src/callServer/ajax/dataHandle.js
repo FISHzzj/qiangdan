@@ -739,7 +739,168 @@ export default {
             msg: data.result.message
         }
     },
+    auctionauction1sk_list(data){
+        if ( mistake(data) ) return false
+        let {zfb, wx, yhk} = data.result 
+        return{
+            zfb: zfb || "",
+            wx: wx || "",
+            yhk: yhk || ""
+        }
+    },
+    auctionauction1address(data){
+        if ( mistake(data) ) return false
+        let {list} = data.result 
+        let dataarr = []
+        list.forEach((item, index)=>{
+            dataarr.push({
+                id: item.id,
+                name: item.realname,
+                tel: item.mobile,
+                province: item.province,
+                city:item.city,
+                county:item.area,
+                address: item.address,
+                isDefault: item.is_default == 1 ? true : false,
+                areaCode: item.areaCode
+            })
+        })
+        return {
+            dataarr
+        }
 
+    },
+    auctionauction1address_edit(data){
+        if ( mistake(data) ) return false
+        return {
+            msg: data.result.message
+        }
+    },
+    auctionauction1address_del(data){
+        if ( mistake(data) ) return false
+        return {
+            msg: data.result.message
+        }
+    },
+    auctionauction1address_add(data){
+        if ( mistake(data) ) return false
+        return {
+            msg: data.result.message
+        }
+    },
+    auctionauction1mai_order_list(data){
+        if ( mistake(data) ) return false
+        let {list} = data.result
+        return {
+            list
+        }
+    },
+    auctionauction1mai_order_detail(data){
+        if ( mistake(data) ) return false
+        let {list, sell_list} = data.result
+        let newObj = {}
+        Object.assign(newObj,list,sell_list);
+
+        return {
+            newObj
+        }
+    },
+    auctionauction1sell_order_list(data){
+        if ( mistake(data) ) return false
+        let {list} = data.result
+        return {
+            list
+        }
+    },
+    auctionauction1mai_order_status(data){
+        if ( mistake(data) ) return false
+        return {
+            msg: data.result.message
+        }
+    },
+    auctionauction1sell_order_status(data){
+        if ( mistake(data) ) return false
+        return {
+            msg: data.result.message
+        }
+    },
+    auctionauction1get_team(data){
+        if ( mistake(data) ) return false
+        let {list, ding} = data.result
+        return {
+            list,
+            ding
+        }
+
+    },
+    auctionauction1money_log(data){
+        if ( mistake(data) ) return false
+        let list = data.result.list
+        return{
+            list
+        }
+
+    },
+    auctionauction1invite(data){
+        if ( mistake(data) ) return false
+        let {id, avatar, nickname, code, qrcode} = data.result
+        return{
+            id, 
+            avatar, 
+            nickname, 
+            code, 
+            qrcode
+        }
+
+    },
+    auctionauction1cs_goods(data){
+        if ( mistake(data) ) return false
+        let {goods} = data.result
+        return{
+            list: goods
+        }
+
+    },
+    auctionauction1cs_goods_detail(data){
+        if ( mistake(data) ) return false
+        let {id, marketprice, thumb, thumb_url, total, title, content} = data.result.goods
+        return {
+            detailId:id,
+            marketprice,
+            thumb,
+            thumb_url,
+            total,
+            title,
+            content
+        }
+    },
+    auctionauction1cs_pay_list(data){
+        if ( mistake(data) ) return false
+        let {goods, address} = data.result
+        let newObj = {
+            gid: goods.id,
+            marketprice: goods.marketprice,
+            thumb: goods.thumb,
+            thumb_url: goods.thumb_url,
+            total: goods.total,
+            title: goods.title,
+            content: goods.content,
+            aid: address.id,
+            isdefault: address.isdefault,
+            province: address.province,
+            city: address.city,
+            area: address.area,
+            address: address.address,
+            mobile: address.mobile,
+            realname: address.realname
+
+        }
+        // Object.assign(newObj,goods,address);
+        return {
+            newObj
+
+        }
+    }
 
 
 

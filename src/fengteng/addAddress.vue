@@ -1,5 +1,9 @@
 <template>
     <div class="addAddress">
+        <div class="header">
+            <van-icon @click="$router.go(-1)" name="arrow-left" />
+            <p>{{title}}</p>
+        </div>
         <van-address-edit
             :area-list="areaList"
             show-delete
@@ -7,6 +11,7 @@
             show-search-result
             :search-result="searchResult"
             :area-columns-placeholder="['请选择', '请选择', '请选择']"
+            :address-info="AddressInfo"
             @save="onSave"
             @delete="onDelete"
             @change-detail="onChangeDetail"
@@ -22,16 +27,109 @@ export default {
         return {
             areaList,
             searchResult: [],
+            // id:"", 
+            // realname: "", 
+            // mobile: "", 
+            // province: "",
+            // city: "",
+            // area: "",
+            // address: "",
+            title: "",
+            AddressInfo:{}
         };
     },
     mounted() {
+        let {title, addressInfo} = this.$route.query
+        console.log(title)
+        console.log(addressInfo)
+        // console.log(obj)
+        this.title = title
+        this.AddressInfo = addressInfo
+
+        // let AddressInfo = {}
+        // Object.keys(obj).forEach((key)=>{
+        //     this[key]= obj[key]
+        //     AddressInfo[key] = obj[key]
+        // })
+        // this.AddressInfo = AddressInfo
+        // console.log(this.AddressInfo)
     },
     methods:{
-        onSave() {
-            Toast('save');
+
+        async onSave(content) {
+            // Toast('save');
+            let addr = new Object;
+            // console.log('content');
+            // console.log(content);
+            // console.log(this.title)
+     
+            
+            console.log(addr)
+            if(this.title == '修改地址'){
+                addr = {
+                    id:content.id,
+                    realname:content.name,
+                    mobile:content.tel,
+                    city:content.city,
+                    area:content.county,
+                    is_default:content.isDefault == true ? 1 : 0,
+                    // postal_code:content.postal_code,
+                    province:content.province,
+                    areaCode:content.areaCode,
+                    address:content.province+content.city+content.county+content.addressDetail
+                };
+                 let res = await $ajax('auctionauction1address_edit', addr)
+                if(!res) return false
+
+                Toast(res.msg)
+            }else{
+                addr = {
+                    // id:content.id,
+                    realname:content.name,
+                    mobile:content.tel,
+                    city:content.city,
+                    area:content.county,
+                    is_default:content.isDefault == true ? 1 : 0,
+                    // postal_code:content.postal_code,
+                    province:content.province,
+                    areaCode:content.areaCode,
+                    address:content.province+content.city+content.county+content.addressDetail
+                };
+                 let res = await $ajax('auctionauction1address_add', addr)
+                if(!res) return false
+
+                Toast(res.msg)
+            }
+           
+            this.$router.push({
+                name: 'ft_addressList'
+            })
+            // let is_add = this.list.push(addr);
+            // 判断是否选中默认
+            // if (content.is_default) {
+            //     this.chosenAddressId = len;
+            // }
+            // if (is_add) {
+            //     this.show1 = false;
+            // }
+            // console.log(this.list);
         },
-        onDelete() {
-            Toast('delete');
+        async onDelete(content) {
+            // Toast('delete');
+            // if(this.title == '修改地址'){
+            //     // addr['id']
+            //     addr['id'] = content.id 
+            // }
+            if(!content.id) return false
+            // console.log(content.id)
+            let res = await $ajax('auctionauction1address_del', {id: content.id})
+            if(!res) return false
+
+            Toast(res.msg)
+            this.$router.push({
+                name: 'ft_addressList'
+            })
+
         },
         onChangeDetail(val) {
             if (val) {

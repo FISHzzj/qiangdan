@@ -2,51 +2,56 @@
   <div class="orderdetail">
     <div class="header">
         <van-icon @click="$router.go(-1)" name="arrow-left" />
+        <p>{{titletop}}</p>
     </div>
     <div style="height:12vw"></div>
     <div class="status flex flex_between ali_center">
-      <div class="left">
+      <!-- <div class="left">
         <div>请付款</div>
         <p>您已经拍成功，请及时付款</p>
-      </div>
-      <div class="right flex ali_center">
+      </div> -->
+      <!-- <div class="right flex ali_center">
         <van-icon name="clock-o" />
         <div class="flex ali_center">
           <span>剩余时间</span>
           <CountDown :datatime="datatime" navclass="on_1" :currenttime="currenttime"></CountDown>
         </div>
-      </div>
+      </div> -->
     </div>
     <div class="goodsInfo flex flex_between ali_center">
       <div class="left flex">
-        <img src="@/assets/images/alipay.png" alt="" />
+        <img :src="thumb" alt="" />
         <div>
           <p class="type">名称</p>
-          <div class="name">df-dffffff</div>
-          <p class="type">收益率</p>
-          <div class="num">5%</div>
+          <div class="name">{{title}}</div>
+          <p class="type">期数</p>
+          <div class="num">{{qishu}}</div>
         </div>
       </div>
       <div class="right">
         <div class="type">实付金额</div>
-        <div class="num">￥4000.00</div>
+        <div class="num">￥{{moneys}}</div>
       </div>
     </div>
-    <div @click="showType = true" class="changetype flex flex_between ali_center">
-      <div class="left flex ali_center" v-if="type == 'card'">
+    <div class="changetype flex flex_between ali_center">
+      <!-- <div class="left flex ali_center" v-if="type == 'card'">
         <img src="@/assets/images/card.png" alt="" />
         <p>银联</p>
-      </div>
-      <div class="left flex ali_center" v-else>
+      </div> -->
+      <div class="left flex ali_center" v-if="pay_type == 2">
         <img src="@/assets/images/alipay.png" alt="" />
         <p>支付宝</p>
       </div>
+       <div class="left flex ali_center" v-if="pay_type == 1">
+        <img src="@/assets/images/weixin.png" alt="" />
+        <p>微信</p>
+      </div>
       <div class="right flex ali_center">
-        <span>切换方式</span>
+        <span>支付方式</span>
         <van-icon name="arrow" />
       </div>
     </div>
-    <div class="list" v-if="type == 'card'">
+    <!-- <div class="list" v-if="type == 'card'">
       <div class="item flex ali_center flex_between">
         <div class="left">银行卡号：111111</div>
         <div class="copy" data-clipboard-text="11111">复制</div>
@@ -59,21 +64,21 @@
         <div class="left">开户行：33333</div>
         <div class="copy" data-clipboard-text="33333">复制</div>
       </div>
-    </div>
-    <div class="list" v-else>
-      <div class="item flex ali_center flex_between">
+    </div> -->
+    <div class="list" v-if="zfb_img">
+      <!-- <div class="item flex ali_center flex_between">
         <div class="left">支付宝账户：44444</div>
         <div class="copy" data-clipboard-text="444444">复制</div>
-      </div>
-      <div class="item flex ali_center flex_between">
+      </div> -->
+      <!-- <div class="item flex ali_center flex_between">
         <div class="left">支付宝姓名：55555</div>
         <div class="copy" data-clipboard-text="55555">复制</div>
-      </div>
+      </div> -->
     </div>
     <div class="wrapper flex ali_center">
-      <img @click="show_image" v-if="true" src="@/assets/images/centerInfoBg.png" alt="">
-      <p>提示：付款时请不要备注任何信息，推荐只用支付宝，银行卡号转账</p>
-      <div @click="showUploader = true">上传支付凭证</div>
+      <img @click="show_image" v-if="true" :src="pay_img" alt="">
+      <!-- <p>提示：付款时请不要备注任何信息，推荐只用支付宝，银行卡号转账</p> -->
+      <!-- <div @click="showUploader = true">上传支付凭证</div> -->
     </div>
     <div class="footer">
       <div class="item flex flex_between ali_center">
@@ -82,23 +87,29 @@
           <span>卖方</span>
         </div>
         <div class="right flex ali_center">
-          <span>1111111111</span>
+          <span>{{name}}</span>
           <van-icon name="phone" />
         </div>
       </div>
-      <div class="item flex flex_between ali_center">
-        <div class="left flex ali_center">
+      <div class="item flex " style="flex-direction: row;flex-wrap: wrap;">
+        <div class="left flex ali_center" style="width: 100%;margin: 10px 0;">
           <van-icon name="share" size="14" />
-          <span>紧急联系人</span>
+          <span>卖方收款码</span>
         </div>
-        <div class="right flex ali_center">
-          <span>1111111111</span>
-          <van-icon name="phone" />
+        <div class="right flex flex_between ali_center">
+          <!-- <span>1111111111</span>
+          <van-icon name="phone" /> -->
+          <img :src="wx_img" alt="" style="width:50%;margin-right:10px;height:150px" />
+          <img :src="zfb_img" alt="" style="width:50%;height:150px" />
+
         </div>
       </div>
+
     </div>
-    <div @click="showType = false" class="mask" v-if="showType"></div>
-    <div class="typeList" v-if="showType">
+    <div @click="getmoney" v-if="titletop == '卖单详情' && statusstr == '带确认收款'"><van-button type="primary" block>确认收款</van-button></div>
+
+    <!-- <div @click="showType = false" class="mask" v-if="showType"></div> -->
+    <!-- <div class="typeList" v-if="showType">
       <div class="title flex flex_between ali_center">
         <span @click="showType = false">取消</span>
         <p>请选择支付方式</p>
@@ -111,9 +122,9 @@
         </div>
         <van-icon name="success" color="#fc4142" v-if="type1 == item.type" />
       </div>
-    </div>
+    </div> -->
     <div @click="showImage = false" class="mask1" v-if="showImage"></div>
-    <img v-if="showImage" class="pingzheng" src="@/assets/images/centerInfoBg.png" alt="">
+    <img v-if="showImage" class="pingzheng" :src="pay_img" alt="">
     <div class="mask2" v-if="showUploader" @click="showUploader = false"></div>
     <div class="uploader" v-if="showUploader">
       <van-uploader :max-count="1" v-model="fileList" :after-read="afterRead" />
@@ -125,15 +136,13 @@
   </div>
 </template>
 <script>
+import { Toast } from 'vant';
 import {copy} from '../func/copy'
 import CountDown from "./common/CountDown.vue";
 export default {
   name: "ft_orderdetail",
   components: {
     CountDown
-  },
-  mounted() {
-    this.clipboard = copy('.copy')
   },
   data() {
     return {
@@ -158,11 +167,41 @@ export default {
       type: "card",
       currenttime: 1500000000,
       datatime: 15000000000,
-      id: this.$route.params.id,
-      detail: ""
+      // id: this.$route.params.id,
+      detail: "",
+      qishu: "",
+      title: "",
+      total: "",
+      moneys: "",
+      statusstr: "",
+      createtime: "",
+      wx_img: "",
+      zfb_img: "",
+      name: "",
+      pay_img: "",
+      thumb: "",
+      pay_type: "",
+      titletop: "",
     }
   },
+  mounted() {
+    this.clipboard = copy('.copy')
+    this.id = this.$route.query.id
+    this.titletop = this.$route.query.title
+    this.getData()
+  },
   methods: {
+    async getData(){
+        let res = await $ajax('auctionauction1mai_order_detail', {id: this.id})
+        if(!res) return false
+        console.log(res)
+        let resnewObj = res.newObj
+        Object.keys(resnewObj).forEach((key)=>{
+          this[key] = resnewObj[key]
+        })
+        
+        
+    },
     afterRead(res) {
       console.log(res);
     },
@@ -176,6 +215,15 @@ export default {
     changeType(item) {
       this.typeinfo = item;
       this.type1 = item.type;
+    },
+    async getmoney(){
+      let res = await $ajax('auctionauction1sell_order_status', {id: this.id})
+      if(!res) return false
+      console.log(res)
+      Toast(res.msg)
+      this.$router.push({
+        name: 'ft_store'
+      })
     }
   }
 }
@@ -328,7 +376,7 @@ export default {
   .footer {
     padding: 10vw 4vw 3vw;
     .item {
-      height: 10vw;
+      // height: 50vw;
       .left {
         .van-icon {
           transform: rotate(180deg);

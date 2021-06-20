@@ -67,7 +67,37 @@ export default {
     auctionauction1get_auction_order: `${common}do=mobile&r=auction.auction1.get_auction_order`, // 获取竞拍页面数据
     auctionauction1pay_order: `${common}do=mobile&r=auction.auction1.pay_order`, // 支付竞拍订单
     auctionauction1createimg: `${common}do=mobile&r=auction.auction1.createimg`, // 上传图片
-    auctionauction1sk_set: `${common}do=mobile&r=auction.auction1.createimg`, // 上传图片
+    auctionauction1sk_set: `${common}do=mobile&r=auction.auction1.sk_set`, // 添加收款设置
+    auctionauction1sk_list: `${common}do=mobile&r=auction.auction1.sk_list`, // 收款设置
+    auctionauction1address: `${common}do=mobile&r=auction.auction1.address`, // 收货地址列表
+    auctionauction1address_edit: `${common}do=mobile&r=auction.auction1.address_edit`, // 收货地址编辑
+    auctionauction1address_del: `${common}do=mobile&r=auction.auction1.address_del`, // 收货地址删除
+    auctionauction1address_add: `${common}do=mobile&r=auction.auction1.address_add`, // 收货地址新增
+    auctionauction1mai_order_list: `${common}do=mobile&r=auction.auction1.mai_order_list`, // 买单订单列表
+    auctionauction1mai_order_detail: `${common}do=mobile&r=auction.auction1.mai_order_detail`, // 买单详情
+    auctionauction1sell_order_list: `${common}do=mobile&r=auction.auction1.sell_order_list`, // 卖单订单
+    auctionauction1mai_order_status: `${common}do=mobile&r=auction.auction1.mai_order_status`, // 买单转售
+    auctionauction1sell_order_status: `${common}do=mobile&r=auction.auction1.sell_order_status`, // 卖家确任收款
+    auctionauction1get_team: `${common}do=mobile&r=auction.auction1.get_team`, // 我的团队
+    auctionauction1money_log: `${common}do=mobile&r=auction.auction1.money_log`, // 我的钱包
+    auctionauction1invite: `${common}do=mobile&r=auction.auction1.invite`, // 邀请码
+    auctionauction1cs_goods: `${common}do=mobile&r=auction.auction1.cs_goods`, // 积分商城商品列表
+    auctionauction1cs_goods_detail: `${common}do=mobile&r=auction.auction1.cs_goods_detail`, // 积分商城商品详情列表
+    auctionauction1cs_pay_list: `${common}do=mobile&r=auction.auction1.cs_pay_list`, // 积分商城商品详情列表
+
+
+    
+    
+
+    
+    
+    
+
+    
+
+    
+    
+
 
 
 

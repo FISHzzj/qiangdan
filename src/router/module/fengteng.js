@@ -92,7 +92,7 @@ export default [
         }
     },
     {
-        path: '/ft_addAddress/:id?', // 编辑收货地址
+        path: '/ft_addAddress', // 编辑收货地址
         name: 'ft_addAddress',
         component: () => import("@/fengteng/addAddress.vue"),
         props: false,//1111,
@@ -102,7 +102,7 @@ export default [
         }
     },
     {
-        path: '/ft_store/:id?', // 商家信息
+        path: '/ft_store', // 传家
         name: 'ft_store',
         component: () => import("@/fengteng/store.vue"),
         props: false,//1111,
@@ -212,7 +212,7 @@ export default [
         }
     },
     {
-        path: '/ft_orderdetail/:id', // 订单详情
+        path: '/ft_orderdetail', // 订单详情
         name: 'ft_orderdetail',
         component: () => import("@/fengteng/orderdetail.vue"),
         props: false,//1111,
@@ -222,9 +222,39 @@ export default [
         }
     },
     {
-        path: '/ft_jfgoodsDetail/:id', // 订单详情
+        path: '/ft_jfgoodsDetail/:id', // 积分商品详情
         name: 'ft_jfgoodsDetail',
         component: () => import("@/fengteng/jifen_goodsdetail.vue"),
+        props: false,//1111,
+        meta:{
+            index: 1,
+            mustLogin: true,//
+        }
+    },
+    {
+        path: '/ft_market', // 积分商城
+        name: 'ft_market',
+        component: () => import("@/fengteng/market.vue"),
+        props: false,//1111,
+        meta:{
+            index: 1,
+            mustLogin: true,//
+        }
+    },
+    {
+        path: '/ft_orderList', // 积分订单列表
+        name: 'ft_orderList',
+        component: () => import("@/fengteng/orderList.vue"),
+        props: false,//1111,
+        meta:{
+            index: 1,
+            mustLogin: true,//
+        }
+    },
+    {
+        path: '/ft_jf_orderdetail', // 积分详情
+        name: 'ft_jf_orderdetail',
+        component: () => import("@/fengteng/jf_orderdetail.vue"),
         props: false,//1111,
         meta:{
             index: 1,

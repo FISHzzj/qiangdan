@@ -18,6 +18,14 @@
                     <p class="num">0.01</p>
                 </div>
                 <div class="item">
+                    <p class="type">积分</p>
+                    <p class="num">0.01</p>
+                </div>
+                <div class="item">
+                    <p class="type">竞拍币</p>
+                    <p class="num">0.01</p>
+                </div>
+                <div class="item">
                     <p class="type">累计佣金</p>
                     <p class="num">0.01</p>
                 </div>

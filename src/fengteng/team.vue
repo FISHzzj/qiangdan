@@ -5,25 +5,32 @@
         <div class="top flex flex_between ali_center">
             <div class="item">
                 <div class="type">代理人数</div>
-                <div class="num">0</div>
+                <div class="num">{{dl}}</div>
             </div>
             <div class="item">
                 <div class="type">今日订单数</div>
-                <div class="num">0</div>
+                <div class="num">{{dd}}</div>
             </div>
             <div class="item">
                 <div class="type">今日佣金</div>
-                <div class="num">￥0</div>
+                <div class="num">{{yj}}</div>
             </div>
         </div>
         <div class="list">
-            <div class="item flex ali_center" v-for="item in 10" :key="item">
-                <img src="@/assets/images/dui.png" alt="" />
-                <div class="info flex">
-                    <p class="name">用户名：<span> 昵称</span></p>
-                    <p class="type">订单<span>0</span>代理<span>0</span>佣金<span>0</span></p>
+            <!-- <van-list
+                v-model="loading"
+                :finished="finished"
+                :finished-text="'我是有底线的'"
+                @load="getData"
+            > -->
+                <div class="item flex ali_center" v-for="(item, index) in list" :key="index">
+                    <img :src="item.avatar" alt="" />
+                    <div class="info flex">
+                        <p class="name">用户名：<span> {{item.nickname}}</span></p>
+                        <p class="type">订单id<span>{{item.id}}</span>代理<span>{{item.dl}}</span>佣金<span>{{item.yj}}</span></p>
+                    </div>
                 </div>
-            </div>
+            <!-- </van-list> -->
         </div>
         <bottom-nav></bottom-nav>
     </div>
@@ -35,6 +42,42 @@ export default {
     components: {
         bottomNav
     },
+    data(){
+        return{
+            dd: '',
+            dl: '',
+            yj: '',
+            page: 1,
+            list:[],
+            limit: 10,
+            finished: false,
+            loading: false,
+        }
+    },
+    mounted(){
+        this.getData()
+    },
+    methods:{
+        async getData(){
+            let res = await $ajax('auctionauction1get_team', {})
+            if(!res) return false
+            console.log(res)
+            let {dd, dl, yj} = res.ding
+            this.dd = dd || 0
+            this.dl = dl || 0
+            this.yj = yj || 0
+            this.list = res.list 
+            // this.page++
+            
+            // this.list.push(...res.list)
+            // // // // 加载状态结束
+            // this.loading = false
+            // if (res.list.length === 0) {
+            //     this.finished = true //加载完成
+            // } 
+        },
+        
+    }
 }
 </script>
 <style lang="less" scoped>
@@ -47,6 +90,7 @@ export default {
         height: 12vw;
         line-height: 12vw;
         text-align: center;
+        background: #fff;
     }
     .top {
         padding: 3vw 0;

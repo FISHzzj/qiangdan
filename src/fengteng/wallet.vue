@@ -9,19 +9,26 @@
             <div class="type">钱包余额(元)</div>
             <div class="num">0.01</div>
         </div>
-        <select class="select" name="" id="" v-model="date">
-            <option value="month">本月</option>
-            <option value="week">本周</option>
-            <option value="year">本年</option>
+        <select class="select" name="" id="" v-model="date" @change="selecthandle(date)">
+            <option value="2">本月</option>
+            <option value="1">本周</option>
+            <option value="3">本年</option>
         </select>
         <div class="list">
-            <div class="item flex flex_between ali_center" :class="{first: index == 0}" v-for="(item, index) in 20" :key="item">
-                <div class="left">
-                    <div class="time">2020-20-20 20:20:20</div>
-                    <div class="title">微信充值</div>
+            <van-list
+                v-model="loading"
+                :finished="finished"
+                :finished-text="'我是有底线的'"
+                @load="getData"
+            >
+                <div class="item flex flex_between ali_center" :class="{first: index == 0}" v-for="(item, index) in list" :key="index">
+                    <div class="left">
+                        <div class="time">{{item.time}}</div>
+                        <div class="title">{{item.content}}</div>
+                    </div>
+                    <div class="right">{{item.money}}</div>
                 </div>
-                <div class="right">0.01</div>
-            </div>
+            </van-list>
         </div>
         <div style="height:12vw"></div>
         <div class="footer flex">
@@ -35,7 +42,43 @@ export default {
     name: "ft_content",
     data() {
         return {
-            date: "month"
+            date: "1",
+            // status: '1'
+            // list: [],
+            page: 1,
+            list:[],
+            limit: 10,
+            finished: false,
+            loading: false,
+        }
+    },
+    mounted(){
+        this.getData()
+    },
+    methods:{
+        selecthandle(e){
+            console.log(e)
+            this.date = e
+            this.list = []
+            this.page = []
+            this.getData()
+
+        },  
+        async getData(){
+            let res = await $ajax('auctionauction1money_log', {status: this.date, page: this.page})
+            if(!res) return false
+            console.log(res)
+            // this.list = res.list
+            this.page++
+            
+            this.list.push(...res.list)
+            // // // 加载状态结束
+            this.loading = false
+            if (res.list.length === 0) {
+                this.finished = true //加载完成
+            } 
+            
+
         }
     }
 }

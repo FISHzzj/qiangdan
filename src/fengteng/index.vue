@@ -79,6 +79,11 @@ export default {
                     name: "邀请好友",
                     url: "/ft_invite"
                 },
+                {
+                    img: require("@/assets/images/vip3.png"),
+                    name: "商城",
+                    url: "/ft_market"
+                },
             ],
             swiperOptions: {
                 loop: true,

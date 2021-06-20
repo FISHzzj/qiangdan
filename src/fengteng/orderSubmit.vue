@@ -34,23 +34,23 @@
         <!-- 积分商品显示 -->
         <div class="payways">
             <div class="title">支付方式</div>
-            <div class="item flex ali_center flex_between" @click="change('weixin')">
+            <div class="item flex ali_center flex_between" @click="change('1')">
                 <div class="left flex ali_center">
                     <van-icon name="gold-coin-o" />
                     <span>微信支付</span>
                 </div>
                 <div class="right">
-                    <van-icon color="#fc4142" v-if="payType == 'weixin'" name="checked" />
+                    <van-icon color="#fc4142" v-if="payType == '1'" name="checked" />
                     <div v-else></div>
                 </div>
             </div>
-            <div class="item flex ali_center flex_between" @click="change('zhifubao')">
+            <div class="item flex ali_center flex_between" @click="change('2')">
                 <div class="left flex ali_center">
                     <van-icon name="gold-coin-o" />
                     <span>支付宝</span>
                 </div>
                 <div class="right">
-                    <van-icon color="#fc4142" v-if="payType == 'zhifubao'" name="checked" />
+                    <van-icon color="#fc4142" v-if="payType == '2'" name="checked" />
                     <div v-else></div>
                 </div>
             </div>
@@ -101,12 +101,10 @@ export default {
             value: '',
             show: false,
             showKeyboard: true,
-            payType: 'PPVB',
+            payType: '1',
             address: {},
             img:'https://img.yzcdn.cn/vant/cat.jpeg',
-            fileList: [
-                { url: 'https://img01.yzcdn.cn/vant/leaf.jpg' },
-            ],
+            fileList: [],
             qishu: "", 
             gid: "",
             id: "",
@@ -120,15 +118,20 @@ export default {
     },
     mounted() {
         let {qishu, gid, id} = this.$route.query
+        this.qishu = qishu
+        this.gid = gid
+        this.id = id
         this.getData()
     },
     methods:{
         async getData(){
-            let res = await $ajax('auctionauction1get_auction_order', {id: this.id, gid: this.goodid, qishu: this.qishu})
+            let res = await $ajax('auctionauction1get_auction_order', {id: this.id, qishu: this.qishu})
             if(!res) return false
-            Object.keys(keys).forEach((key) => {
+            
+            Object.keys(res).forEach((key) => {
                 this[key] = res[key]
             })
+            this.img = this.wx_img
         },
         change(type) {
             this.payType = type;
@@ -142,14 +145,18 @@ export default {
         async afterRead(file) {
             // 此时可以自行将文件上传至服务器
             console.log(file);
-             let res = await $ajax('auctionauction1createimg', {img: file })
+             let res = await $ajax('auctionauction1createimg', {img: file.content })
             if(!res) return false
             this.fileList[0].url = res.imgurl
         },
         async pay(){
-             let res = await $ajax('auctionauction1get_auction_order', {id: this.id, gid: this.goodid, qishu: this.qishu, img: ''})
+            if(this.fileList.length == 0) return Toast('请上传凭证')
+             let res = await $ajax('auctionauction1pay_order', {id: this.id, qishu: this.qishu, img: this.fileList[0].url, pay_type: this.payType})
             if(!res) return false
             Toast(res.msg)
+            this.$router.push({
+                name: 'ft_store'
+            })
         }
     }
 };

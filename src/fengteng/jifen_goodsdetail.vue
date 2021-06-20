@@ -14,21 +14,21 @@
     </div>
     <div style="height:12vw"></div>
     <swiper ref="mySwiper" class="mySwiper" :options="swiperOptions">
-      <swiper-slide v-for="(item, index) in 5" :key="index">
-        <img src="@/assets/images/vip3.png" alt="">
+      <swiper-slide v-for="(item, index) in thumb_url" :key="index">
+        <img :src="item" alt="">
       </swiper-slide>
     </swiper>
-    <div class="store_name">这里是名字</div>
-    <div class="price">积分：<span>99</span></div>
+    <div class="store_name">{{title}}</div>
+    <div class="price">积分：<span>{{marketprice}}</span></div>
     <div class="stock_fee flex flex_between ali_center">
-      <span class="stock">库存：999</span>
-      <span class="fee">邮费：10</span>
+      <span class="stock">库存：{{total}}</span>
+      <!-- <span class="fee">邮费：10</span> -->
     </div>
     <div class="detail">
       <div class="title">商品详情</div>
-      <div class="content" v-html="11111"></div>
+      <div class="content" v-html="content"></div>
     </div>
-    <div class="submit on">立即购买</div>
+    <div class="submit " @click="pay">立即购买</div>
   </div>
 </template>
 <script>
@@ -42,7 +42,7 @@ export default {
   },
   data() {
     return {
-      id: this.$route.params.id,
+      id: "",
       swiperOptions: {
         loop: true,
         speed: 2000,
@@ -51,7 +51,37 @@ export default {
           stopOnLastSlide: false,
           disableOnInteraction: false,
         },
-      }
+      },
+      detailId:"",
+      marketprice:"",
+      thumb:"",
+      thumb_url:"",
+      total:"",
+      title:"",
+      content:""
+    }
+  },
+  mounted(){
+    this.id = this.$route.query.id
+    this.getData()
+  },
+  methods:{
+    async getData(){
+            let res = await $ajax('auctionauction1cs_goods_detail', { goods_id: this.id})
+            if(!res) return false
+            console.log(res)
+            Object.keys(res).forEach((key)=>{
+              this[key] = res[key]
+            })
+    },
+    pay(){
+
+      this.$router.push({
+        name: 'ft_jf_orderdetail',
+        query:{
+          id: this.id
+        }
+      })
     }
   }
 }
@@ -104,7 +134,7 @@ export default {
     padding: 0 4vw;
   }
   .detail {
-    padding: 0 4vw;
+    padding: 0 4vw 20vw;
     .title {
       line-height: 10vw;
       font-size: 3.73vw;

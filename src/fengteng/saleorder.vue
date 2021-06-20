@@ -2,7 +2,7 @@
     <div class="orderList">
         <div class="header">
             <van-icon @click="$router.go(-1)" name="arrow-left" />
-            <p>我的买单</p>
+            <p>我的卖单</p>
         </div>
         <div style="height:12vw"></div>
         <div class="nav flex ali_center flex_around">
@@ -12,31 +12,51 @@
             <div class="item" :class="{on:status == 3}" @click="changenav(3)">已完成</div>
         </div>
         <div class="list">
-            <div class="item" @click="id = 1" v-for="item in 20" :key="item">
-                <div class="top flex flex_between ali_center">
-                    <div class="left flex ali_center" @click.stop="$router.push('/ft_store/1')">
-                        <img src="@/assets/images/dui.png" alt="" />
-                        <span>店铺名字</span>
-                        <van-icon name="arrow" />
-                    </div>
-                    <div class="right">买家已取消</div>
-                </div>
-                <div class="infos flex flex_between ali_center">
-                    <div class="left flex ali_center">
-                        <img src="@/assets/images/dui.png" alt="" />
-                        <div>
-                            <p class="name">商品名字</p>
-                            <p class="storeId">商家:000112232411</p>
+            <van-list
+                v-model="loading"
+                :finished="finished"
+                :finished-text="'我是有底线的'"
+                @load="getData"
+            >
+                <div class="item" @click="godetail(item.show_status, item.id, item.qishu)"  v-for="(item, index) in list" :key="index">
+                    <div class="top flex flex_between ali_center" >
+                        <div class="left flex ali_center" >
+                            <img src="@/assets/images/dui.png" alt="" />
+                            <!-- <span>店铺名字</span>
+                            <van-icon name="arrow" /> -->
+                        </div>
+                        <div class="right" >{{item.statusstr}}</div>
+
+                     </div>
+                    <div class="infos flex flex_between ali_center" >
+                        <div class="left flex ali_center">
+                            <img src="@/assets/images/dui.png" alt="" />
+                            <div>
+                                <p class="name">{{item.title}}}</p>
+                                <!-- <p class="storeId">商家:000112232411</p> -->
+                            </div>
+                        </div>
+                        <div class="right">
+                            <p class="num">X{{item.total}}</p>
+                            <p class="price">￥{{item.moneys}}</p>
                         </div>
                     </div>
-                    <div class="right">
-                        <p class="num">X1</p>
-                        <p class="price">￥300.00</p>
+                    <div class="infos flex flex_between ali_center">
+                        <div class="left flex ali_center">
+                            <div>  
+                                <div class="time">创建时间：{{item.createtime}}</div>
+                                <div class="time">期数：{{item.qishu}}</div>
+
+                            </div>
+                            
+                        </div>
+                        <div class="right">
+                            <van-button v-if="item.show_status == 2 " type="primary" size="mini" >确认收款</van-button>
+
+                        </div>
                     </div>
                 </div>
-                <div class="time">创建时间;2020-20-20 20：20：20</div>
-                <div class="time">订单号：3132564321</div>
-            </div>
+            </van-list>
         </div>
     </div>
 </template>
@@ -46,14 +66,57 @@ export default {
     data() {
         return {
             status: 0,
-            title: this.$route.query.title,
-            type: this.$route.params.type,
-            detail: ""
+            // title: this.$route.query.title,
+            // type: this.$route.params.type,
+            detail: "",
+            page: 1,
+            list:[],
+            limit: 10,
+            finished: false,
+            loading: false,
         }
     },
+    mounted(){
+        // this.getData()
+    },
     methods: {
+        async getData(){
+            let res = await $ajax('auctionauction1sell_order_list', {show_status: this.status, page: this.page})
+            if(!res) return false
+            console.log(res)
+            // this.list = res.list
+            // console.log(this.list)
+             this.page++
+            
+            this.list.push(...res.list)
+            // // // 加载状态结束
+            this.loading = false
+            if (res.list.length === 0) {
+                this.finished = true //加载完成
+            } 
+        },
+        godetail(status, id, qishu){
+            if(status == 1 || status == 2 || status == 3){
+                this.$router.push({name: 'ft_orderdetail', query: {
+                    // qishu,
+                    id,
+                    title: '卖单详情'
+
+                }})
+            }else if(status == 0){
+                // this.$router.push({name: 'ft_goodsdetail', query: {
+                //     // qishu,
+                //     id
+
+                // }})
+            }
+        },
         changenav(status) {
             this.status = status;
+            this.page = 1
+            this.list = []
+            this.getData()
+
         }
     }
 }
