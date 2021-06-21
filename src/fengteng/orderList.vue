@@ -7,35 +7,43 @@
         <div style="height:25vw"></div>
         <div class="nav flex">
           <a href="javascript:;">
-            <div class="item" @click="changenav(0)" :class="{on:status==0}">全部订单</div>
+            <div class="item" @click="changenav(4)" :class="{on:status==4}">全部订单</div>
           </a>
           <a href="javascript:;">
-            <div class="item" @click="changenav(1)" :class="{on:status==1}">待付款</div>
+            <div class="item" @click="changenav(0)" :class="{on:status==0}">待付款</div>
           </a>
           <a href="javascript:;">
-            <div class="item" @click="changenav(2)" :class="{on:status==2}">待发货</div>
+            <div class="item" @click="changenav(1)" :class="{on:status==1}">待发货</div>
           </a>
           <a href="javascript:;">
-            <div class="item" @click="changenav(3)" :class="{on:status==3}">待收货</div>
+            <div class="item" @click="changenav(2)" :class="{on:status==2}">待收货</div>
           </a>
           <a href="javascript:;">
-            <div class="item" @click="changenav(4)" :class="{on:status==4}">已完成</div>
+            <div class="item" @click="changenav(3)" :class="{on:status==3}">已完成</div>
           </a>
         </div>
         <div class="list">
-          <div class="item" v-for="item in 20" :key="item">
-            <div class="top flex flex_between">
-              <div class="left flex">
-                <img src="@/assets/images/alipay.png" alt="" />
-                <span>这里是名字</span>
+          <van-list
+                v-model="loading"
+                :finished="finished"
+                :finished-text="'我是有底线的'"
+                @load="getData"
+            >
+            <div class="item" v-for="(item,index) in list" :key="index">
+              <div class="top flex flex_between">
+                <div class="left flex">
+                  <img :src="item.thumbw4" alt="" />
+                  <span>{{item.title}}</span> 
+                  <span>X{{item.goods_num}}</span>
+                </div>
+                <div class="right">{{item.statusstr}}</div>
               </div>
-              <div class="right">待付款</div>
+              <div class="bottom flex flex_between ali_center">
+                <div class="left">价格: <span>{{item.price}}</span></div>
+                <div class="right" v-if="status==0" @click="gopay(item.id)">立即付款</div>
+              </div>
             </div>
-            <div class="bottom flex flex_between ali_center">
-              <div class="left">积分： <span>196</span></div>
-              <div class="right">立即付款</div>
-            </div>
-          </div>
+          </van-list>
         </div>
     </div>
 </template>
@@ -44,12 +52,46 @@ export default {
     name: "ft_content",
     data() {
         return {
-            status: 0
+            status: 4,
+            page: 1,
+            list:[],
+            limit: 10,
+            finished: false,
+            loading: false,
         }
     },
+    mounted(){
+      // this.getData()
+    },
     methods: {
+      async getData(){
+          let res = await $ajax('auctionauction1order_list', {page: this.page, status: this.status })
+          if(!res) return false
+          console.log(res)
+          // this.list = res.list
+          // console.log(this.list)
+            this.page++
+          
+          this.list.push(...res.list)
+          // // // 加载状态结束
+          this.loading = false
+          if (res.list.length === 0) {
+              this.finished = true //加载完成
+          } 
+      },
       changenav(status) {
         this.status = status;
+        
+        this.page = 1
+        this.list = []
+       
+        this.getData()
+      },
+      gopay(id){
+        this.$router.push({
+          name:'ft_orderdetail',
+          id
+        })
       }
     }
 }

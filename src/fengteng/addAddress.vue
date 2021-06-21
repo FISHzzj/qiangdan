@@ -35,16 +35,18 @@ export default {
             // area: "",
             // address: "",
             title: "",
-            AddressInfo:{}
+            AddressInfo:{},
+            gid: "",
         };
     },
     mounted() {
-        let {title, addressInfo} = this.$route.query
+        let {title, addressInfo, gid} = this.$route.query
         console.log(title)
         console.log(addressInfo)
         // console.log(obj)
         this.title = title
         this.AddressInfo = addressInfo
+        this.gid = gid  
 
         // let AddressInfo = {}
         // Object.keys(obj).forEach((key)=>{
@@ -101,9 +103,7 @@ export default {
                 Toast(res.msg)
             }
            
-            this.$router.push({
-                name: 'ft_addressList'
-            })
+            this.$router.go(-1)
             // let is_add = this.list.push(addr);
             // 判断是否选中默认
             // if (content.is_default) {
@@ -126,9 +126,7 @@ export default {
             if(!res) return false
 
             Toast(res.msg)
-            this.$router.push({
-                name: 'ft_addressList'
-            })
+            this.$router.go(-1)
 
         },
         onChangeDetail(val) {

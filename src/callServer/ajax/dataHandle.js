@@ -662,10 +662,11 @@ export default {
     },
     auctionauction1(data){
         if ( mistake(data) ) return false
-        let {remai, lunbo} = data.result
+        let {remai, lunbo, guanggao} = data.result
         return{
             remai,
-            lunbo
+            lunbo,
+            guanggao
         }
 
     },
@@ -900,8 +901,64 @@ export default {
             newObj
 
         }
+    },
+    auctionauction1cs_buy(data){
+        if ( mistake(data) ) return false
+        return {
+            msg: data.result.message
+        }
+    },
+    auctionauction1sysset_text(data){
+        if ( mistake(data) ) return false
+        return {
+            text: data.result.text
+        }
+    },
+    auctionauction1get_cz(data){
+        if ( mistake(data) ) return false
+        let {wx_img, zfb_img} = data.result
+        return {
+            wx_img,
+            zfb_img
+        }
+    },
+    auctionauction1pay_cz(data){
+        if ( mistake(data) ) return false
+        return {
+            msg: data.result.message
+        }
+    },
+    auctionauction1withdraw_submit(data){
+        if ( mistake(data) ) return false
+        return {
+            msg: data.result.message
+        }
+    },  
+    auctionauction1get_member(data){
+        if ( mistake(data) ) return false
+        let {member} = data.result
+        return {
+            member
+        }
+    },
+    auctionauction1invite(data){
+        if ( mistake(data) ) return false
+        let {id, avatar, nickname, code, qrcode} = data.result
+        return {
+            id, 
+            avatar, 
+            nickname, 
+            code, 
+            qrcode
+        }
+    },
+    auctionauction1order_list(data){
+        if ( mistake(data) ) return false
+        let {list} = data.result
+        return {
+            list
+        }
     }
-
 
 
 

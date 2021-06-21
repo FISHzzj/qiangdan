@@ -84,8 +84,22 @@ export default {
     auctionauction1cs_goods: `${common}do=mobile&r=auction.auction1.cs_goods`, // 积分商城商品列表
     auctionauction1cs_goods_detail: `${common}do=mobile&r=auction.auction1.cs_goods_detail`, // 积分商城商品详情列表
     auctionauction1cs_pay_list: `${common}do=mobile&r=auction.auction1.cs_pay_list`, // 积分商城商品详情列表
+    auctionauction1cs_buy: `${common}do=mobile&r=auction.auction1.cs_buy`, // 积分商城支付页面
+    auctionauction1sysset_text: `${common}do=mobile&r=auction.auction1.sysset_text`, // 文本页面接口
+    auctionauction1get_cz: `${common}do=mobile&r=auction.auction1.get_cz`, // 充值页面渲染
+    auctionauction1pay_cz: `${common}do=mobile&r=auction.auction1.pay_cz`, // 提交充值
+    auctionauction1withdraw_submit: `${common}do=mobile&r=auction.auction1.withdraw_submit`, // 提现申请
+    auctionauction1get_member: `${common}do=mobile&r=auction.auction1.get_member`, // 会员中心
+    auctionauction1invite: `${common}do=mobile&r=auction.auction1.invite`, // 邀请码页面
+    auctionauction1order_list: `${common}do=mobile&r=auction.auction1.order_list`, // 邀请码页面
+
+    
 
 
+    
+    
+    
+    
     
     
 

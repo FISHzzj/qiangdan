@@ -9,7 +9,7 @@ import '@/assets/css/font_icon_6164.css'
 
 import Vant from 'vant'
 import 'vant/lib/index.css'
-import { Lazyload, Dialog, Toast  } from 'vant';
+import { Lazyload, Dialog, Toast } from 'vant';
 
 import ajax from './callServer/ajax'
 import * as apicloud from './apicloud'
@@ -29,6 +29,7 @@ window.Dialog = Dialog
 window.Toast = Toast
 window.$ajax = ajax
 window.apicloud = undefined
+// window.router = router
 
 // 将 多语言模块 挂载在 vue 的原型连上
 let lang = localStorage.getItem('lang') || 'cn' // 获取语言, 默认为简体
@@ -53,8 +54,8 @@ window.apiready = async function() {
 // 进行路由 之前, 进行 判断
 router.beforeEach((to,from,next) => {
     let isLogin = localStorage.getItem("openid") || false //獲取本地存儲的openid, 判斷狀態
-    console.log(isLogin)
-    console.log(to.meta.mustLogin)
+    // console.log(isLogin)
+    // console.log(to.meta.mustLogin)
     window.scroll(0, 0) //每次切換頁面, 都滾動到頂部
     // 如果 必須登錄, 且 未登錄, 則 跳轉 登錄界面
     if (to.meta.mustLogin && !isLogin) {

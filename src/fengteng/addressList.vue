@@ -12,54 +12,15 @@
                 default-tag-text="默认"
                 @add="onAdd"
                 @edit="onEdit"
+                @select="onSelect"
             />
         </div>
- 
-        <!-- <div v-if="list.length>0">
-            <van-list
-                v-model="loading"
-                :finished="finished"
-                :finished-text="'我是有底线的'"
-                @load="getData"
-            >
-                <div class="item" v-for="(item, index ) in list" :key="index">
-                    <div class="top flex ali_center">
-                        <van-icon name="location-o" color="rgb(155,99,99)" size="30" />
-                        <div class="right flex flex_between ali_center">
-                            <div>
-                                <p class="name_phone">姓名：{{item.realname}}  {{item.mobile}}</p>
-                                <p class="adddetail">{{item.province}}{{item.city}}{{item.area}}{{item.address}}</p>
-                            </div>
-                            <div>
-                                <router-link :to="{name: 'ft_addAddress', query:{
-                                id:`${item.id}`, 
-                                name: `${item.realname}`, 
-                                tel: `${item.mobile}`, 
-                                province: `${item.province}`,
-                                city: `${item.city}`,
-                                county: `${item.area}`,
-                                address_detail: `${item.address}`,
-                          
-                                }}"  class="edit" >编辑</router-link>
-                                <p class="del" @click="delhandle">删除</p>
-                                <p class="isdefault" v-if="isdefault == 1">设成默认</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </van-list>
-        </div>
- 
-        <div class="item" v-else>
-            <div class="top flex ali_center">
-                <van-icon name="location-o" color="rgb(155,99,99)" size="30" />
-                <div class="right">暂无地址</div>
-            </div>
-        </div>
-        <div class="footer" @click="addaddress">新增收货地址</div> -->
+
     </div>
 </template>
 <script>
+import Bus from '@/assets/bus.js';   //bus.js
+
 export default {
     name: "addressList",
     data() {
@@ -86,9 +47,12 @@ export default {
                 //     address: '浙江省杭州市拱墅区莫干山路 50 号',
                 // },
             ],
+            gid: "",
         };
     },
     mounted() {
+        this.gid = this.$route.query.id
+
         this.getData()
     },
     methods:{
@@ -108,42 +72,22 @@ export default {
             } 
         },
         onAdd() {
-            // Toast('新增地址');
-            // let addressInfo = new Object;
-      
-            // addressInfo = {
-            //     id:item.id,
-            //     name:item.name,
-            //     tel:item.tel,
-            //     province:item.province,
-            //     city:item.city,
-            //     county:item.county,
-            //     areaCode: item.areaCode,
-            //     addressDetail:item.address,
-            //     // postal_code:item.postal_code,
-            //     is_default:item.is_default,
-            // }
-            // this.$router.push({
-            //     name: 'ft_addAddress',
-            //     query:{
-            //         title: '修改地址',
-            //         addressInfo: addressInfo
-            //     }
-            // })
+        
+            this.gid = this.$route.query.id
             this.$router.push({
                 name: 'ft_addAddress',
                 query:{
                     title: '新增地址',
-                    addressInfo: {}
+                    addressInfo: {},
+                    gid: this.gid
                 }
-                
-
             })
         },
         onEdit(item, index) {
             // Toast('编辑地址:' + index);
+            console.log(JSON.stringify(item))
             let addressInfo = new Object;
-      
+            this.gid = this.$route.query.id
             addressInfo = {
                 id:item.id,
                 name:item.name,
@@ -154,16 +98,47 @@ export default {
                 areaCode: item.areaCode,
                 addressDetail:item.address,
                 // postal_code:item.postal_code,
-                is_default:item.is_default,
+                is_default:item.isDefault,
             }
             this.$router.push({
                 name: 'ft_addAddress',
                 query:{
                     title: '修改地址',
-                    addressInfo: addressInfo
+                    addressInfo: addressInfo,
+                    gid: this.gid
                 }
             })
             
+        },
+        onSelect(item,index){
+            console.log(JSON.stringify(item))
+            console.log('选中'+  item.id + "," +index)
+   
+            this.gid = this.$route.query.id
+            if(!this.gid) return false
+            console.log(this.gid)
+            let addressInfo = new Object;
+             addressInfo = {
+                aid:item.id,
+                realname:item.name,
+                mobile:item.tel,
+                province:item.province,
+                city:item.city,
+                area:item.county,
+                areaCode: item.areaCode,
+                address:item.address,
+                // postal_code:item.postal_code,
+                isdefault:item.isDefault,
+            }
+            this.$router.push({
+                name: 'ft_jf_orderdetail',
+                query: {
+                    aid: item.id,
+                    id : this.gid,
+                    addressInfo: addressInfo,
+                }
+            })
+
         },
         // edithandle(){
         //     this.$router.push()

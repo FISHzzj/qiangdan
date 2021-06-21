@@ -5,7 +5,7 @@
             <p>{{title}}</p>
         </div>
         <div style="height:12vw"></div>
-        <div class="detail" v-html="detail"></div>
+        <div class="detail" v-html="text"></div>
     </div>
 </template>
 <script>
@@ -15,8 +15,20 @@ export default {
         return {
             title: this.$route.query.title,
             id: this.$route.params.id,
-            detail: ""
+            detail: "",
+            text: ""
         }
+    },
+    mounted(){
+        this.getData()
+    },
+    methods:{
+        async getData(){
+            let res = await $ajax('auctionauction1sysset_text', {text_key: this.id})
+            if(!res) return false
+            this.text = res.text
+
+        },
     }
 }
 </script>

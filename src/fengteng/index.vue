@@ -12,10 +12,10 @@
         </swiper>
         <!-- 公告 -->
         <div class="notice flex ali_center">
-            <van-notice-bar color="#6e6e6e" left-icon="volume-o" text="在代码阅读过程中人们说脏话的频率是衡量代码质量的唯一标准。" />
+            <van-notice-bar color="#6e6e6e" left-icon="volume-o" :text="guanggao" />
         </div>
         <div class="nav flex ali_center">
-            <router-link :to="item.url" class="item flex ali_center" v-for="item in nav" :key="item" tag="div">
+            <router-link :to="item.url" class="item flex ali_center" v-for="(item,index) in nav" :key="index" tag="div">
                 <img :src="item.img" alt="" />
                 <span>{{item.name}}</span>
             </router-link>
@@ -96,6 +96,7 @@ export default {
             },
             remai:[],
             lunbo: [],
+            guanggao: "",
         };
     },
     created(){
@@ -105,9 +106,10 @@ export default {
         async getData(){
             let res = await $ajax('auctionauction1', {})
             if(!res) return false
-            let {remai, lunbo} = res
+            let {remai, lunbo, guanggao} = res
             this.remai = remai
             this.lunbo = lunbo
+            this.guanggao = guanggao
 
         },
         goitem(e) {

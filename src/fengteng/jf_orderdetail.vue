@@ -4,12 +4,13 @@
             <van-icon @click="$router.go(-1)" name="arrow-left" size="20" />
             <p>订单详情</p>
         </div>
-        <div class="addressInfo flex ali_center" @click="$router.push('/addressList/1')">
+        <div class="addressInfo flex ali_center" @click="goaddress">
             <van-icon name="location-o" />
-            <div class="right">
-                <p class="name_phone">姓名： 145  14500000000</p>
-                <p class="adddetail">北京市</p>
+            <div class="right" v-if="aid">
+                <p class="name_phone">姓名： {{realname}}  {{mobile}}</p>
+                <p class="adddetail">{{address}}</p>
             </div>
+            <div  v-else class="right">请先选择地址</div>
         </div>
         <div class="goodsInfo">
             <div class="list">
@@ -17,41 +18,41 @@
                     <img src="@/assets/images/vip2.png" class="proimg" alt="">
                     <div class="right flex flex_between">
                         <p class="name_status flex flex_between">
-                          <span class="name">这里是名字这里是名字这里是名字</span>
+                          <span class="name">{{title}}</span>
                           <span class="status">待付款</span>
                         </p>
-                        <p class="price_num">￥300.00</p>
+                        <p class="price_num">{{marketprice}}</p>
                     </div>
                 </div>
                 <div class="flex flex_between item1 ali_center">
                     <div class="left_1">实付金额</div>
-                    <div class="right_1">￥200</div>
+                    <div class="right_1">{{marketprice}}</div>
                 </div>
-                <div class="flex flex_between item1 ali_center">
+                <!-- <div class="flex flex_between item1 ali_center">
                     <div class="left_1">运费</div>
                     <div class="right_1 on">5</div>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="payways">
             <div class="title">支付方式</div>
-            <div class="item flex ali_center flex_between" @click="change('weixin')">
+            <div class="item flex ali_center flex_between" @click="change('2')">
                 <div class="left flex ali_center">
                     <van-icon name="gold-coin-o" />
                     <span>拍卖币</span>
                 </div>
                 <div class="right">
-                    <van-icon color="#fc4142" v-if="payType == 'weixin'" name="checked" />
+                    <van-icon color="#fc4142" v-if="payType == '2'" name="checked" />
                     <div v-else></div>
                 </div>
             </div>
-            <div class="item flex ali_center flex_between" @click="change('zhifubao')">
+            <div class="item flex ali_center flex_between" @click="change('1')">
                 <div class="left flex ali_center">
                     <van-icon name="gold-coin-o" />
                     <span>积分</span>
                 </div>
                 <div class="right">
-                    <van-icon color="#fc4142" v-if="payType == 'zhifubao'" name="checked" />
+                    <van-icon color="#fc4142" v-if="payType == '1'" name="checked" />
                     <div v-else></div>
                 </div>
             </div>
@@ -77,6 +78,7 @@
 </template>
 <script>
 import { Toast } from 'vant';
+import Bus from '@/assets/bus.js';   //bus.js
 export default {
     name: "ft_jf_orderdetail",
     data() {
@@ -84,8 +86,8 @@ export default {
             value: '',
             show: false,
             showKeyboard: true,
-            payType: 'PPVB',
-            address: {},
+            payType: '1',
+            // address: {},
             id: "",
             gid: "",
             marketprice: "",
@@ -102,6 +104,7 @@ export default {
             address: "",
             mobile: "",
             realname: "",
+            areaCode: "",
 
 
         };
@@ -109,27 +112,57 @@ export default {
     mounted() {
         this.id = this.$route.query.id
         this.getData()
+
     },
+    
     methods:{
         async getData(){
             let res = await $ajax('auctionauction1cs_pay_list', { goods_id: this.id})
             if(!res) return false
             console.log(res)
-            let newObje = res.newObje
+            let newObj = res.newObj
 
-            Object.keys(newObje).forEach((key)=>{
-              this[key] = newObje[key]
+            Object.keys(newObj).forEach((key)=>{
+              this[key] = newObj[key]
             })
+
+            if(this.$route.query.addressInfo){
+                let addressInfo = this.$route.query.addressInfo
+                Object.keys(addressInfo).forEach((key)=>{
+                this[key] = addressInfo[key]
+                })
+            }
 
         },
         change(type) {
+            // console.log(type)
             this.payType = type;
+            // console.log(this.payType)
         },
-        jiesuan(){
-            // this.$router.push('')
+        async jiesuan(){
+            if(!this.aid) return Toast('请选择地址')
+            if(!this.payType) return Toast('请支付方式')
+            let res = await $ajax('auctionauction1cs_buy', { goods_id: this.id, address_id: this.aid, paytype: this.payType})
+            if(!res) return false
+            console.log(res)
+            
             Toast('支付完成')
+            this.$router.push({
+                name: 'ft_market'
+            })
+
         },
-    }
+        goaddress(){
+            localStorage.setItem('gid', this.id)
+            this.$router.push({name: 'ft_addressList', query:{
+                id: this.id
+            }})
+        },
+        getPath(){
+            console.log(this.$route.path);
+        }
+    },
+  
 };
 </script>
 <style lang="less" scoped>

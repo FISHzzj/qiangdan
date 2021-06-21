@@ -7,22 +7,53 @@
         <div style="height:12vw"></div>
         <div class="list">
             <div class="title">到账账户</div>
-            <div class="item flex ali_center flex_between" @click="changeway('card')">
+            <div class="item flex ali_center flex_between" @click="changeway('3')">
                 <div class="left flex ali_center">
                     <img src="@/assets/images/card.png" alt="" />
                     <span>银行卡</span>
                 </div>
-                <img src="@/assets/images/dui.png" v-if="type == 'card'" alt="" />
+                <img src="@/assets/images/dui.png" v-if="type == '3'" alt="" />
+            </div>
+             <div class="item flex ali_center flex_between" @click="changeway('2')">
+                <div class="left flex ali_center">
+                    <img src="@/assets/images/alipay.png" alt="" />
+                    <span>支付宝</span>
+                </div>
+                <img src="@/assets/images/dui.png" v-if="type == '2'" alt="" />
+            </div>
+            <div class="item flex ali_center flex_between" @click="changeway('1')">
+                <div class="left flex ali_center">
+                    <img src="@/assets/images/weixin.png" alt="" />
+                    <span>微信</span>
+                </div>
+                <img src="@/assets/images/dui.png" v-if="type == '1'" alt="" />
+            </div>
+        </div>  
+        <div class="list list1">
+            <div v-if="type == 1 || type == 2">
+                <div class="title">上传二维码</div>
+                <div class="uploader flex ali_center">
+                    <!-- <div class="label">上传二维码</div> -->
+                    <van-uploader :max-count="1" v-model="fileList" :after-read="afterRead"  preview-size='200px' />
+                </div>
+            </div>
+            <div v-if="type == 3">
+                <div class="title">银行卡</div>
+                <van-cell-group border>
+                    <van-field v-model="realname" placeholder="请输入用户姓名"  label="用户姓名" />
+                    <van-field v-model="bankname" placeholder="请输入银行名称" label="银行名称" />
+                    <van-field v-model="bankcard" placeholder="请输入银行卡号" label="银行卡号" />
+                </van-cell-group>
             </div>
         </div>
         <div class="list list1">
             <div class="title">提现金额</div>
             <div class="money flex ali_center">
                 <span>￥</span>
-                <input type="number" />
+                <input type="number" v-model="money" />
             </div>
         </div>
-        <div class="submit">提现</div>
+        <div class="submit" @click="tixian">提现</div>
     </div>
 </template>
 <script>
@@ -30,17 +61,49 @@ export default {
     name: "ft_cash",
     data() {
         return {
-            type: "card",
-            fileList: []
+            type: "1",
+            fileList: [],
+            realname: "",
+            bankname: "",
+            bankcard: "",
+            money: "",
         }
     },
     methods: {
         changeway(type) {
             this.type = type;
         },
-        afterRead(file) {
+        async afterRead(file) {
             console.log(file);
-            console.log(this.fileList)
+            // console.log(this.fileList)
+            // console.log(file);
+             let res = await $ajax('auctionauction1createimg', {img: file.content })
+            if(!res) return false
+            this.fileList[0].url = res.imgurl
+        },
+        async tixian(){
+            if(this.type == 1 || this.type == 2){
+                 if(!this.money) return Toast('请输入提现金额')
+                if(this.fileList.length == 0) return Toast('请上传凭证')
+                let res = await $ajax('auctionauction1withdraw_submit', {img: this.fileList[0].url, money: this.money,applytype: this.type   })
+                if(!res) return false
+                console.log(res)
+                 Toast(res.msg)
+            }else{
+                 if(!this.money) return Toast('请输入提现金额')
+                 if(!this.realname) return Toast('请输入银行卡姓名')
+                 if(!this.bankname) return Toast('请输入银行名称')
+                 if(!this.bankcard) return Toast('请输入银行卡号')
+
+                 let res = await $ajax('auctionauction1withdraw_submit', {realname: this.realname, bankname: this.bankname, bankcard: this.bankcard, money: this.money,applytype: this.type   })
+                if(!res) return false
+                console.log(res)
+                Toast(res.msg)
+            }
+           
+       
+            
+            this.$router.go(-1)
         },
     }
 }
@@ -53,6 +116,7 @@ export default {
         left: 0;
         width: 100%;
         height: 12vw;
+        background: #fff;
         p {
             text-align: center;
             line-height: 12vw;
@@ -63,6 +127,14 @@ export default {
             top: 4vw;
         }
     }
+    .erweima{
+        justify-content: center;
+        // img{
+        //     width: 200px;
+        //     height: 200px;
+        // }
+    }
+
     .list {
         padding: 0 4vw;
         &.list1 {
@@ -107,7 +179,8 @@ export default {
             }
         }
         .uploader {
-            padding: 4vw 0;
+            // padding: 4vw 0;
+            justify-content: center;
             .label {
                 width: 20vw;
                 font-size: 3.47vw;

@@ -6,32 +6,32 @@
                 <img src="@/assets/images/logout.png" alt="" />
             </div>
             <div class="userInfo flex ali_center">
-                <img class="avatar" src="@/assets/images/dui.png" alt="">
+                <img class="avatar" :src="avatar" alt="">
                 <div class="info">
                     <div class="name">昵称</div>
-                    <div class="phone">145000000000</div>
+                    <div class="phone">{{nickname}}</div>
                 </div>
             </div>
             <div class="flex flex_between ali_center money">
                 <div class="item">
                     <p class="type">余额</p>
-                    <p class="num">0.01</p>
+                    <p class="num">{{credit2}}</p>
                 </div>
                 <div class="item">
                     <p class="type">积分</p>
-                    <p class="num">0.01</p>
+                    <p class="num">{{credit1}}</p>
                 </div>
                 <div class="item">
                     <p class="type">竞拍币</p>
-                    <p class="num">0.01</p>
+                    <p class="num">{{credit50}}</p>
                 </div>
                 <div class="item">
                     <p class="type">累计佣金</p>
-                    <p class="num">0.01</p>
+                    <p class="num">{{yj}}</p>
                 </div>
                 <div class="item">
                     <p class="type">代理人数</p>
-                    <p class="num">0.01</p>
+                    <p class="num">{{xia}}</p>
                 </div>
             </div>
         </div>
@@ -91,27 +91,27 @@ export default {
                 {
                     img: require("@/assets/images/vip3.png"),
                     name: "我的签约",
-                    url: "/ft_content/5?title=我的签约"
+                    url: "/ft_content/me_qy?title=我的签约"
                 },
                 {
                     img: require("@/assets/images/vip3.png"),
                     name: "用户指南",
-                    url: "/ft_content/5?title=用户指南"
+                    url: "/ft_content/attention?title=用户指南"
                 },
                 {
                     img: require("@/assets/images/vip3.png"),
                     name: "风险提示",
-                    url: "/ft_content/5?title=风险提示"
+                    url: "/ft_content/fengxian?title=风险提示"
                 },
                 {
                     img: require("@/assets/images/vip3.png"),
                     name: "规则指引",
-                    url: "/ft_content/5?title=规则指引"
+                    url: "/ft_content/strategy?title=规则指引"
                 },
                 {
                     img: require("@/assets/images/vip3.png"),
                     name: "关于我们",
-                    url: "/ft_content/5?title=关于我们"
+                    url: "/ft_content/aboutus?title=关于我们"
                 },
             ],
             swiperOptions: {
@@ -122,11 +122,31 @@ export default {
                     stopOnLastSlide: false,
                     disableOnInteraction: false,
                 },
-            }
+            },
+            id: "",
+            credit2: "",
+            credit1: "",
+            nickname: "",
+            mobile: "",
+            avatar: "",
+            yj: "",
+            xia: "",
+            credit50: "",
         };
     },
-    mounted(){},
+    mounted(){
+        this.getData()
+    },
     methods:{
+        async getData(){
+            let res = await $ajax('auctionauction1get_member', {})
+            if(!res) return false
+            let member = res.member
+            Object.keys(member).forEach((key)=>{
+                this[key] = member[key]
+            })
+
+        },
         logout() {
             Dialog.confirm({
                 title: '温馨提示',

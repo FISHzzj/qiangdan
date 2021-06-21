@@ -7,52 +7,93 @@
         <div style="height:12vw"></div>
         <div class="list">
             <div class="title">充值方式</div>
-            <div class="item flex ali_center flex_between" @click="changeway('alipay')">
+            <div class="item flex ali_center flex_between" @click="changeway('2')">
                 <div class="left flex ali_center">
                     <img src="@/assets/images/alipay.png" alt="" />
-                    <span>微信</span>
+                    <span>支付宝</span>
                 </div>
-                <img src="@/assets/images/dui.png" v-if="type == 'alipay'" alt="" />
+                <img src="@/assets/images/dui.png" v-if="type == '2'" alt="" />
             </div>
-            <div class="item flex ali_center flex_between" @click="changeway('weixin')">
+            <div class="item flex ali_center flex_between" @click="changeway('1')">
                 <div class="left flex ali_center">
                     <img src="@/assets/images/weixin.png" alt="" />
                     <span>微信</span>
                 </div>
-                <img src="@/assets/images/dui.png" v-if="type == 'weixin'" alt="" />
+                <img src="@/assets/images/dui.png" v-if="type == '1'" alt="" />
             </div>
+        </div>
+        <div class="erweima flex ali_center">
+            <van-image
+            width="200"
+            height="200"
+            :src="erweima"
+            />
         </div>
         <div class="list list1">
             <div class="title">充值金额</div>
             <div class="money flex ali_center">
                 <span>￥</span>
-                <input type="number" />
+                <input type="number" v-model="money" />
             </div>
             <div class="uploader flex">
                 <div class="label">上传凭证</div>
-                <van-uploader :max-count="1" v-model="fileList" :after-read="afterRead" />
+                <van-uploader :max-count="1" v-model="fileList" :after-read="afterRead"  preview-size='200px' />
             </div>
         </div>
-        <div class="submit">充值</div>
+        <div class="submit" @click="chongzhi">充值</div>
     </div>
 </template>
 <script>
+import { Toast } from 'vant'
 export default {
     name: "ft_recharge",
     data() {
         return {
-            type: "alipay",
-            fileList: []
+            type: "1",
+            fileList: [],
+            erweima: "",
+            wx_img: "",
+            zfb_img: "",
+            money: "",
+            
         }
     },
+    mounted(){
+        this.getData()
+    },
     methods: {
+         async getData(){
+            let res = await $ajax('auctionauction1get_cz', {})
+            if(!res) return false
+            console.log(res)
+            if(this.type == 1){
+                this.erweima = res.wx_img
+            }else{
+                this.erweima = res.zfb_img
+            }
+            
+        },
         changeway(type) {
             this.type = type;
+             this.getData()
         },
-        afterRead(file) {
+        async afterRead(file) {
             console.log(file);
-            console.log(this.fileList)
+            // console.log(this.fileList)
+            // console.log(file);
+             let res = await $ajax('auctionauction1createimg', {img: file.content })
+            if(!res) return false
+            this.fileList[0].url = res.imgurl
         },
+        async chongzhi(){
+            if(!this.money) return Toast('请输入充值金额')
+            if(this.fileList.length == 0) return Toast('请上传凭证')
+            let res = await $ajax('auctionauction1pay_cz', {img: this.fileList[0].url, money: this.money,rechargetype: this.type   })
+            if(!res) return false
+            console.log(res)
+            Toast(res.msg)
+            this.$router.go(-1)
+        }
     }
 }
 </script>
@@ -64,6 +105,7 @@ export default {
         left: 0;
         width: 100%;
         height: 12vw;
+        background: #fff;
         p {
             text-align: center;
             line-height: 12vw;
@@ -73,6 +115,13 @@ export default {
             left: 4vw;
             top: 4vw;
         }
+    }
+    .erweima{
+        justify-content: center;
+        // img{
+        //     width: 200px;
+        //     height: 200px;
+        // }
     }
     .list {
         padding: 0 4vw;

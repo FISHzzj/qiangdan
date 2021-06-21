@@ -1,6 +1,7 @@
 <template>
     <div class="content">
         <div class="header">
+            <van-icon @click="$router.go(-1)" name="arrow-left" />
             <p>商城</p>
         </div>
         <img class="top_bg" src="@/assets/images/top_bg.png" alt="" />
@@ -109,10 +110,16 @@ export default {
         left: 0;
         width: 100%;
         height: 12vw;
+        // background: #fff;
+        color: #fff;
         p {
-            text-align: center;
-            line-height: 12vw;
-            color: #fff;
+        text-align: center;
+        line-height: 12vw;
+        }
+        .van-icon {
+        position: fixed;
+        left: 4vw;
+        top: 4vw;
         }
     }
     .top_bg {

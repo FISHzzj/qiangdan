@@ -6,8 +6,8 @@
         </div>
         <div style="height:12vw"></div>
         <div class="top">
-            <div class="type">钱包余额(元)</div>
-            <div class="num">0.01</div>
+            <div class="type">钱包余额</div>
+            <div class="num">{{credit2}}</div>
         </div>
         <select class="select" name="" id="" v-model="date" @change="selecthandle(date)">
             <option value="2">本月</option>
@@ -50,17 +50,19 @@ export default {
             limit: 10,
             finished: false,
             loading: false,
+            credit2:"",
         }
     },
     mounted(){
         this.getData()
+        this.getyue()
     },
     methods:{
         selecthandle(e){
             console.log(e)
             this.date = e
             this.list = []
-            this.page = []
+            this.page = 1
             this.getData()
 
         },  
@@ -79,7 +81,16 @@ export default {
             } 
             
 
-        }
+        },
+        async getyue(){
+            let res = await $ajax('auctionauction1get_member', {})
+            if(!res) return false
+            let member = res.member
+            Object.keys(member).forEach((key)=>{
+                this[key] = member[key]
+            })
+
+        },
     }
 }
 </script>

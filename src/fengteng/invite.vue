@@ -6,9 +6,9 @@
         </div>
         <div class="content">
             <div class="first">您的邀请码为：</div>
-            <div class="second">1000001</div>
+            <div class="second">{{code}}</div>
             <div class="third">好友也可在注册时直接填写邀请码</div>
-            <img src="@/assets/images/weixin.png" alt="" />
+            <img :src="qrcode" alt="" />
         </div>
     </div>
 </template>
@@ -17,7 +17,25 @@ export default {
     name: "ft_invite",
     data() {
         return {
+            id: "", 
+            avatar: "", 
+            nickname: "", 
+            code: "", 
+            qrcode: "",
         }
+    },
+    mounted(){
+        this.getData()
+    },
+    methods:{
+        async getData(){
+            let res = await $ajax('auctionauction1invite', {})
+            if(!res) return false
+            Object.keys(res).forEach((key)=>{
+                this[key] = res[key]
+            })
+
+        },
     }
 }
 </script>
