@@ -24,13 +24,14 @@
                 <p class="label">邀请码</p>
                 <input type="text" v-model="spread" placeholder="" />
             </div>
-            <div class="submit">
+            <div class="submit" @click="register">
                 完成并登录
             </div>
         </div>
     </div>
 </template>
 <script>
+import { Toast } from 'vant';
 export default {
     name: "ft_register",
     data() {
@@ -63,7 +64,23 @@ export default {
                     this.second = 60;
                 }
             }, 1000)
-        }
+        },
+        async register(){
+            if(!this.phone) return Toast('请输入手机号')
+            if(!this.code) return Toast('请输入验证码')
+            if(!this.name) return Toast('请输入姓名')
+            if(!this.cardId) return Toast('请输入身份证号')
+            // if(!this.spread) return Toast('请输入邀请码')
+            
+            let res = await $ajax('auctionauction1register', { mobile: this.phone, verifycode: this.code, nickname:this.name, sfz:this.cardId, code: this.spread})
+            if(!res) return false
+            console.log(res)
+            Toast('注册成功')
+            this.$router.push({
+                name: 'ft_index'
+            })
+        },
+
     },
     destroyed() {
         window.clearInterval(this.timer);

@@ -92,10 +92,12 @@ export default {
     auctionauction1get_member: `${common}do=mobile&r=auction.auction1.get_member`, // 会员中心
     auctionauction1invite: `${common}do=mobile&r=auction.auction1.invite`, // 邀请码页面
     auctionauction1order_list: `${common}do=mobile&r=auction.auction1.order_list`, // 邀请码页面
+    auctionauction1register: `${common}do=mobile&r=auction.auction1.register`, // 注册接口
+
 
     
 
-
+    
     
     
     

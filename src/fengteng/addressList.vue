@@ -98,7 +98,7 @@ export default {
                 areaCode: item.areaCode,
                 addressDetail:item.address,
                 // postal_code:item.postal_code,
-                is_default:item.isDefault,
+                isDefault:item.isDefault,
             }
             this.$router.push({
                 name: 'ft_addAddress',
@@ -170,6 +170,7 @@ export default {
         width: 100%;
         height: 12vw;
         background: #fff;
+        z-index: 999;
         p {
             text-align: center;
             line-height: 12vw;

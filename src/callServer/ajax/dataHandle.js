@@ -762,7 +762,7 @@ export default {
                 city:item.city,
                 county:item.area,
                 address: item.address,
-                isDefault: item.is_default == 1 ? true : false,
+                isDefault: item.isdefault == 1 ? true : false,
                 areaCode: item.areaCode
             })
         })
@@ -957,6 +957,12 @@ export default {
         let {list} = data.result
         return {
             list
+        }
+    },
+    auctionauction1register(data){
+        if ( mistake(data) ) return false
+        return {
+            msg: data.result.message
         }
     }
 

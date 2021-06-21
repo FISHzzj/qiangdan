@@ -39,19 +39,19 @@
             <div class="title">我的订单</div>
             <div class="list flex flex_between ali_center">
                 <div class="item flex ali_center" @click="$router.push('/ft_buyorder')">
-                    <img src="@/assets/images/dui.png" alt="" />
+                    <img src="@/assets/images/icon/1.png" alt="" />
                     <p>买单</p>
                 </div>
                 <div class="item flex ali_center" @click="$router.push('/ft_saleorder')">
-                    <img src="@/assets/images/dui.png" alt="" />
+                    <img src="@/assets/images/icon/2.png" alt="" />
                     <p>卖单</p>
                 </div>
                 <div class="item flex ali_center" @click="$router.push('/ft_invite')">
-                    <img src="@/assets/images/dui.png" alt="" />
+                    <img src="@/assets/images/icon/3.png" alt="" />
                     <p>邀请码</p>
                 </div>
                 <div class="item flex ali_center" @click="$router.push('/ft_wallet')">
-                    <img src="@/assets/images/dui.png" alt="" />
+                    <img src="@/assets/images/icon/4.png" alt="" />
                     <p>钱包</p>
                 </div>
             </div>
@@ -79,37 +79,37 @@ export default {
         return {
             nav: [
                 {
-                    img: require("@/assets/images/dui.png"),
+                    img: require("@/assets/images/icon/about.png"),
                     name: "收货地址",
                     url: "/ft_addressList"
                 },
                 {
-                    img: require("@/assets/images/vip3.png"),
+                    img: require("@/assets/images/icon/daili.png"),
                     name: "收款设置",
                     url: "/ft_setting"
                 },
                 {
-                    img: require("@/assets/images/vip3.png"),
+                    img: require("@/assets/images/icon/dingdan.png"),
                     name: "我的签约",
                     url: "/ft_content/me_qy?title=我的签约"
                 },
                 {
-                    img: require("@/assets/images/vip3.png"),
+                    img: require("@/assets/images/icon/fankui.png"),
                     name: "用户指南",
                     url: "/ft_content/attention?title=用户指南"
                 },
                 {
-                    img: require("@/assets/images/vip3.png"),
+                    img: require("@/assets/images/icon/jia.png"),
                     name: "风险提示",
                     url: "/ft_content/fengxian?title=风险提示"
                 },
                 {
-                    img: require("@/assets/images/vip3.png"),
+                    img: require("@/assets/images/icon/qianbao.png"),
                     name: "规则指引",
                     url: "/ft_content/strategy?title=规则指引"
                 },
                 {
-                    img: require("@/assets/images/vip3.png"),
+                    img: require("@/assets/images/icon/shoufukuan.png"),
                     name: "关于我们",
                     url: "/ft_content/aboutus?title=关于我们"
                 },

@@ -23,8 +23,8 @@ export default {
                 },
                 {
                     name: "传家",
-                    img:  require('@/assets/images/home/home.png'),
-                    img_sel:  require('@/assets/images/home/home_sel.png'),
+                    img:  require('@/assets/images/home/informa.png'),
+                    img_sel:  require('@/assets/images/home/informa_sel.png'),
                     url: "/ft_store"
                 },
                 // {
@@ -35,14 +35,14 @@ export default {
                 // },
                 {
                     name: "团队",
-                    img:  require('@/assets/images/home/home.png'),
-                    img_sel:  require('@/assets/images/home/home_sel.png'),
+                    img:  require('@/assets/images/home/server.png'),
+                    img_sel:  require('@/assets/images/home/server_sel.png'),
                     url: "/ft_team"
                 },
                 {
                     name: "个人中心",
-                    img:  require('@/assets/images/home/home.png'),
-                    img_sel:  require('@/assets/images/home/home_sel.png'),
+                    img:  require('@/assets/images/home/user.png'),
+                    img_sel:  require('@/assets/images/home/user_sel.png'),
                     url: "/ft_mine"
                 }
             ]

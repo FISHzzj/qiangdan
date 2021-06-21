@@ -60,27 +60,27 @@ export default {
         return {
             nav: [
                 {
-                    img: require("@/assets/images/vip3.png"),
+                    img: require("@/assets/images/icon/chongbi1.png"),
                     name: "订单中心",
                     url: "/ft_buyorder"
                 },
                 {
-                    img: require("@/assets/images/vip3.png"),
+                    img: require("@/assets/images/icon/tibi1.png"),
                     name: "手续费充值",
                     url: "/ft_wallet"
                 },
                 {
-                    img: require("@/assets/images/vip3.png"),
+                    img: require("@/assets/images/icon/yaoqinghaoyou1.png"),
                     name: "我的代理",
                     url: "/ft_team"
                 },
                 {
-                    img: require("@/assets/images/vip3.png"),
+                    img: require("@/assets/images/icon/shouyi1.png"),
                     name: "邀请好友",
                     url: "/ft_invite"
                 },
                 {
-                    img: require("@/assets/images/vip3.png"),
+                    img: require("@/assets/images/icon/chongbi1.png"),
                     name: "商城",
                     url: "/ft_market"
                 },
