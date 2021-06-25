@@ -84,16 +84,16 @@ export default {
         console.log(this.gid)
 
         this.getgooddetail()
-        Dialog.confirm({
-            message: '请先预约',
-        }).then(() => {
-            // on close
-            this.sureupload = true  
-            this.yuyue( )
-        }) .catch(() => {
-            // on cancel
-            this.sureupload = true
-        });
+        // Dialog.confirm({
+        //     message: '请先预约',
+        // }).then(() => {
+        //     // on close
+        //     this.sureupload = true  
+        //     this.yuyue( )
+        // }) .catch(() => {
+        //     // on cancel
+        //     this.sureupload = true
+        // });
     },
     mounted() {
         console.log(1111);
