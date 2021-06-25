@@ -93,8 +93,11 @@ export default {
     auctionauction1invite: `${common}do=mobile&r=auction.auction1.invite`, // 邀请码页面
     auctionauction1order_list: `${common}do=mobile&r=auction.auction1.order_list`, // 邀请码页面
     auctionauction1register: `${common}do=mobile&r=auction.auction1.register`, // 注册接口
+    auctionauction1zhuan_auction: `${common}do=mobile&r=auction.auction1.zhuan_auction`, // 送单
+    auctionauction1zhuan_jpb: `${common}do=mobile&r=auction.auction1.zhuan_jpb`, // 转增竞拍币给下级
 
 
+    
     
 
     
