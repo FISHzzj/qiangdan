@@ -964,7 +964,19 @@ export default {
         return {
             msg: data.result.message
         }
-    }
+    },
+    auctionauction1zhuan_auction(data){
+        if ( mistake(data) ) return false
+        return {
+            msg: data.result.message
+        }
+    },
+    auctionauction1zhuan_jpb(data){
+        if ( mistake(data) ) return false
+        return {
+            msg: data.result.message
+        }
+    },
 
 
 

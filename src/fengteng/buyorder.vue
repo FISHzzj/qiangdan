@@ -56,6 +56,7 @@
                             <van-button v-if="item.show_status == 3" type="primary" size="mini" @click="sale(item.id)">转售</van-button>
                             <van-button v-if="item.show_status == 3" type="primary" size="mini" @click="zhuandingdan(item.id)">转订单</van-button>
                             <van-button v-if="item.show_status == 3" type="primary" size="mini" @click="zhuanpaibi(item.id)">转竞拍币</van-button>
+                            <van-button v-if="item.show_status == 3" type="primary" size="mini" @click="songdan(item.id)">送单</van-button>
 
                         </div>
                     </div>
@@ -152,6 +153,18 @@ export default {
             if(!res) return false
             Toast(res.msg)
             this.getData()
+        },
+        songdan(id){
+            this.$router.push({
+                name: 'ft_songdan',
+                query: {
+                    id
+                }
+            })
+            // let res = await $ajax('auctionauction1zhuan_auction', {id: id})
+            // if(!res) return false
+            // Toast(res.msg)
+            // this.getData()
         },
     }
 }

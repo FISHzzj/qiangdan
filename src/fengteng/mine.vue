@@ -15,23 +15,23 @@
             <div class="flex flex_between ali_center money">
                 <div class="item">
                     <p class="type">余额</p>
-                    <p class="num">{{credit2}}</p>
+                    <p class="num">{{credit2 || 0}}</p>
                 </div>
                 <div class="item">
                     <p class="type">积分</p>
-                    <p class="num">{{credit1}}</p>
+                    <p class="num">{{credit1 || 0}}</p>
                 </div>
-                <div class="item">
+                <div class="item" @click="paibi">
                     <p class="type">竞拍币</p>
-                    <p class="num">{{credit50}}</p>
+                    <p class="num">{{credit50 || 0}}</p>
                 </div>
                 <div class="item">
                     <p class="type">累计佣金</p>
-                    <p class="num">{{yj}}</p>
+                    <p class="num">{{yj || 0}}</p>
                 </div>
                 <div class="item">
                     <p class="type">代理人数</p>
-                    <p class="num">{{xia}}</p>
+                    <p class="num">{{xia || 0}}</p>
                 </div>
             </div>
         </div>
@@ -88,6 +88,11 @@ export default {
                     name: "收款设置",
                     url: "/ft_setting"
                 },
+                // {
+                //     img: require("@/assets/images/icon/shoufukuan.png"),
+                //     name: "送单",
+                //     url: "/ft_songdan"
+                // },
                 {
                     img: require("@/assets/images/icon/dingdan.png"),
                     name: "我的签约",
@@ -138,6 +143,11 @@ export default {
         this.getData()
     },
     methods:{
+        async paibi(){
+            this.$router.push({
+                name: 'paibi'
+            })
+        },
         async getData(){
             let res = await $ajax('auctionauction1get_member', {})
             if(!res) return false

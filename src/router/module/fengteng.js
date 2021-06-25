@@ -260,5 +260,25 @@ export default [
             index: 1,
             mustLogin: true,//
         }
+    },
+    {
+        path: '/ft_songdan', // 送单
+        name: 'ft_songdan',
+        component: () => import("@/fengteng/ft_songdan.vue"),
+        props: false,//1111,
+        meta:{
+            index: 1,
+            mustLogin: true,//
+        }
+    },
+    {
+        path: '/paibi', // 送单
+        name: 'paibi',
+        component: () => import("@/fengteng/paibi.vue"),
+        props: false,//1111,
+        meta:{
+            index: 1,
+            mustLogin: true,//
+        }
     }
 ]
