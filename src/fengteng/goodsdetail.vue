@@ -11,9 +11,9 @@
                     <div>￥{{marketprice}}</div>
                 </div>
                 <div class="right flex">
-                    <p v-if="1 == 1">本轮拍卖已结束</p>
-                    <p v-if="1 == 2">本轮拍卖正在进行中</p>
-                    <CountDown navclass="on" :datatime="datatime" :currenttime="currenttime"></CountDown>
+                    <p v-if="status_s == 2">本轮拍卖已结束</p>
+                    <p v-else>本轮拍卖正在进行中</p>
+                    <CountDown navclass="on" :datatime="datatime" :currenttime="currenttime" ></CountDown>
                 </div>
             </div>
         </div>
@@ -59,7 +59,7 @@ export default {
             datatime: 0,
             // id: this.$route.params.id,
             detail: "",
-            sureupload: false,
+            sureupload: true,
             goodid: "",
             auction: [],
             id: "",
@@ -81,8 +81,9 @@ export default {
     },
     created(){
         this.goodid = this.$route.query.id
-        console.log(this.gid)
-
+        this.status_s = this.$route.query.status_s
+        // console.log(this.gid)
+        console.log(3333333)
         this.getgooddetail()
         // Dialog.confirm({
         //     message: '请先预约',
@@ -97,8 +98,7 @@ export default {
     },
     mounted() {
         console.log(1111);
-        this.currenttime = Date.parse(new Date())/1000;
-        console.log( this.currenttime)
+        // console.log( this.currenttime)
     },
     methods:{
         async yuyue(){
@@ -118,10 +118,33 @@ export default {
                 this[key] = goods[key]
 
             })
-            this.datatime = Number(this.etime)
-            console.log(this.datatime)
+     
             this.thumbimg = this.thumb[0]
             console.log(this.thumbimg)
+            let startTime = Number(this.stime)
+            let endTime = Number(this.etime)
+            let timestamp = Date.parse(new Date())/1000;
+            var date1 = ""; //开始时间
+            if(timestamp<startTime){
+                date1=startTime;
+            }else{
+                date1 = timestamp; //开始时间
+            }
+            var date2 = endTime; //结束时间
+
+            console.log(date1)
+            console.log(date2)
+        
+            if(date1 >= date2){
+                this.currenttime = 0
+                this.datatime = 0
+            }else{
+                this.currenttime = date1
+                this.datatime = date2
+            }
+            var date3 =  (date2- date1)*1000; //时间差的毫秒数
+            console.log(date3)
+
         },
         async submitorder(){
             let res = await $ajax('auctionauction1get_auction', {gid: this.goodid, qishu: this.qishu})

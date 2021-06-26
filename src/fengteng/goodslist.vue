@@ -13,7 +13,7 @@
             @load="getData"
             >
             <div class="list flex flex_between">
-                <router-link  :to="{name: 'ft_goodsdetail', query:{id:`${item.id}`}}"  tag="div"  v-for="(item, index ) in goods" :key="index" class="item  ">
+                <router-link  :to="{name: 'ft_goodsdetail', query:{id:`${item.id}`, status_s: `${item.status_s}`}}"  tag="div"  v-for="(item, index ) in goods" :key="index" class="item  ">
                     <img :src="item.thumb" alt="">
                     <div class="name">{{item.title}}</div>
                     <div class="bottom flex flex_between">

@@ -63,6 +63,9 @@ export default {
   },
   created: function() {
     this.show_time();
+    let intDiff = (this.datatime - this.currentTime) * 1000 //获取数据中的时间戳的时间差；
+    console.log(intDiff)
+
   },
   mounted: function() {},
   methods: {
@@ -70,7 +73,7 @@ export default {
       let that = this;
       function runTime() {
         //时间函数
-        let intDiff = that.datatime - that.currentTime + 3600 * 24; //获取数据中的时间戳的时间差；
+        let intDiff = (that.datatime - that.currentTime) * 1000 //获取数据中的时间戳的时间差；
         that.currentTime++;
         let day = 0,
           hour = 0,
@@ -78,18 +81,25 @@ export default {
           second = 0;
         if (intDiff > 0) {
           //转换时间
+          //计算出相差天数
+
           if (that.isDay === true) {
-            day = Math.floor(intDiff / (60 * 60 * 24));
+            day = Math.floor(intDiff / (24 * 3600 * 1000));
           } else {
             day = 0;
           }
-          hour = Math.floor(intDiff / (60 * 60)) - day * 24;
-          minute = Math.floor(intDiff / 60) - day * 24 * 60 - hour * 60;
-          second =
-            Math.floor(intDiff) -
-            day * 24 * 60 * 60 -
-            hour * 60 * 60 -
-            minute * 60;
+          //计算出小时数
+          let leave1 = intDiff % (24 * 3600 * 1000); //计算天数后剩余的毫秒数
+          hour = Math.floor(leave1 / (3600 * 1000));
+
+          //计算相差分钟数
+          let leave2 = leave1 % (3600 * 1000); //计算小时数后剩余的毫秒数
+          minute = Math.floor(leave2 / (60 * 1000));
+
+          //计算相差秒数
+          let leave3 = leave2 % (60 * 1000); //计算分钟数后剩余的毫秒数
+          second = Math.round(leave3 / 1000);
+          
           if (hour <= 9) hour = "0" + hour;
           if (minute <= 9) minute = "0" + minute;
           if (second <= 9) second = "0" + second;
