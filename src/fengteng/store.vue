@@ -20,16 +20,16 @@
             </swiper-slide>
             <div class="swiper-pagination" slot="pagination"></div>
         </swiper>
-        <div class="list">
+        <div class="list"  v-for="(item, index) in category" :key="index">
             <div class="title flex ali_center flex_between">
                 <div class="title flex ali_center">
                      <img src="@/assets/images/chuizi.png" alt="" />
                     <div>热门拍卖</div>
                 </div>
-                <div><van-button round type="info" size="mini" @click="yuyueshow">预约</van-button></div>
+                <div><van-button round type="info" size="mini" @click="yuyueshow(item.id)">预约</van-button></div>
                
             </div>
-            <div class="item" @click="gonext(item.id)" v-for="(item, index) in category" :key="index">
+            <div class="item" @click="gonext(item.id)">
                 <div class="status">风腾优品</div>
                 <img :src="item.advimg" alt="" class="cover" />
                 <div class="storeInfo flex ali_center">
@@ -112,6 +112,7 @@ export default {
             },
             category:[],
             lunbo:[],
+            id: "",
         };
     },
     mounted(){
@@ -137,12 +138,13 @@ export default {
                 }
             })
         },
-        yuyueshow(){
+        yuyueshow(id){
              Dialog.confirm({
                 message: '请先预约',
             }).then(() => {
                 // on close
                 // this.sureupload = true  
+                this.id = id
                 this.yuyue( )
             }) .catch(() => {
                 // on cancel
@@ -150,7 +152,7 @@ export default {
             });
         },
         async yuyue(){
-            let res = await $ajax('auctionauction1auction_yy', {gid: this.goodid, qishu: this.qishu})
+            let res = await $ajax('auctionauction1auction_yy', {category_id: this.id})
             if(!res) return false
             Toast(res.msg)
         },

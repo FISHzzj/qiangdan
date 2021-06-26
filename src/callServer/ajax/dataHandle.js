@@ -977,7 +977,12 @@ export default {
             msg: data.result.message
         }
     },
-
+    auctionauction1member_edit(data){
+        if ( mistake(data) ) return false
+        return {
+            msg: data.result.message
+        }
+    },  
 
 
 

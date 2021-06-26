@@ -1,16 +1,25 @@
 <template>
     <div class="index">
         <div class="header">
-            <div class="top flex ali_center flex_between" @click="logout">
+            <div class="top flex ali_center flex_between" >
                 <span></span>
-                <img src="@/assets/images/logout.png" alt="" />
+                <img src="@/assets/images/logout.png" alt="" @click="logout"/>
+                
             </div>
-            <div class="userInfo flex ali_center">
-                <img class="avatar" :src="avatar" alt="">
-                <div class="info">
-                    <div class="name">昵称</div>
-                    <div class="phone">{{nickname}}</div>
+            <div class="userInfo flex ali_center flex_between">
+                <div class="userInfo flex ali_center">
+                    <img class="avatar" :src="avatar" alt="">
+                    <div class="info">
+                        <div class="name">昵称</div>
+                        <div class="phone">{{nickname}}</div>
+                    </div>
                 </div>
+                <div>
+                    <van-icon @click="$router.push('/setname')" name="arrow" size="20" />
+
+                </div>
+                
+
             </div>
             <div class="flex flex_between ali_center money">
                 <div class="item">

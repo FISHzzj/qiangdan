@@ -280,5 +280,15 @@ export default [
             index: 1,
             mustLogin: true,//
         }
+    },
+    {
+        path: '/setname', // 设置头像
+        name: 'setname',
+        component: () => import("@/fengteng/setname.vue"),
+        props: false,//1111,
+        meta:{
+            index: 1,
+            mustLogin: true,//
+        }
     }
 ]
