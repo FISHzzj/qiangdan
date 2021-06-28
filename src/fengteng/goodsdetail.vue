@@ -13,7 +13,17 @@
                 <div class="right flex">
                     <p v-if="status_s == 2">本轮拍卖已结束</p>
                     <p v-else>本轮拍卖正在进行中</p>
-                    <CountDown navclass="on" :datatime="datatime" :currenttime="currenttime" ></CountDown>
+                    <!-- <CountDown navclass="on" :datatime="datatime" :currenttime="currenttime" ></CountDown> -->
+                     <div class="time" :class="navclass">
+                        {{ tipText }}<span class="styleAll" v-if="isDay === true">{{ day }}</span
+                        ><span class="timeTxt">{{ dayText }}</span
+                        ><span class="styleAll">{{ hour }}</span
+                        ><span class="timeTxt">{{ hourText }}</span
+                        ><span class="styleAll">{{ minute }}</span
+                        ><span class="timeTxt">{{ minuteText }}</span
+                        ><span class="styleAll">{{ second }}</span
+                        ><span class="timeTxt">{{ secondText }}</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -55,7 +65,7 @@ export default {
     },
     data() {
         return {
-            currenttime: 0,
+            currentTime: 0,
             datatime: 0,
             // id: this.$route.params.id,
             detail: "",
@@ -77,6 +87,18 @@ export default {
             qishu: "",
             thumbimg: '',
             title: "",
+            tipText: "",
+            isDay: false,
+            day: "00",
+            hour: "00",
+            minute: "00",
+            second: "00",
+            hourText: ":",
+            minuteText: ":",
+            secondText: "",
+            navclass: "on",
+            dayText:"",
+            date3: 0,
         }
     },
     created(){
@@ -97,8 +119,11 @@ export default {
         // });
     },
     mounted() {
-        console.log(1111);
+        // console.log(1111);
         // console.log( this.currenttime)
+        // console.log(this.date3)
+        // if(this.date3 == 0) return false 
+        
     },
     methods:{
         async yuyue(){
@@ -136,14 +161,18 @@ export default {
             console.log(date2)
         
             if(date1 >= date2){
-                this.currenttime = 0
+                this.currentTime = 0
                 this.datatime = 0
             }else{
-                this.currenttime = date1
+                this.currentTime = date1
                 this.datatime = date2
             }
-            var date3 =  (date2- date1)*1000; //时间差的毫秒数
-            console.log(date3)
+            // this.date3 =  (date2- date1)*1000; //时间差的毫秒数
+            // console.log(this.date3)
+            console.log(this.currentTime)
+            this.show_time();
+
+            
 
         },
         async submitorder(){
@@ -161,6 +190,72 @@ export default {
 
                 }
             })
+        },
+        show_time() {
+            let _this = this;
+            // let intDiff = (that.datatime - that.currentTime) * 1000 //获取数据中的时间戳的时间差；
+            // console.log(that.datatime)
+            // console.log(that.currentTime)
+            // console.log(intDiff)
+            // console.log(222222)
+            this.interval = setInterval(function () {
+                // console.log(222)
+                _this.runTime();
+                // clearInterval(_this.interval);
+            }, 1000);
+  
+            // runTime();
+            // setInterval(runTime, 1000);
+        },
+        runTime() {
+            let that = this;
+            // console.log(that.datatime)
+            // console.log(that.currentTime)
+            //时间函数
+            let intDiff = (that.datatime - that.currentTime) * 1000 //获取数据中的时间戳的时间差；
+            //  console.log(that.datatime)
+            // console.log(that.currentTime)
+            // console.log(intDiff)
+            // console.log(intDiff)
+            that.currentTime++;
+            let day = 0,
+            hour = 0,
+            minute = 0,
+            second = 0;
+            if (intDiff > 0) {
+            //转换时间
+            //计算出相差天数
+
+            if (that.isDay === true) {
+                day = Math.floor(intDiff / (24 * 3600 * 1000));
+            } else {
+                day = 0;
+            }
+            //计算出小时数
+            let leave1 = intDiff % (24 * 3600 * 1000); //计算天数后剩余的毫秒数
+            hour = Math.floor(leave1 / (3600 * 1000));
+
+            //计算相差分钟数
+            let leave2 = leave1 % (3600 * 1000); //计算小时数后剩余的毫秒数
+            minute = Math.floor(leave2 / (60 * 1000));
+
+            //计算相差秒数
+            let leave3 = leave2 % (60 * 1000); //计算分钟数后剩余的毫秒数
+            second = Math.round(leave3 / 1000);
+            
+            if (hour <= 9) hour = "0" + hour;
+            if (minute <= 9) minute = "0" + minute;
+            if (second <= 9) second = "0" + second;
+                that.day = day;
+                that.hour = hour;
+                that.minute = minute;
+                that.second = second;
+            } else {
+                that.day = "00";
+                that.hour = "00";
+                that.minute = "00";
+                that.second = "00";
+            }
         }
     }
 }
@@ -217,6 +312,28 @@ export default {
                 border-radius: 0 2vw 0 0;
                 color: #333;
                 line-height: 5.5vw;
+                .on {
+                    .styleAll {
+                        color: #ffffff;
+                        background: #fd563a;
+                        height: 5.33vw;
+                        line-height: 5.33vw;
+                        margin: 0 1vw;
+                        min-width: 5.33vw;
+                        display: inline-block;
+                        text-align: center;
+                        font-size: 3.2vw;
+                        border-radius: 4px;
+                    }
+                    .timeTxt {
+                        color: #fd563a;
+                    }
+                }
+                .on_1 {
+                    color: #fff;
+                    font-size: 3.47vw;
+                    line-height: 8vw;
+                }
             }
         }
     }
@@ -302,5 +419,6 @@ export default {
             background: #d63434;
         }
     }
+    
 }
 </style>
