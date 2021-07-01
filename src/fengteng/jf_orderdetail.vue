@@ -39,7 +39,7 @@
             <div class="item flex ali_center flex_between" @click="change('2')">
                 <div class="left flex ali_center">
                     <van-icon name="gold-coin-o" />
-                    <span>拍卖币</span>
+                    <span>竞拍币</span>
                 </div>
                 <div class="right">
                     <van-icon color="#fc4142" v-if="payType == '2'" name="checked" />
@@ -56,6 +56,44 @@
                     <div v-else></div>
                 </div>
             </div>
+            <div class="item flex ali_center flex_between" @click="change('3')">
+                <div class="left flex ali_center">
+                    <van-icon name="gold-coin-o" />
+                    <span>余额</span>
+                </div>
+                <div class="right">
+                    <van-icon color="#fc4142" v-if="payType == '3'" name="checked" />
+                    <div v-else></div>
+                </div>
+            </div>
+            <div class="item flex ali_center flex_between" @click="change('4')">
+                <div class="left flex ali_center">
+                    <van-icon name="gold-coin-o" />
+                    <span>混合支付</span>
+                </div>
+                <div class="right">
+                    <van-icon color="#fc4142" v-if="payType == '4'" name="checked" />
+                    <div v-else></div>
+                </div>
+            </div>
+            <van-form v-if="payType == '4'">
+                <van-field
+                    v-model="jifen"
+                    name="积分"
+                    label="积分"
+                    placeholder="积分"
+                    :rules="[{ required: true, message: '请填写积分' }]"
+                />
+                <van-field
+                    v-model="paibi"
+                    type="paibi"
+                    name="竞拍币"
+                    label="竞拍币"
+                    placeholder="竞拍币"
+                    :rules="[{ required: true, message: '请填写竞拍币' }]"
+                />  
+            </van-form>
+            
         </div>
         <!-- 拍卖商品显示 -->
         <div v-if="show">
@@ -105,6 +143,9 @@ export default {
             mobile: "",
             realname: "",
             areaCode: "",
+            jifen: "",
+            paibi: "",
+
 
 
         };
@@ -142,7 +183,11 @@ export default {
         async jiesuan(){
             if(!this.aid) return Toast('请选择地址')
             if(!this.payType) return Toast('请支付方式')
-            let res = await $ajax('auctionauction1cs_buy', { goods_id: this.id, address_id: this.aid, paytype: this.payType})
+            if(this.payType == 4){
+                if(this.jifen == "") return Toast('请输入积分')
+                if(this.paibi == "") return Toast('请竞拍币')
+            }
+            let res = await $ajax('auctionauction1cs_buy', { goods_id: this.id, address_id: this.aid, paytype: this.payType, credit1: this.jifen, credit50: this.paibi})
             if(!res) return false
             console.log(res)
             

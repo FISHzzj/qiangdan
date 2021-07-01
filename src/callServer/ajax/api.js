@@ -97,6 +97,7 @@ export default {
     auctionauction1zhuan_jpb: `${common}do=mobile&r=auction.auction1.zhuan_jpb`, // 转增竞拍币给下级
     auctionauction1member_edit: `${common}do=mobile&r=auction.auction1.member_edit`, // 修改头像
     auctionauction1get_kf: `${common}do=mobile&r=auction.auction1.get_kf`, // 客服
+    auctionauction1get_er: `${common}do=mobile&r=auction.auction1.get_er`, // 二级团队
 
     
     

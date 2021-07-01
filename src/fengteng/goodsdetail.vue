@@ -28,21 +28,21 @@
             </div>
         </div>
         <div class="store_name">{{title}}</div>
-        <div class="userInfo flex flex_between ali_center">
+        <div class="userInfo flex flex_between ali_center" v-if="xx">
             <div class="infos flex ali_center">
-                <img :src="thumbimg" alt="" />
+                <img :src="xx.avatar" alt="" />
                 <div>
-                    <div class="nickname">昵称</div>
-                    <div class="time">2020-12-12 00:00</div>
+                    <div class="nickname">{{xx.nickname}}</div>
+                    <div class="time">{{xx.createtime}}</div>
                 </div>
             </div>
-            <div class="price">￥300.00</div>
+            <div class="price">￥{{xx.moneys}}</div>
             <div class="status">领先</div>
         </div>
-        <div class="storeInfo flex ali_center flex_between">
+        <div class="storeInfo flex ali_center flex_between"  v-if="dianpu">
             <div class="left flex ali_center">
-                <img src="@/assets/images/dui.png" alt="" />
-                <div class="name">昵称</div>
+                <img :src="dianpu.names_img" alt="" />
+                <div class="name">{{dianpu.names}}</div>
             </div>
             <div class="right" @click="$router.push('/ft_store/1')">进入店铺</div>
         </div>
@@ -99,6 +99,8 @@ export default {
             navclass: "on",
             dayText:"",
             date3: 0,
+            dianpu:"",
+            xx:"",
         }
     },
     created(){
@@ -137,6 +139,8 @@ export default {
             // this.auction = res.auction
             console.log(res)
             let goods = res.goods
+            this.dianpu = res.dianpu
+            this.xx = res.xx
 
             Object.keys(goods).forEach((key) =>{
                 

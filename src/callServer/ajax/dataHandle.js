@@ -694,9 +694,11 @@ export default {
     },
     auctionauction1goodsdetail(data){
         if ( mistake(data) ) return false
-        let {goods} = data.result
+        let {goods, dianpu, xx} = data.result
         return {
-            goods
+            goods,
+            dianpu,
+            xx,
         }
     },
     auctionauction1get_auction(data){
@@ -990,6 +992,13 @@ export default {
         return{
             kefu_qq,
             kefu_wx
+        }
+    },
+    auctionauction1get_er(data){
+        if ( mistake(data) ) return false
+        let {list} = data.result
+        return{
+            list
         }
     }
 

@@ -22,8 +22,8 @@
                     <div class="top flex flex_between ali_center" @click="godetail(item.show_status, item.id, item.qishu)" >
                         <div class="left flex ali_center" @click.stop="$router.push('/ft_store/1')">
                             <img src="@/assets/images/dui.png" alt="" />
-                            <!-- <span>店铺名字</span>
-                            <van-icon name="arrow" /> -->
+                            <span>店铺名字</span>
+                            <van-icon name="arrow" />
                         </div>
                         <div class="right" >{{item.statusstr}}</div>
                         <!-- <div class="right" v-if="item.statusstr == 2">已付款</div> -->
@@ -47,7 +47,7 @@
                         <div class="left flex ali_center">
                             <div>  
                                 <div class="time">创建时间：{{item.createtime}}</div>
-                                <div class="time">期数：{{item.qishu}}</div>
+                                <div class="time">订单号：{{item.qishu}}</div>
 
                             </div>
                             

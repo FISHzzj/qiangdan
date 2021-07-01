@@ -26,7 +26,7 @@
                 :finished-text="'我是有底线的'"
                 @load="getData"
             > -->
-                <div class="item flex ali_center" v-for="(item, index) in 10" :key="index"  @click="nextgo(item.id)">
+                <div class="item flex ali_center" v-for="(item, index) in list" :key="index"  >
                     <img :src="item.avatar" alt="" />
                     <div class="info flex">
                         <p class="name">用户名：<span> zzj</span></p>
@@ -55,9 +55,11 @@ export default {
             limit: 10,
             finished: false,
             loading: false,
+            id: "",
         }
     },
     mounted(){
+        this.id = this.$route.query.id
         this.getData()
     },
     methods:{
@@ -70,13 +72,13 @@ export default {
             })
         },
         async getData(){
-            let res = await $ajax('auctionauction1get_team', {})
+            let res = await $ajax('auctionauction1get_er', {id: this.id})
             if(!res) return false
             console.log(res)
-            let {dd, dl, yj} = res.ding
-            this.dd = dd || 0
-            this.dl = dl || 0
-            this.yj = yj || 0
+            // let {id, avatar, nickname} = res
+            // this.dd = dd || 0
+            // this.dl = dl || 0
+            // this.yj = yj || 0
             this.list = res.list 
             // this.page++
             
