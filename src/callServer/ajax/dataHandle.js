@@ -672,10 +672,11 @@ export default {
     },
     auctionauction1getCategory(data){
         if ( mistake(data) ) return false
-        let {category, lunbo} = data.result
+        let {category, lunbo, dianpu} = data.result
         return{
             category,
-            lunbo
+            lunbo,
+            dianpu
         }
     },
     auctionauction1get_goods(data){
@@ -983,7 +984,14 @@ export default {
             msg: data.result.message
         }
     },  
-
+    auctionauction1get_kf(data){
+        if ( mistake(data) ) return false
+        let {kefu_qq, kefu_wx} = data.result
+        return{
+            kefu_qq,
+            kefu_wx
+        }
+    }
 
 
 

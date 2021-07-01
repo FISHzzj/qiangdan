@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="store_name">{{title}}</div>
-        <!-- <div class="userInfo flex flex_between ali_center">
+        <div class="userInfo flex flex_between ali_center">
             <div class="infos flex ali_center">
                 <img :src="thumbimg" alt="" />
                 <div>
@@ -38,14 +38,14 @@
             </div>
             <div class="price">￥300.00</div>
             <div class="status">领先</div>
-        </div> -->
-        <!-- <div class="storeInfo flex ali_center flex_between">
+        </div>
+        <div class="storeInfo flex ali_center flex_between">
             <div class="left flex ali_center">
                 <img src="@/assets/images/dui.png" alt="" />
                 <div class="name">昵称</div>
             </div>
             <div class="right" @click="$router.push('/ft_store/1')">进入店铺</div>
-        </div> -->
+        </div>
         <div class="content">
             <div class="title">拍品详情</div>
             <div class="detail" v-html="content"></div>

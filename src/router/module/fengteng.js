@@ -290,5 +290,25 @@ export default [
             index: 1,
             mustLogin: true,//
         }
-    }
+    },
+    {
+        path: '/kefuqq', // 客服
+        name: 'kefuqq',
+        component: () => import("@/fengteng/about.vue"),
+        props: false,//1111,
+        meta:{
+            index: 1,
+            mustLogin: true,//
+        }
+    },
+    {
+        path: '/teamxia', // 团队二级
+        name: 'teamxia',
+        component: () => import("@/fengteng/teamxia.vue"),
+        props: false,//1111,
+        meta:{
+            index: 1,
+            mustLogin: true,//
+        }
+    },
 ]

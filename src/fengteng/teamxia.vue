@@ -1,8 +1,11 @@
 <template>
     <div class="team">
-        <div class="header">团队</div>
-        <div style="height:12vw"></div>
-        <div class="top flex flex_between ali_center">
+        <div class="header">
+            <van-icon @click="$router.go(-1)" name="arrow-left" size="20" />
+            <p>二级团队</p>
+        </div>
+        <!-- <div style="height:12vw"></div> -->
+        <!-- <div class="top flex flex_between ali_center">
             <div class="item">
                 <div class="type">代理人数</div>
                 <div class="num">{{dl}}</div>
@@ -15,7 +18,7 @@
                 <div class="type">今日佣金</div>
                 <div class="num">{{yj}}</div>
             </div>
-        </div>
+        </div> -->
         <div class="list">
             <!-- <van-list
                 v-model="loading"
@@ -23,11 +26,11 @@
                 :finished-text="'我是有底线的'"
                 @load="getData"
             > -->
-                <div class="item flex ali_center" v-for="(item, index) in list" :key="index"  @click="nextgo(item.id)">
+                <div class="item flex ali_center" v-for="(item, index) in 10" :key="index"  @click="nextgo(item.id)">
                     <img :src="item.avatar" alt="" />
                     <div class="info flex">
-                        <p class="name">用户名：<span> {{item.nickname}}</span></p>
-                        <p class="type">id：<span>{{item.id}}</span>代理：<span>{{item.dl}}</span>佣金：<span>{{item.yj || 0}}</span></p>
+                        <p class="name">用户名：<span> zzj</span></p>
+                        <!-- <p class="type">id：<span>{{item.id}}</span>代理：<span>{{item.dl}}</span>佣金：<span>{{item.yj || 0}}</span></p> -->
                     </div>
                 </div>
             <!-- </van-list> -->
@@ -38,7 +41,7 @@
 <script>
 import bottomNav from "./common/footernav";
 export default {
-    name: "team",
+    name: "teamxia",
     components: {
         bottomNav
     },
@@ -91,14 +94,23 @@ export default {
 <style lang="less" scoped>
 .team {
     .header {
-        position: fixed;
-        top: 0;
-        left: 0;
         width: 100%;
         height: 12vw;
-        line-height: 12vw;
-        text-align: center;
-        background: #fff;
+        position: relative;
+        .van-icon {
+            position: absolute;
+            top: 0;
+            left: 3vw;
+            bottom: 0;
+            height: 4vw;
+            margin: auto 0;
+        }
+        p {
+            width: 100%;
+            line-height: 12vw;
+            font-size: 4vw;
+            text-align: center;
+        }
     }
     .top {
         padding: 3vw 0;

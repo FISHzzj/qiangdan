@@ -6,10 +6,10 @@
                 <span></span>
             </div>
             <div class="storeInfo flex ali_center">
-                <img src="@/assets/images/dui.png" alt="" />
+                <img :src="dianpu.names_img" alt="" />
                 <div class="info">
-                    <p class="name">店铺名字</p>
-                    <p class="num">97件商品</p>
+                    <p class="name">{{dianpu.names}}</p>
+                    <!-- <p class="num">97件商品</p> -->
                 </div>
             </div>
         </div>
@@ -113,6 +113,7 @@ export default {
             category:[],
             lunbo:[],
             id: "",
+            dianpu:{}
         };
     },
     mounted(){
@@ -122,10 +123,11 @@ export default {
         async getData(){
             let res = await $ajax('auctionauction1getCategory', {})
             if(!res) return false
-            let {category, lunbo} = res
+            let {category, lunbo, dianpu} = res
             this.category = category.parent[0]
             console.log( this.category )
             this.lunbo = lunbo
+            this.dianpu = dianpu
 
         },
         gonext(id){

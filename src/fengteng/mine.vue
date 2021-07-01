@@ -73,6 +73,7 @@
                     <van-icon name="arrow" />
                 </div>
             </div>
+        
         </div>
         <bottom-nav></bottom-nav>
     </div>
@@ -126,6 +127,11 @@ export default {
                     img: require("@/assets/images/icon/shoufukuan.png"),
                     name: "关于我们",
                     url: "/ft_content/aboutus?title=关于我们"
+                },
+                {
+                    img: require("@/assets/images/icon/shoufukuan.png"),
+                    name: "我的客服",
+                    url: "/kefuqq"
                 },
             ],
             swiperOptions: {

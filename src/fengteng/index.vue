@@ -20,7 +20,7 @@
                 <span>{{item.name}}</span>
             </router-link>
         </div>
-        <div class="adv">
+        <div class="adv" @click="$router.push('/ft_invite')">
             <img src="@/assets/images/centerInfoBg.png" alt="" />
         </div>
         <div class="list">
@@ -29,7 +29,7 @@
                 <div>热门拍卖</div>
                 <span></span>
             </div>
-            <div class="item" v-for="(item, index) in remai" :key="index">
+            <div class="item" v-for="(item, index) in remai" :key="index" @click="handle">
                 <div class="status">拍卖中</div>
                 <img :src="item.thumb" alt="" class="cover" />
                 <div class="storeInfo flex ali_center">
@@ -47,6 +47,7 @@ import { swiper, swiperSlide } from "vue-awesome-swiper";
 import goodsList from "@/components/goodsList";
 import recommend from "@/components/recommend";
 import "swiper/swiper-bundle.css";
+import { Toast } from 'vant';
 export default {
     name: "ft_index",
     components: {
@@ -103,6 +104,9 @@ export default {
         this.getData()
     },
     methods: {
+        handle(){
+            Toast('请进入【传家】进入拍场')
+        },
         async getData(){
             let res = await $ajax('auctionauction1', {})
             if(!res) return false
@@ -180,6 +184,7 @@ export default {
             span {
                 line-height: 7vw;
                 font-size: 3.47vw;
+                font-weight: 600;
             }
         }
     }
