@@ -21,9 +21,9 @@
                 <div class="item" @click="godetail(item.show_status, item.id, item.qishu)"  v-for="(item, index) in list" :key="index">
                     <div class="top flex flex_between ali_center" >
                         <div class="left flex ali_center" >
-                            <img src="@/assets/images/dui.png" alt="" />
-                            <!-- <span>店铺名字</span>
-                            <van-icon name="arrow" /> -->
+                            <img :src="dianpu.names_img" alt="" />
+                            <span>{{dianpu.name}}</span>
+                            <van-icon name="arrow" />
                         </div>
                         <div class="right" >{{item.statusstr}}</div>
 
@@ -46,7 +46,6 @@
                             <div>  
                                 <div class="time">创建时间：{{item.createtime}}</div>
                                 <div class="time">期数：{{item.qishu}}</div>
-
                             </div>
                             
                         </div>
@@ -74,6 +73,7 @@ export default {
             limit: 10,
             finished: false,
             loading: false,
+            dianpu: null,
         }
     },
     mounted(){

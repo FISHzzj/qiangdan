@@ -21,8 +21,8 @@
                 <div class="item" v-for="(item, index) in list" :key="index">
                     <div class="top flex flex_between ali_center" @click="godetail(item.show_status, item.id, item.qishu)" >
                         <div class="left flex ali_center" @click.stop="$router.push('/ft_store/1')">
-                            <img src="@/assets/images/dui.png" alt="" />
-                            <span>店铺名字</span>
+                            <img :src="dianpu.names_img" alt="" />
+                            <span>{{dianpu.names}}</span>
                             <van-icon name="arrow" />
                         </div>
                         <div class="right" >{{item.statusstr}}</div>
@@ -90,6 +90,7 @@ export default {
             limit: 10,
             finished: false,
             loading: false,
+            dianpu: null
         }
     },
     created(){
@@ -103,6 +104,7 @@ export default {
             console.log(res)
             // this.list = res.list
             // console.log(this.list)
+            this.dianpu = res.dianpu
              this.page++
             
             this.list.push(...res.list)

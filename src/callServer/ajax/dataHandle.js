@@ -794,9 +794,10 @@ export default {
     },
     auctionauction1mai_order_list(data){
         if ( mistake(data) ) return false
-        let {list} = data.result
+        let {list, dianpu} = data.result
         return {
-            list
+            list,
+            dianpu
         }
     },
     auctionauction1mai_order_detail(data){
@@ -811,9 +812,10 @@ export default {
     },
     auctionauction1sell_order_list(data){
         if ( mistake(data) ) return false
-        let {list} = data.result
+        let {list, dianpu} = data.result
         return {
-            list
+            list,
+            dianpu
         }
     },
     auctionauction1mai_order_status(data){
