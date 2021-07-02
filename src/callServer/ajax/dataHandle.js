@@ -662,11 +662,12 @@ export default {
     },
     auctionauction1(data){
         if ( mistake(data) ) return false
-        let {remai, lunbo, guanggao} = data.result
+        let {remai, lunbo, guanggao, yq_img} = data.result
         return{
             remai,
             lunbo,
-            guanggao
+            guanggao,
+            yq_img
         }
 
     },

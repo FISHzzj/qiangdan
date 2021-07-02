@@ -21,7 +21,7 @@
             </router-link>
         </div>
         <div class="adv" @click="$router.push('/ft_invite')">
-            <img src="@/assets/images/centerInfoBg.png" alt="" />
+            <img :src="yq_img" alt="" />
         </div>
         <div class="list">
             <div class="title flex ali_center">
@@ -98,6 +98,7 @@ export default {
             remai:[],
             lunbo: [],
             guanggao: "",
+            yq_img: "",
         };
     },
     created(){
@@ -110,10 +111,11 @@ export default {
         async getData(){
             let res = await $ajax('auctionauction1', {})
             if(!res) return false
-            let {remai, lunbo, guanggao} = res
+            let {remai, lunbo, guanggao, yq_img} = res
             this.remai = remai
             this.lunbo = lunbo
             this.guanggao = guanggao
+            this.yq_img = yq_img
 
         },
         goitem(e) {

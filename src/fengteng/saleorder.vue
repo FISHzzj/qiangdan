@@ -21,8 +21,8 @@
                 <div class="item" @click="godetail(item.show_status, item.id, item.qishu)"  v-for="(item, index) in list" :key="index">
                     <div class="top flex flex_between ali_center" >
                         <div class="left flex ali_center" >
-                            <img :src="dianpu.names_img" alt="" />
-                            <span>{{dianpu.name}}</span>
+                            <img :src="avatar" alt="" />
+                            <span>{{nickname}}</span>
                             <van-icon name="arrow" />
                         </div>
                         <div class="right" >{{item.statusstr}}</div>
@@ -74,12 +74,24 @@ export default {
             finished: false,
             loading: false,
             dianpu: null,
+            nickname: "",
+            mobile: "",
+            avatar: "",
         }
     },
     mounted(){
         // this.getData()
+        this.getmine()
     },
     methods: {
+        async getmine(){
+            let res = await $ajax('auctionauction1get_member', {})
+            if(!res) return false
+            let member = res.member
+            Object.keys(member).forEach((key)=>{
+                this[key] = member[key]
+            })
+        },
         async getData(){
             let res = await $ajax('auctionauction1sell_order_list', {show_status: this.status, page: this.page})
             if(!res) return false
