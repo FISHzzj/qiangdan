@@ -85,7 +85,7 @@ export default {
             if(!res) return false
             console.log(res)
             // this.list = res.list
-            // console.log(this.list)
+            console.log(this.list)
              this.page++
             
             this.list.push(...res.list)

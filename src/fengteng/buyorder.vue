@@ -54,7 +54,7 @@
                         </div>
                         <div class="right">
                             <van-button v-if="item.show_status == 3" type="primary" size="mini" @click="sale(item.id)">转售</van-button>
-                            <van-button v-if="item.show_status == 3" type="primary" size="mini" @click="zhuandingdan(item.id)">转订单</van-button>
+                            <van-button v-if="item.show_status == 3" type="primary" size="mini" @click="zhuandingdan(item.id)">提货</van-button>
                             <van-button v-if="item.show_status == 3" type="primary" size="mini" @click="zhuanpaibi(item.id)">转竞拍币</van-button>
                             <van-button v-if="item.show_status == 3" type="primary" size="mini" @click="songdan(item.id)">送单</van-button>
 
@@ -145,13 +145,13 @@ export default {
 
         },
         async zhuandingdan(id){
-            let res = await $ajax('auctionauction1money_log', {id: id})
+            let res = await $ajax('auctionauction1zhuan_order', {id: id})
             if(!res) return false
             Toast(res.msg)
             this.getData()
         },
         async zhuanpaibi(id){
-            let res = await $ajax('auctionauction1invite', {id: id})
+            let res = await $ajax('auctionauction1zhuan_sxf', {id: id})
             if(!res) return false
             Toast(res.msg)
             this.getData()

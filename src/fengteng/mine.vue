@@ -10,8 +10,8 @@
                 <div class="userInfo flex ali_center">
                     <img class="avatar" :src="avatar" alt="">
                     <div class="info">
-                        <div class="name">昵称</div>
-                        <div class="phone">{{nickname}}</div>
+                        <div class="name">{{nickname}}</div>
+                        <div class="phone">{{mobile}}</div>
                     </div>
                 </div>
                 <div>

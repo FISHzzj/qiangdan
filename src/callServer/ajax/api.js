@@ -98,7 +98,8 @@ export default {
     auctionauction1member_edit: `${common}do=mobile&r=auction.auction1.member_edit`, // 修改头像
     auctionauction1get_kf: `${common}do=mobile&r=auction.auction1.get_kf`, // 客服
     auctionauction1get_er: `${common}do=mobile&r=auction.auction1.get_er`, // 二级团队
-
+    auctionauction1zhuan_order: `${common}do=mobile&r=auction.auction1.zhuan_order`, // 转订单
+    auctionauction1zhuan_sxf: `${common}do=mobile&r=auction.auction1.zhuan_sxf`, // 转拍拍币
     
     
     

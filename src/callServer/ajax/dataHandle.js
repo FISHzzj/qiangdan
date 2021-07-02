@@ -1002,6 +1002,18 @@ export default {
         return{
             list
         }
+    },
+    auctionauction1zhuan_order(data){
+        if ( mistake(data) ) return false
+        return {
+            msg: data.result.message
+        }
+    },
+    auctionauction1zhuan_sxf(data){
+        if ( mistake(data) ) return false
+        return {
+            msg: data.result.message
+        }
     }
 
 
