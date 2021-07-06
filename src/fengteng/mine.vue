@@ -156,7 +156,7 @@ export default {
             yj: "",
             xia: "",
             credit50: "",
-            member_level:null,
+            member_level:{},
         };
     },
     mounted(){
