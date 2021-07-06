@@ -10,8 +10,12 @@
                 <div class="userInfo flex ali_center">
                     <img class="avatar" :src="avatar" alt="">
                     <div class="info">
-                        <div class="name">{{nickname}}</div>
-                        <div class="phone">{{mobile}}</div>
+                         <div class="phone">ID：{{id}}</div>
+                        <div class="phone">昵称：{{nickname}}</div>
+                        <div class="phone">VIP等级：{{member_level.levelname}}</div>
+                       
+                        <div class="phone">手机号：{{mobile}}</div>
+                        
                     </div>
                 </div>
                 <div>
@@ -152,6 +156,7 @@ export default {
             yj: "",
             xia: "",
             credit50: "",
+            member_level:null,
         };
     },
     mounted(){

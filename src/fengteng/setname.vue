@@ -9,8 +9,8 @@
                 <div class="label">头像</div>
                 <div class="right flex ali_center">
                     <div class="pic_wrapper">
-                        <van-uploader max-count="1" preview-size="50" :after-read="afterRead" />
-                        <img class="avatar_1" :src="avatar" alt="" />
+                        <van-uploader max-count="1" preview-size="50" v-model="fileList" :after-read="afterRead" :deletable="deletable" />
+                        <!-- <img class="avatar_1" :src="avatar" alt="" /> -->
                     </div>
                     <van-icon name="arrow" />
                 </div>
@@ -63,6 +63,7 @@
     </div>
 </template>
 <script>
+import { Toast } from 'vant';
 // import changeName from './common/changeName';
 export default {
     name: "setname",
@@ -74,9 +75,14 @@ export default {
             nickname: "这是昵称",
             showNickname: false,
             show: false,
-            avatar: require("@/assets/images/icon/jyjl.png"),
+            avatar: require("@/assets/images/icon/zz.png"),
             mobile: "",
             sf_type: "",
+            fileList: [
+                { url: 'https://img01.yzcdn.cn/vant/leaf.jpg' },
+            ],
+            deletable: true
+            
         };
     },
     mounted() {
@@ -101,6 +107,7 @@ export default {
             Object.keys(member).forEach((key)=>{
                 this[key] = member[key]
             })
+            this.fileList[0].url = member.avatar
 
         },
         async clearname(e) {
@@ -119,7 +126,7 @@ export default {
             })
             if(!res) return false
             console.log(res)
-            this.avatar = res.imgurl
+            this.fileList[0].url = res.imgurl
             // Toast(res.msg)
 
         },
@@ -147,8 +154,9 @@ export default {
             });
         },
         async save(){
+            if(this.fileList[0].url == '') return Toast('请先上传图片')
             let res = await $ajax('auctionauction1member_edit', {
-                avatar: this.avatar
+                avatar: this.fileList[0].url
             })
             if(!res) return false
             // console.log(res)
@@ -206,7 +214,7 @@ export default {
                         left: 0;
                         width: 12vw;
                         height: 12vw;
-                        opacity: 0;
+                        // opacity: 0;
                     }
                     .avatar_1 {
                         width: 12vw;
