@@ -11,8 +11,8 @@
                     <div>￥{{marketprice}}</div>
                 </div>
                 <div class="right flex">
-                    <p v-if="status_s == 2">本轮拍卖已结束</p>
-                    <p v-else>本轮拍卖正在进行中</p>
+                    <p >{{statustext}}</p>
+                    <!-- <p v-else>本轮拍卖正在进行中</p> -->
                     <!-- <CountDown navclass="on" :datatime="datatime" :currenttime="currenttime" ></CountDown> -->
                      <div class="time" :class="navclass">
                         {{ tipText }}<span class="styleAll" v-if="isDay === true">{{ day }}</span
@@ -101,6 +101,7 @@ export default {
             date3: 0,
             dianpu:"",
             xx:"",
+            statustext: "",
         }
     },
     created(){
@@ -153,24 +154,46 @@ export default {
             let startTime = Number(this.stime)
             let endTime = Number(this.etime)
             let timestamp = Date.parse(new Date())/1000;
-            var date1 = ""; //开始时间
-            if(timestamp<startTime){
-                date1=startTime;
-            }else{
-                date1 = timestamp; //开始时间
-            }
-            var date2 = endTime; //结束时间
+            
+            var date1 = null; //开始时间
+            var date2 = null; //结束时间
+            // if(timestamp<startTime){
+            //     date1=startTime;
+            // }else{
+            //     date1 = timestamp; //开始时间
+            // }
+            // var date2 = endTime; //结束时间
 
-            console.log(date1)
-            console.log(date2)
-        
-            if(date1 >= date2){
+            // console.log(date1)
+            // console.log(date2)
+            // console.log(date1 >= date2)
+            // if(date1 >= date2){
+            //     this.currentTime = 0
+            //     this.datatime = 0
+            // }else if(date1 < date2){
+            //     this.currentTime = date1
+            //     this.datatime = date2
+            // }else if((date1 >= timestamp ){
+            //      this.currentTime = timestamp
+            //     this.datatime = date1
+            // }else if((date1 < timestamp ){
+            //      this.currentTime = timestamp
+            //     this.datatime = date2
+            // }
+            if(startTime > timestamp){
+                this.currentTime = timestamp
+                this.datatime = startTime
+                this.statustext = '距离拍卖开始倒计时'
+            }else if(startTime < timestamp && timestamp < endTime){
+                this.currentTime = timestamp
+                this.datatime = endTime
+                this.statustext = '本轮拍卖正在进行中'
+            }else if( timestamp > endTime){
                 this.currentTime = 0
                 this.datatime = 0
-            }else{
-                this.currentTime = date1
-                this.datatime = date2
+                this.statustext = '本轮拍卖已结束'
             }
+            
             // this.date3 =  (date2- date1)*1000; //时间差的毫秒数
             // console.log(this.date3)
             console.log(this.currentTime)
