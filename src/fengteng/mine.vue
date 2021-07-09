@@ -10,7 +10,9 @@
                 <div class="userInfo flex ali_center">
                     <img class="avatar" :src="avatar" alt="">
                     <div class="info">
-                        <div class="name">{{nickname}}</div>
+                        <div class="name" style="color: #ffd01e;font-size:4vw;">{{member_level.levelname}}</div>
+
+                        <div class="phone">{{nickname}}</div>
                         <div class="phone">{{mobile}}</div>
                     </div>
                 </div>
@@ -18,8 +20,7 @@
                     <van-icon @click="$router.push('/setname')" name="arrow" size="20" />
 
                 </div>
-                
-
+            
             </div>
             <div class="flex flex_between ali_center money">
                 <div class="item">
@@ -152,6 +153,7 @@ export default {
             yj: "",
             xia: "",
             credit50: "",
+            member_level: null,
         };
     },
     mounted(){

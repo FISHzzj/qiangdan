@@ -188,11 +188,27 @@ export default {
     this.clipboard = copy('.copy')
     this.id = this.$route.query.id
     this.titletop = this.$route.query.title
-    this.getData()
+    if(this.titletop == '卖单详情'){
+      this.getmaidan()
+    }else {
+      this.getData()
+
+    }
   },
   methods: {
     async getData(){
         let res = await $ajax('auctionauction1mai_order_detail', {id: this.id})
+        if(!res) return false
+        console.log(res)
+        let resnewObj = res.newObj
+        Object.keys(resnewObj).forEach((key)=>{
+          this[key] = resnewObj[key]
+        })
+        
+        
+    },
+    async getmaidan(){
+        let res = await $ajax('auctionauction1sell_order_detail', {id: this.id})
         if(!res) return false
         console.log(res)
         let resnewObj = res.newObj

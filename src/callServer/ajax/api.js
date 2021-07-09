@@ -100,6 +100,7 @@ export default {
     auctionauction1get_er: `${common}do=mobile&r=auction.auction1.get_er`, // 二级团队
     auctionauction1zhuan_order: `${common}do=mobile&r=auction.auction1.zhuan_order`, // 转订单
     auctionauction1zhuan_sxf: `${common}do=mobile&r=auction.auction1.zhuan_sxf`, // 转拍拍币
+    auctionauction1sell_order_detail: `${common}do=mobile&r=auction.auction1.sell_order_detail`, // 卖单详情
     
     
     

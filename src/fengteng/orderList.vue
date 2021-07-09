@@ -30,6 +30,10 @@
                 @load="getData"
             >
             <div class="item" v-for="(item,index) in list" :key="index">
+              <div class="bottom flex flex_between ali_center">
+                <div class="left">订单号: <span>{{item.ordersn}}</span></div>
+                <!-- <div class="right" v-if="status==0" @click="gopay(item.id)">立即付款</div> -->
+              </div>
               <div class="top flex flex_between">
                 <div class="left flex">
                   <img :src="item.thumbw4" alt="" />

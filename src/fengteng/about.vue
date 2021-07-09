@@ -5,8 +5,8 @@
             <p>客服</p>
         </div>
         <div class="logo_version">
-            <img src="@/assets/images/home/laba.jpg" alt="" />
-            <div class="version">V4.3.0</div>
+            <img :src="kefu_img" alt="" />
+            <!-- <div class="version">V4.3.0</div> -->
         </div>
         <div class="list">
             <div class="copy item flex flex_between ali_center" :data-clipboard-text="kefu_qq">
@@ -56,6 +56,7 @@ export default {
             wechat_img: "",
             kefu_qq: "",
             kefu_wx: "",
+            kefu_img: "",
 
 
         };
@@ -71,6 +72,7 @@ export default {
             if (!res) return false
             this.kefu_qq = res.kefu_qq
             this.kefu_wx = res.kefu_wx
+            this.kefu_img = res.kefu_img
             // this.content = res.content
             // this.wechat_img = res.wechat_img
             

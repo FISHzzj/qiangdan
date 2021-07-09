@@ -991,10 +991,11 @@ export default {
     },  
     auctionauction1get_kf(data){
         if ( mistake(data) ) return false
-        let {kefu_qq, kefu_wx} = data.result
+        let {kefu_qq, kefu_wx, kefu_img} = data.result
         return{
             kefu_qq,
-            kefu_wx
+            kefu_wx,
+            kefu_img
         }
     },
     auctionauction1get_er(data){
@@ -1015,7 +1016,17 @@ export default {
         return {
             msg: data.result.message
         }
-    }
+    },
+    auctionauction1sell_order_detail(data){
+        if ( mistake(data) ) return false
+        let {list, sell_list} = data.result
+        let newObj = {}
+        Object.assign(newObj,list,sell_list);
+
+        return {
+            newObj
+        }
+    },
 
 
 
