@@ -50,7 +50,7 @@
             <div class="title">拍品详情</div>
             <div class="detail" v-html="content"></div>
         </div>
-        <div class="submit " :class="{on:sureupload == true}" @click="submitorder">立即下单</div>
+        <div class="submit " :class="{on:sureupload}" @click="submitorder">立即下单</div>
         <!-- <van-dialog id="van-dialog" /> -->
     </div>
 </template>
@@ -102,6 +102,7 @@ export default {
             dianpu:"",
             xx:"",
             statustext: "",
+            is_zhuan: 0,
         }
     },
     created(){
@@ -181,17 +182,20 @@ export default {
             //     this.datatime = date2
             // }
             if(startTime > timestamp){
-                this.currentTime = timestamp
+                this.currentTime = timestamp 
                 this.datatime = startTime
-                this.statustext = '距离拍卖开始倒计时'
+                this.statustext = '距离拍卖开始还有'
+                this.sureupload = false
             }else if(startTime < timestamp && timestamp < endTime){
                 this.currentTime = timestamp
                 this.datatime = endTime
                 this.statustext = '本轮拍卖正在进行中'
-            }else if( timestamp > endTime){
+                this.sureupload = true
+            }else if( timestamp > endTime && this.is_zhuan  == 1){
                 this.currentTime = 0
                 this.datatime = 0
                 this.statustext = '本轮拍卖已结束'
+                this.sureupload = false
             }
             
             // this.date3 =  (date2- date1)*1000; //时间差的毫秒数
