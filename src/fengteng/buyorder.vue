@@ -9,7 +9,7 @@
             <div class="item" :class="{on:status == 0}" @click="changenav(0)">全部</div>
             <div class="item" :class="{on:status == 1}" @click="changenav(1)">待付款</div>
             <div class="item" :class="{on:status == 2}" @click="changenav(2)">已付款</div>
-            <div class="item" :class="{on:status == 3}" @click="changenav(3)">已完成/待转拍</div>
+            <div class="item" :class="{on:status == 3}" @click="changenav(3)">待转拍</div>
         </div>
         <div class="list">
             <van-list
@@ -56,7 +56,7 @@
                             <van-button v-if="item.show_status == 3" type="primary" size="mini" @click="sale(item.id)">转售</van-button>
                             <van-button v-if="item.show_status == 3" type="primary" size="mini" @click="zhuandingdan(item.id)">提货</van-button>
                             <van-button v-if="item.show_status == 3" type="primary" size="mini" @click="zhuanpaibi(item.id)">转竞拍币</van-button>
-                            <van-button v-if="item.show_status == 3" type="primary" size="mini" @click="songdan(item.id)">送单</van-button>
+                            <van-button v-if="item.show_status == 1" type="primary" size="mini" @click="songdan(item.id)">送单</van-button>
 
                         </div>
                     </div>
