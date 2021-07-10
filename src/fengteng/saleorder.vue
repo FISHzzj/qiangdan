@@ -30,7 +30,7 @@
                      </div>
                     <div class="infos flex flex_between ali_center" >
                         <div class="left flex ali_center">
-                            <img src="@/assets/images/dui.png" alt="" />
+                            <img :src="item.thumb" alt="" />
                             <div>
                                 <p class="name">{{item.title}}}</p>
                                 <!-- <p class="storeId">商家:000112232411</p> -->

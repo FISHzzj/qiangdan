@@ -47,7 +47,11 @@ export default {
             timer: null
         };
     },
+    created(){
+        this.spread = this.$route.query.code || ""
+    },
     methods: {
+
         sendCode() {
             console.log(1)
             this.djs();

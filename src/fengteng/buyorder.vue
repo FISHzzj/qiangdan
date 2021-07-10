@@ -9,7 +9,7 @@
             <div class="item" :class="{on:status == 0}" @click="changenav(0)">全部</div>
             <div class="item" :class="{on:status == 1}" @click="changenav(1)">待付款</div>
             <div class="item" :class="{on:status == 2}" @click="changenav(2)">已付款</div>
-            <div class="item" :class="{on:status == 3}" @click="changenav(3)">已完成/待转拍</div>
+            <div class="item" :class="{on:status == 3}" @click="changenav(3)">待转拍</div>
         </div>
         <div class="list">
             <van-list
@@ -32,10 +32,10 @@
                     </div>
                     <div class="infos flex flex_between ali_center" @click="godetail(item.show_status, item.id, item.qishu)" >
                         <div class="left flex ali_center">
-                            <img src="@/assets/images/dui.png" alt="" />
+                            <img :src="item.thumb" alt="" />
                             <div>
                                 <p class="name">{{item.title}}</p>
-                                <!-- <p class="storeId">商家:000112232411</p> -->
+                                <p class="storeId">{{item.dianpu.mobile}}</p>
                             </div>
                         </div>
                         <div class="right">
@@ -53,10 +53,10 @@
                             
                         </div>
                         <div class="right">
-                            <van-button v-if="item.show_status == 3" type="primary" size="mini" @click="sale(item.id)">转售</van-button>
-                            <van-button v-if="item.show_status == 3" type="primary" size="mini" @click="zhuandingdan(item.id)">提货</van-button>
-                            <van-button v-if="item.show_status == 3" type="primary" size="mini" @click="zhuanpaibi(item.id)">转竞拍币</van-button>
-                            <van-button v-if="item.show_status == 3" type="primary" size="mini" @click="songdan(item.id)">送单</van-button>
+                            <van-button v-if="item.show_status == 3 && item.is_del == 1" type="primary" size="mini" @click="sale(item.id)">转售</van-button>
+                            <van-button v-if="item.show_status == 3 && item.is_del == 1" type="primary" size="mini" @click="zhuandingdan(item.id)">提货</van-button>
+                            <van-button v-if="item.show_status == 3 && item.is_del == 1" type="primary" size="mini" @click="zhuanpaibi(item.id)">转竞拍币</van-button>
+                            <van-button v-if="item.show_status == 1" type="primary" size="mini" @click="songdan(item.id)">送单</van-button>
 
                         </div>
                     </div>
