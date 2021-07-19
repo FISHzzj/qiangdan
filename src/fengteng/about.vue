@@ -57,8 +57,6 @@ export default {
             kefu_qq: "",
             kefu_wx: "",
             kefu_img: "",
-
-
         };
     },
     mounted() {

@@ -50,14 +50,12 @@
                                 <div class="time">订单号：{{item.qishu}}</div>
 
                             </div>
-                            
                         </div>
                         <div class="right">
                             <van-button v-if="item.show_status == 3 && item.is_del == 1" type="primary" size="mini" @click="sale(item.id)">转售</van-button>
                             <van-button v-if="item.show_status == 3 && item.is_del == 1" type="primary" size="mini" @click="zhuandingdan(item.id)">提货</van-button>
                             <van-button v-if="item.show_status == 3 && item.is_del == 1" type="primary" size="mini" @click="zhuanpaibi(item.id)">转竞拍币</van-button>
                             <van-button v-if="item.show_status == 1" type="primary" size="mini" @click="songdan(item.id)">送单</van-button>
-
                         </div>
                     </div>
                    
