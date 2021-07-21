@@ -233,6 +233,9 @@ export default {
                 // console.log(222)
                 _this.runTime();
                 // clearInterval(_this.interval);
+                if(_this.statustext == '本轮拍卖正在进行中'){
+                    _this.sureupload = true
+                }
             }, 1000);
   
             // runTime();

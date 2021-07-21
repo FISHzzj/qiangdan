@@ -24,13 +24,13 @@
         <div>
           <p class="type">名称</p>
           <div class="name">{{title}}</div>
-          <p class="type">期数</p>
+          <p class="type">订单号</p>
           <div class="num">{{qishu}}</div>
         </div>
       </div>
       <div class="right">
         <div class="type">实付金额</div>
-        <div class="num">￥{{moneys}}</div>
+        <div class="num">￥{{marketprice}}</div>
       </div>
     </div>
     <div class="changetype flex flex_between ali_center">
@@ -182,6 +182,7 @@ export default {
       thumb: "",
       pay_type: "",
       titletop: "",
+      marketprice: "",
     }
   },
   mounted() {
