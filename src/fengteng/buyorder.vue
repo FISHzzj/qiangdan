@@ -58,7 +58,7 @@
                             <van-button v-if="item.show_status == 1" type="primary" size="mini" @click="songdan(item.id)">送单</van-button>
                         </div>
                     </div>
-                   
+
                 </div>
             </van-list>
         </div>

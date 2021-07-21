@@ -233,9 +233,9 @@ export default {
                 // console.log(222)
                 _this.runTime();
                 // clearInterval(_this.interval);
-                if(_this.statustext == '本轮拍卖正在进行中'){
-                    _this.sureupload = true
-                }
+                // if(_this.statustext == '本轮拍卖正在进行中'){
+                //     _this.sureupload = true
+                // }
             }, 1000);
   
             // runTime();
@@ -289,6 +289,7 @@ export default {
                 that.hour = "00";
                 that.minute = "00";
                 that.second = "00";
+                this.sureupload = true
             }
         }
     }
