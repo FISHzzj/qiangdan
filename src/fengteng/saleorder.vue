@@ -45,7 +45,7 @@
                         <div class="left flex ali_center">
                             <div>  
                                 <div class="time">创建时间：{{item.createtime}}</div>
-                                <div class="time">期数：{{item.qishu}}</div>
+                                <div class="time">订单号：{{item.qishu}}</div>
                             </div>
                             
                         </div>
