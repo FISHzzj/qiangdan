@@ -149,7 +149,7 @@ export default {
             credit1: "",
             nickname: "",
             mobile: "",
-            avatar:"",
+            avatar:require("@/assets/images/touxiang.png"),
             yj: "",
             xia: "",
             credit50: "",
@@ -174,6 +174,7 @@ export default {
             let member = res.member
             Object.keys(member).forEach((key)=>{
                 this[key] = member[key]
+           
                 
             })
 

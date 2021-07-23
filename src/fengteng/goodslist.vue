@@ -18,7 +18,7 @@
                     <div class="name">{{item.title}}</div>
                     <div class="bottom flex flex_between">
                         <span class="price">￥{{item.marketprice}}</span>
-                        <span class="status">{{item.status_s == 1 ? '售卖中' : '售窑'}}</span>
+                        <span class="status">{{item.status_s == 1 ? '售卖中' : '已售空'}}</span>
                     </div>
                 </router-link>
             </div>

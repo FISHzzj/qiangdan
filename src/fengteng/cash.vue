@@ -62,16 +62,65 @@ export default {
     data() {
         return {
             type: "1",
-            fileList: [],
+            fileList: [{url: ''}],
             realname: "",
             bankname: "",
             bankcard: "",
             money: "",
+            wnum: "",
+            mobile: "",
+            id: "",
+            alipaynum: "",
+            bname: "",
+            banknames: "",
+            bnum: "",
+            
         }
     },
+    mounted(){
+        this.getData()
+    },
     methods: {
+        async getData(){
+            let res = await $ajax('auctionauction1sk_list', {})
+            if(!res) return false
+            console.log(res)
+            let {wx, zfb, yhk} = res
+            // console.log(wx.conten)
+            // console.log(wx.conten.cont1)
+            
+            if(this.type == 1 && wx.conten){
+                // console.log(3333333)
+                this.fileList[0].url = wx.conten.cont1
+                console.log(this.fileList)
+                this.wnum = wx.conten.cont2
+                this.mobile = wx.conten.cont3
+                // console.log(this.mobile)
+                this.id = wx.id
+                // this.type = wx.type
+            }else if(this.type == 2 && zfb.conten){
+                this.fileList[0].url = zfb.conten.cont1
+                this.alipaynum = zfb.conten.cont2
+                this.mobile = zfb.conten.cont3
+                this.id = zfb.id
+                // this.type = zfb.type
+            }else if(this.type == 3 && yhk.conten ){
+                // this.fileList[0].url = yhk.conten.cont1
+                this.realname = yhk.conten.cont2
+                this.bankname = yhk.conten.cont3
+                this.banknames = yhk.conten.cont4
+                this.bankcard = yhk.conten.cont5
+                this.mobile = yhk.conten.cont6
+                this.id = yhk.id
+                // this.type = yhk.type
+            }
+        },
         changeway(type) {
+            this.fileList[0].url = ""
             this.type = type;
+            
+            this.getData()
+            
         },
         async afterRead(file) {
             console.log(file);
@@ -95,7 +144,7 @@ export default {
                  if(!this.bankname) return Toast('请输入银行名称')
                  if(!this.bankcard) return Toast('请输入银行卡号')
 
-                 let res = await $ajax('auctionauction1withdraw_submit', {realname: this.realname, bankname: this.bankname, bankcard: this.bankcard, money: this.money,applytype: this.type   })
+                 let res = await $ajax('auctionauction1withdraw_submit', {realname: this.realname, bankname: this.bankname, bankcard: this.bankcard, money: this.money,applytype: this.type })
                 if(!res) return false
                 console.log(res)
                 Toast(res.msg)

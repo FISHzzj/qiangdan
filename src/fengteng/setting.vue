@@ -105,7 +105,7 @@ export default {
             let {wx, zfb, yhk} = res
             // console.log(wx.conten)
             // console.log(wx.conten.cont1)
-            if(wx.conten){
+            if(wx.conten && this.type == 1){
                 // console.log(3333333)
                 this.fileList[0].url = wx.conten.cont1
                 console.log(this.fileList)
@@ -113,14 +113,16 @@ export default {
                 this.mobile = wx.conten.cont3
                 // console.log(this.mobile)
                 this.id = wx.id
-                this.type = wx.type
-            }else if(zfb.conten){
+                // this.type = wx.type
+            }else if(zfb.conten && this.type == 3){
+                console.log(2222)
                 this.fileList[0].url = zfb.conten.cont1
+                console.log(this.fileList)
                 this.alipaynum = zfb.conten.cont2
                 this.mobile = zfb.conten.cont3
                 this.id = zfb.id
-                this.type = zfb.type
-            }else if(yhk.conten){
+                // this.type = zfb.type
+            }else if(yhk.conten && this.type == 2){
                 // this.fileList[0].url = yhk.conten.cont1
                 this.bname = yhk.conten.cont2
                 this.bankname = yhk.conten.cont3
@@ -128,12 +130,13 @@ export default {
                 this.bnum = yhk.conten.cont5
                 this.mobile = yhk.conten.cont6
                 this.id = yhk.id
-                this.type = yhk.type
+                // this.type = yhk.type
             }
         },
         changenav(type) {
-            this.fileList = [];
+             this.fileList[0].url = ""
             this.type = type;
+            console.log(this.type)
             if(type == 1){
                 this.getData()
             }else if(type == 2){

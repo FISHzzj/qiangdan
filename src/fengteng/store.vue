@@ -9,7 +9,7 @@
                 <img :src="dianpu.names_img" alt="" />
                 <div class="info">
                     <p class="name">{{dianpu.names}}</p>
-                    <!-- <p class="num">97件商品</p> -->
+                    <p class="num">{{dianpu.zong}}件商品</p>
                 </div>
             </div>
         </div>

@@ -32,7 +32,7 @@
                         <div class="left flex ali_center">
                             <img :src="item.thumb" alt="" />
                             <div>
-                                <p class="name">{{item.title}}}</p>
+                                <p class="name">{{item.title}}</p>
                                 <!-- <p class="storeId">商家:000112232411</p> -->
                             </div>
                         </div>
