@@ -79,7 +79,7 @@ export default {
             mobile: "",
             sf_type: "",
             fileList: [
-                { url: 'https://img01.yzcdn.cn/vant/leaf.jpg' },
+                { url: '' },
             ],
             deletable: true
             
@@ -154,7 +154,7 @@ export default {
             });
         },
         async save(){
-            if(this.fileList[0].url == '') return Toast('请先上传图片')
+            if(!this.fileList[0].url) return Toast('请先上传图片')
             let res = await $ajax('auctionauction1member_edit', {
                 avatar: this.fileList[0].url
             })

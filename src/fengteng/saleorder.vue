@@ -18,8 +18,8 @@
                 :finished-text="'我是有底线的'"
                 @load="getData"
             >
-                <div class="item" @click="godetail(item.show_status, item.id, item.qishu)"  v-for="(item, index) in list" :key="index">
-                    <div class="top flex flex_between ali_center" >
+                <div class="item"  v-for="(item, index) in list" :key="index">
+                    <div class="top flex flex_between ali_center" @click="godetail(item.show_status, item.id, item.qishu)" >
                         <div class="left flex ali_center" >
                             <img :src="avatar" alt="" />
                             <span>{{nickname}}</span>
@@ -28,7 +28,7 @@
                         <div class="right" >{{item.statusstr}}</div>
 
                      </div>
-                    <div class="infos flex flex_between ali_center" >
+                    <div class="infos flex flex_between ali_center" @click="godetail(item.show_status, item.id, item.qishu)" >
                         <div class="left flex ali_center">
                             <img :src="item.thumb" alt="" />
                             <div>
@@ -41,7 +41,7 @@
                             <p class="price">￥{{item.moneys}}</p>
                         </div>
                     </div>
-                    <div class="infos flex flex_between ali_center">
+                    <div class="infos flex flex_between ali_center" >
                         <div class="left flex ali_center">
                             <div>  
                                 <div class="time">创建时间：{{item.createtime}}</div>
@@ -50,7 +50,7 @@
                             
                         </div>
                         <div class="right">
-                            <van-button v-if="item.show_status == 2 " type="primary" size="mini" >确认收款</van-button>
+                            <!-- <van-button v-if="item.show_status == 2 " type="primary" size="mini" @click="queren">确认收款</van-button> -->
 
                         </div>
                     </div>
@@ -129,6 +129,10 @@ export default {
             this.list = []
             this.getData()
 
+        },
+        async queren(){
+            //  let res = await $ajax('auctionauction1sell_order_list', {show_status: this.status, page: this.page})
+            // if(!res) return false
         }
     }
 }

@@ -104,7 +104,7 @@ export default {
             payType: '1',
             address: {},
             img:'https://img.yzcdn.cn/vant/cat.jpeg',
-            fileList: [],
+            fileList: [{url: ""}],
             qishu: "", 
             gid: "",
             id: "",
@@ -150,7 +150,7 @@ export default {
             this.fileList[0].url = res.imgurl
         },
         async pay(){
-            if(this.fileList.length == 0) return Toast('请上传凭证')
+            if(!this.fileList[0].url) return Toast('请上传凭证')
              let res = await $ajax('auctionauction1pay_order', {id: this.id, qishu: this.qishu, img: this.fileList[0].url, pay_type: this.payType})
             if(!res) return false
             Toast(res.msg)

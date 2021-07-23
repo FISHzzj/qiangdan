@@ -91,22 +91,23 @@
           <van-icon name="phone" />
         </div>
       </div>
-      <div class="item flex " style="flex-direction: row;flex-wrap: wrap;">
+      <div class="item flex " style="flex-direction: row;flex-wrap: wrap;" v-if="titletop == '买单详情'">
         <div class="left flex ali_center" style="width: 100%;margin: 10px 0;">
           <van-icon name="share" size="14" />
           <span>卖方收款码</span>
         </div>
         <div class="right flex flex_between ali_center">
-          <!-- <span>1111111111</span>
-          <van-icon name="phone" /> -->
-          <img :src="wx_img" alt="" style="width:50%;margin-right:10px;height:150px" />
-          <img :src="zfb_img" alt="" style="width:50%;height:150px" />
+
+          <img :src="wx_img" alt=""  :style=" wx_img ? 'width:50%;margin-right:10px;height:150px;' : 'width:0;height:0;'" />
+          <img :src="zfb_img" alt=""  :style="zfb_img ? 'width:50%;height:150px;' : 'width:0;height:0;'"/>
 
         </div>
       </div>
 
     </div>
-    <div @click="getmoney" v-if="titletop == '卖单详情' && statusstr == '带确认收款'"><van-button type="primary" block>确认收款</van-button></div>
+    <div @click="getmoney" v-if="titletop == '卖单详情'" style="margin-top: 50px;">
+      <van-button type="primary" block>确认收款</van-button>
+    </div>
 
     <!-- <div @click="showType = false" class="mask" v-if="showType"></div> -->
     <!-- <div class="typeList" v-if="showType">
