@@ -76,7 +76,7 @@
       </div> -->
     </div>
     <div class="wrapper flex ali_center">
-      <img @click="show_image" v-if="true" :src="pay_img" alt="">
+      <img @click="show_image"  :src="pay_img" alt="">
       <!-- <p>提示：付款时请不要备注任何信息，推荐只用支付宝，银行卡号转账</p> -->
       <!-- <div @click="showUploader = true">上传支付凭证</div> -->
     </div>
@@ -217,6 +217,7 @@ export default {
         Object.keys(resnewObj).forEach((key)=>{
           this[key] = resnewObj[key]
         })
+        console.log(this.pay_img)
         
         
     },
