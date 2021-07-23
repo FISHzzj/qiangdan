@@ -75,7 +75,6 @@ export default {
             })
     },
     pay(){
-
       this.$router.push({
         name: 'ft_jf_orderdetail',
         query:{
