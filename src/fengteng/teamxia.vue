@@ -30,7 +30,7 @@
                     <img :src="item.avatar" alt="" />
                     <div class="info flex">
                         <p class="name">用户名：<span> {{item.nickname}}</span></p>
-                        <!-- <p class="type">id：<span>{{item.id}}</span>代理：<span>{{item.dl}}</span>佣金：<span>{{item.yj || 0}}</span></p> -->
+                        <p class="type">id：<span>{{item.id}}</span>代理：<span>{{item.dl}}</span>佣金：<span>{{item.yj || 0}}</span></p>
                     </div>
                 </div>
             <!-- </van-list> -->

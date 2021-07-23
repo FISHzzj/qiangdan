@@ -8,7 +8,7 @@
         <div class="nav flex ali_center flex_around">
             <div class="item" :class="{on:status == 0}" @click="changenav(0)">待售</div>
             <div class="item" :class="{on:status == 1}" @click="changenav(1)">已锁单</div>
-            <div class="item" :class="{on:status == 2}" @click="changenav(2)">带确认收款</div>
+            <div class="item" :class="{on:status == 2}" @click="changenav(2)">待确认收款</div>
             <div class="item" :class="{on:status == 3}" @click="changenav(3)">已完成</div>
         </div>
         <div class="list">
