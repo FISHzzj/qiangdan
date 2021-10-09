@@ -46,6 +46,10 @@
                 <div class="left">价格: <span>{{item.price}}</span></div>
                 <div class="right" v-if="status==0" @click="gopay(item.id)">立即付款</div>
               </div>
+               <div class="bottom flex flex_between ali_center" v-if="status != 0 || status != 1"> 
+                <div class="left">快递: <span>{{item.express}}</span></div>
+                <div class="right">快递单号: {{item.expresssn}}</div>
+              </div>
             </div>
           </van-list>
         </div>

@@ -1,12 +1,20 @@
 <template>
     <div class="login">
         <div class="title">欢迎登录风腾优品</div>
+        <van-tabs v-model="active">
+            <van-tab title="密码"></van-tab>
+            <van-tab title="验证码"></van-tab>
+        </van-tabs>
         <div class="list">
             <div class="item">
                 <p class="label">手机号</p>
                 <input type="text" v-model="phone" placeholder="请输入手机号" />
             </div>
-            <div class="item">
+             <div class="item" v-if="active == 0">
+                <p class="label">密码</p>
+                <input type="text" v-model="pwd" placeholder="请输入密码" />
+            </div>
+            <div class="item" v-if="active == 1">
                 <p class="label">验证码</p>
                 <div class="flex flex_between ali_center">
                     <input type="text" v-model="code" placeholder="请输入短信验证码" />
@@ -27,13 +35,15 @@ export default {
         return {
             disabled: false,
             code: "",
+            pwd:"",
             cardId: "",
             phone: "",
             second: 60,
             text: "获取验证码",
             spread: "",
             name: "",
-            timer: null
+            timer: null,
+            active: 0,
         };
     },
     methods: {
@@ -55,13 +65,23 @@ export default {
             }, 1000)
         },
         async login(){
-            let {phone, code} = this
-            if (!phone || !code) {
-				return Toast({
-					message: '请填写账号和验证码',
-					duration: 1000,
-				})
-			}
+            let {phone, code, pwd, active} = this
+            if(active == 0){
+                 if (!phone || !pwd) {
+                    return Toast({
+                        message: '请填写账号和密码',
+                        duration: 1000,
+                    })
+			    }
+            }else{
+                if (!phone || !code) {
+                    return Toast({
+                        message: '请填写账号和验证码',
+                        duration: 1000,
+                    })
+			    }
+            }
+           
 			if (phone.length < 11) {
 				return Toast({
 					message: '请填写正确的手机号',
@@ -76,23 +96,44 @@ export default {
                 position: 'bottom',
                 duration: 0
             })
-            // 發送 ajax
-            let res = await $ajax('auctionauction1login',{
-                mobile:phone,
-                verifycode: code
-            }, () => {
-                toast.clear()
-            })
-            // 如果返回爲 false ,則中斷函數
-            if (!res) return false
-            console.log(res)
-            // 保存 openid 以及 ip 到本地
-            localStorage.setItem('openid', res.openid)
-            // localStorage.setItem('ip', res.ip)
-            localStorage.setItem('mobile', phone)
-            this.$router.push({
-                name: 'ft_index'
-            })
+            if(active == 0){
+                 // 發送 ajax
+                let res = await $ajax('auctionauction1login',{
+                    mobile:phone,
+                    pwd: pwd
+                }, () => {
+                    toast.clear()
+                })
+                // 如果返回爲 false ,則中斷函數
+                if (!res) return false
+                console.log(res)
+                // 保存 openid 以及 ip 到本地
+                localStorage.setItem('openid', res.openid)
+                // localStorage.setItem('ip', res.ip)
+                localStorage.setItem('mobile', phone)
+                this.$router.push({
+                    name: 'ft_index'
+                })
+            }else {
+                 // 發送 ajax
+                let res = await $ajax('auctionauction1login',{
+                    mobile:phone,
+                    verifycode: code
+                }, () => {
+                    toast.clear()
+                })
+                // 如果返回爲 false ,則中斷函數
+                if (!res) return false
+                console.log(res)
+                // 保存 openid 以及 ip 到本地
+                localStorage.setItem('openid', res.openid)
+                // localStorage.setItem('ip', res.ip)
+                localStorage.setItem('mobile', phone)
+                this.$router.push({
+                    name: 'ft_index'
+                })
+            }
+           
         }
     },
     destroyed() {

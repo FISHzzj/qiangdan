@@ -44,7 +44,7 @@
                 <img :src="dianpu.names_img" alt="" />
                 <div class="name">{{dianpu.names}}</div>
             </div>
-            <div class="right" @click="$router.push('/ft_store/1')">进入店铺</div>
+            <div class="right" @click="$router.push('/ft_store')">进入店铺</div>
         </div>
         <div class="content">
             <div class="title">拍品详情</div>

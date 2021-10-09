@@ -31,10 +31,10 @@
                     <p class="type">积分</p>
                     <p class="num">{{credit1 || 0}}</p>
                 </div>
-                <div class="item" @click="paibi">
+                <!-- <div class="item" @click="paibi">
                     <p class="type">竞拍币</p>
                     <p class="num">{{credit50 || 0}}</p>
-                </div>
+                </div> -->
                 <div class="item">
                     <p class="type">累计佣金</p>
                     <p class="num">{{yj || 0}}</p>
@@ -70,7 +70,7 @@
             <div v-for="item in nav" @click="$router.push(item.url)" :key="item.name" class="item flex ali_center flex_between">
                 <img :src="item.img" alt="" />
                 <div class="right flex ali_center flex_between">
-                    <span>{{ item.name }}</span>
+                    <span>{{ item.name }} <span v-if="item.name == '竞拍币'">{{credit50 || 0}}</span></span>
                     <van-icon name="arrow" />
                 </div>
             </div>
@@ -89,6 +89,11 @@ export default {
     data() {
         return {
             nav: [
+                {
+                    img: require("@/assets/images/icon/dingdan.png"),
+                    name: "竞拍币",
+                    url: "/paibi"
+                },
                 {
                     img: require("@/assets/images/icon/about.png"),
                     name: "收货地址",

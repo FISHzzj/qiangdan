@@ -24,13 +24,13 @@
             <div class="title flex ali_center flex_between">
                 <div class="title flex ali_center">
                      <img src="@/assets/images/chuizi.png" alt="" />
-                    <div>热门拍卖</div>
+                    <div>拍卖专场</div>
                 </div>
                 <div><van-button round type="info" size="mini" @click="yuyueshow(item.id)">预约</van-button></div>
                
             </div>
             <div class="item" @click="gonext(item.id)">
-                <div class="status">风腾优品</div>
+                <div class="status">祥瑞昌拍</div>
                 <img :src="item.advimg" alt="" class="cover" />
                 <div class="storeInfo flex ali_center">
                     <div class="name flex ali_center">

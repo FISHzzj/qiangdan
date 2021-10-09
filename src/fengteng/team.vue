@@ -5,15 +5,15 @@
         <div class="top flex flex_between ali_center">
             <div class="item">
                 <div class="type">代理人数</div>
-                <div class="num">{{dl}}</div>
+                <div class="num">{{dl || 0}}</div>
             </div>
             <div class="item">
                 <div class="type">今日订单数</div>
-                <div class="num">{{dd}}</div>
+                <div class="num">{{dd || 0}}</div>
             </div>
             <div class="item">
                 <div class="type">今日佣金</div>
-                <div class="num">{{yj}}</div>
+                <div class="num">{{yj || 0}}</div>
             </div>
         </div>
         <div class="list">

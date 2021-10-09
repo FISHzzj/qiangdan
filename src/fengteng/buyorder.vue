@@ -52,13 +52,22 @@
                             </div>
                         </div>
                         <div class="right">
+                            <van-button v-if="item.show_status == 1" type="primary" size="mini" @click="godetail(item.show_status, item.id, item.qishu)">待付款</van-button>
                             <van-button v-if="item.show_status == 3 && item.is_del == 1" type="primary" size="mini" @click="sale(item.id)">转售</van-button>
                             <van-button v-if="item.show_status == 3 && item.is_del == 1" type="primary" size="mini" @click="zhuandingdan(item.id)">提货</van-button>
                             <van-button v-if="item.show_status == 3 && item.is_del == 1" type="primary" size="mini" @click="zhuanpaibi(item.id)">转竞拍币</van-button>
                             <van-button v-if="item.show_status == 1" type="primary" size="mini" @click="songdan(item.id)">送单</van-button>
                         </div>
                     </div>
+                    <div class="infos flex flex_between ali_center">
+                        <div class="left flex ali_center">
+                            <div>  
+                                <div class="time"><van-checkbox v-model="checked1">本人已经阅读《成交确认书》提货或转拍同意且签字</van-checkbox></div>
+                                <div class="time"><van-checkbox v-model="checked2">本人已经阅读《委托仓储拍卖协议》提货或转拍同意且签字</van-checkbox></div>
 
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </van-list>
         </div>
@@ -88,7 +97,9 @@ export default {
             limit: 10,
             finished: false,
             loading: false,
-            dianpu: null
+            dianpu: null,
+            checked1: false,
+            checked2: false,
         }
     },
     created(){
@@ -135,23 +146,33 @@ export default {
             }
         },
         async sale(id){
+            if(!checked1) return Toast('请阅读《成交确认书》');
+            if(!checked2) return Toast('请阅读《委托仓储拍卖协议》');
             let res = await $ajax('auctionauction1mai_order_status', {id: id})
             if(!res) return false
             Toast(res.msg)
+            this.page = 1
+            this.list = []
             this.getData()
 
 
         },
         async zhuandingdan(id){
+            if(!checked1) return Toast('请阅读《成交确认书》');
+            if(!checked2) return Toast('请阅读《委托仓储拍卖协议》');
             let res = await $ajax('auctionauction1zhuan_order', {id: id})
             if(!res) return false
             Toast(res.msg)
+            this.page = 1
+            this.list = []
             this.getData()
         },
         async zhuanpaibi(id){
             let res = await $ajax('auctionauction1zhuan_sxf', {id: id})
             if(!res) return false
             Toast(res.msg)
+            this.page = 1
+            this.list = []
             this.getData()
         },
         songdan(id){
@@ -250,6 +271,7 @@ export default {
                 }
                 .right {
                     text-align: right;
+                    white-space: nowrap;
                     .num {
                         font-size: 3.2vw;
                         color: #333;
