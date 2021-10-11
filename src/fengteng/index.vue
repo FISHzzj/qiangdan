@@ -15,9 +15,12 @@
             <van-notice-bar color="#6e6e6e" left-icon="volume-o" :text="guanggao" />
         </div>
         <div class="nav flex ali_center">
-            <router-link :to="item.url" class="item flex ali_center" v-for="(item,index) in nav" :key="index" tag="div">
-                <img :src="item.img" alt="" />
-                <span>{{item.name}}</span>
+            <router-link :to="item.url" class="item flex ali_center" v-for="(item,index) in nav" :key="index" tag="div"  >
+                <div v-if="item.name == '商城' || is_shangc == 1">
+                    <img :src="item.img" alt="" />
+                    <span>{{item.name}}</span>
+                </div>
+                
             </router-link>
         </div>
         <div class="adv" @click="$router.push('/ft_invite')">
@@ -99,6 +102,7 @@ export default {
             lunbo: [],
             guanggao: "",
             yq_img: "",
+            is_shangc: "",
         };
     },
     created(){
@@ -111,11 +115,12 @@ export default {
         async getData(){
             let res = await $ajax('auctionauction1', {})
             if(!res) return false
-            let {remai, lunbo, guanggao, yq_img} = res
+            let {remai, lunbo, guanggao, yq_img, is_shangc} = res
             this.remai = remai
             this.lunbo = lunbo
             this.guanggao = guanggao
             this.yq_img = yq_img
+            this.is_shangc = is_shangc
 
         },
         goitem(e) {
