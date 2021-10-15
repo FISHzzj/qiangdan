@@ -100,7 +100,8 @@ export default {
                  // 發送 ajax
                 let res = await $ajax('auctionauction1login',{
                     mobile:phone,
-                    pwd: pwd
+                    pwd: pwd,
+                    isa: 0,
                 }, () => {
                     toast.clear()
                 })
@@ -118,7 +119,8 @@ export default {
                  // 發送 ajax
                 let res = await $ajax('auctionauction1login',{
                     mobile:phone,
-                    verifycode: code
+                    verifycode: code,
+                    isa: 1
                 }, () => {
                     toast.clear()
                 })
