@@ -13,7 +13,12 @@
             <div class="item">
                 <p class="label">手机号</p>
                 <input type="text" v-model="phone" placeholder="请输入手机号" />
-            </div><div class="item">
+            </div>
+            <div class="item">
+                <p class="label">密码</p>
+                <input type="text" v-model="pwd" placeholder="请输入密码" />
+            </div>
+            <div class="item">
                 <p class="label">验证码</p>
                 <div class="flex flex_between ali_center">
                     <input type="text" v-model="code" placeholder="请输入短信验证码" />
@@ -44,6 +49,7 @@ export default {
             text: "获取验证码",
             spread: "",
             name: "",
+            pwd:"",
             timer: null
         };
     },
@@ -74,9 +80,9 @@ export default {
             if(!this.code) return Toast('请输入验证码')
             if(!this.name) return Toast('请输入姓名')
             if(!this.cardId) return Toast('请输入身份证号')
-            // if(!this.spread) return Toast('请输入邀请码')
+            if(!this.pwd) return Toast('请输入密码')
             
-            let res = await $ajax('auctionauction1register', { mobile: this.phone, verifycode: this.code, nickname:this.name, sfz:this.cardId, code: this.spread})
+            let res = await $ajax('auctionauction1register', { mobile: this.phone, verifycode: this.code, nickname:this.name, sfz:this.cardId, code: this.spread,pwd:this.pwd})
             if(!res) return false
             console.log(res)
             Toast('注册成功')

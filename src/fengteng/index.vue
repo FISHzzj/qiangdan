@@ -16,7 +16,11 @@
         </div>
         <div class="nav flex ali_center">
             <router-link :to="item.url" class="item flex ali_center" v-for="(item,index) in nav" :key="index" tag="div"  >
-                <div v-if="item.name == '商城' || is_shangc == 1">
+                <div class="item flex ali_center" v-if="item.name == '商城' || is_shangc == 1">
+                    <img :src="item.img" alt="" />
+                    <span>{{item.name}}</span>
+                </div>
+                <div class="item flex ali_center" v-else>
                     <img :src="item.img" alt="" />
                     <span>{{item.name}}</span>
                 </div>

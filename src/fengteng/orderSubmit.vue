@@ -155,7 +155,7 @@ export default {
             if(!res) return false
             Toast(res.msg)
             this.$router.push({
-                name: 'ft_store'
+                name: 'ft_buyorder'
             })
         }
     }

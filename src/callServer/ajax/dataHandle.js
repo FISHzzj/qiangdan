@@ -1,3 +1,5 @@
+import { Toast } from "vant"
+
 // status 0 等于 0 時, 統一進行處理
 function mistake (data) {
     // 如果返回的数据, 不是 json
@@ -9,9 +11,10 @@ function mistake (data) {
         return true //發生錯誤
     }
     if (parseInt(data.status) !== 1) {
-        Dialog.alert({
-            message: data.result.message
-        })
+        // Dialog.alert({
+        //     message: data.result.message
+        // })
+        Toast(data.result.message)
         return true //發生錯誤
     }
     return false //未發生錯誤

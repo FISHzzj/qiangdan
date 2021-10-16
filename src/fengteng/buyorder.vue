@@ -62,8 +62,8 @@
                     <div class="infos flex flex_between ali_center">
                         <div class="left flex ali_center">
                             <div>  
-                                <div class="time"><van-checkbox v-model="checked1">本人已经阅读《成交确认书》提货或转拍同意且签字</van-checkbox></div>
-                                <div class="time"><van-checkbox v-model="checked2">本人已经阅读《委托仓储拍卖协议》提货或转拍同意且签字</van-checkbox></div>
+                                <div class="time"><van-checkbox v-model="checked1" >本人已经阅读《成交确认书》提货或转拍同意且签字</van-checkbox></div>
+                                <div class="time"><van-checkbox v-model="checked2" >本人已经阅读《委托仓储拍卖协议》提货或转拍同意且签字</van-checkbox></div>
 
                             </div>
                         </div>
@@ -107,6 +107,7 @@ export default {
         // this.getData()
     },
     methods: {
+       
         async getData(){
             let res = await $ajax('auctionauction1mai_order_list', {show_status: this.status, page: this.page})
             if(!res) return false
@@ -117,6 +118,13 @@ export default {
              this.page++
             
             this.list.push(...res.list)
+            // if(this.list.length > 0){
+            //     this.list.forEach(v => {
+            //         v.isCheck1 = false;
+            //         v.isCheck2 = false;
+            //     });
+            // }
+
             // // // 加载状态结束
             this.loading = false
             if (res.list.length === 0) {
@@ -146,8 +154,8 @@ export default {
             }
         },
         async sale(id){
-            if(!checked1) return Toast('请阅读《成交确认书》');
-            if(!checked2) return Toast('请阅读《委托仓储拍卖协议》');
+            if(!this.checked1) return Toast('请阅读《成交确认书》');
+            if(!this.checked2) return Toast('请阅读《委托仓储拍卖协议》');
             let res = await $ajax('auctionauction1mai_order_status', {id: id})
             if(!res) return false
             Toast(res.msg)
@@ -157,15 +165,19 @@ export default {
 
 
         },
-        async zhuandingdan(id){
-            if(!checked1) return Toast('请阅读《成交确认书》');
-            if(!checked2) return Toast('请阅读《委托仓储拍卖协议》');
-            let res = await $ajax('auctionauction1zhuan_order', {id: id})
-            if(!res) return false
-            Toast(res.msg)
-            this.page = 1
-            this.list = []
-            this.getData()
+        zhuandingdan(id){
+            if(!this.checked1) return Toast('请阅读《成交确认书》');
+            if(!this.checked2) return Toast('请阅读《委托仓储拍卖协议》');
+            Dialog.confirm({
+                message: '是否确定提货',
+            }).then(async () => {
+                let res = await $ajax('auctionauction1zhuan_order', {id: id})
+                if(!res) return false
+                Toast(res.msg)
+                this.page = 1
+                this.list = []
+                this.getData()
+            })
         },
         async zhuanpaibi(id){
             let res = await $ajax('auctionauction1zhuan_sxf', {id: id})
@@ -176,12 +188,21 @@ export default {
             this.getData()
         },
         songdan(id){
-            this.$router.push({
-                name: 'ft_songdan',
-                query: {
-                    id
-                }
-            })
+            Dialog.confirm({
+                message: '是否确定送单',
+            }).then(() => {
+             // on close
+                this.$router.push({
+                    name: 'ft_songdan',
+                    query: {
+                        id
+                    }
+                })
+
+            }).catch(() => {
+                // on cancel
+            });
+            
             // let res = await $ajax('auctionauction1zhuan_auction', {id: id})
             // if(!res) return false
             // Toast(res.msg)
