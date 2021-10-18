@@ -1,6 +1,6 @@
 <template>
     <div class="register">
-        <div class="title on">欢迎注册风腾优品</div>
+        <div class="title on">欢迎注册祥瑞昌拍</div>
         <div class="list">
             <div class="item">
                 <p class="label">姓名</p>

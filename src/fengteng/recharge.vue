@@ -40,7 +40,7 @@
                 <van-uploader :max-count="1" v-model="fileList" :after-read="afterRead"  preview-size='200px' />
             </div>
         </div>
-        <div class="submit" @click="chongzhi">充值</div>
+        <div class="submit" @click.once="chongzhi">充值</div>
     </div>
 </template>
 <script>

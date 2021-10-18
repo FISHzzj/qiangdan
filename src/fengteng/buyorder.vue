@@ -51,7 +51,12 @@
 
                             </div>
                         </div>
-                        <div class="right">
+                        <div class="right" v-if="item.zhuan_uid_status == 1">
+                            <van-button  type="primary" size="mini" @click="jieshou(item.id, 1)">接受</van-button>
+                            <van-button  type="primary" size="mini" @click="tuihui(item.id, 2)">退回</van-button>
+
+                        </div>
+                        <div class="right" v-else>
                             <van-button v-if="item.show_status == 1" type="primary" size="mini" @click="godetail(item.show_status, item.id, item.qishu)">待付款</van-button>
                             <van-button v-if="item.show_status == 3 && item.is_del == 1" type="primary" size="mini" @click="sale(item.id)">转售</van-button>
                             <van-button v-if="item.show_status == 3 && item.is_del == 1" type="primary" size="mini" @click="zhuandingdan(item.id)">提货</van-button>
@@ -59,11 +64,11 @@
                             <van-button v-if="item.show_status == 1" type="primary" size="mini" @click="songdan(item.id)">送单</van-button>
                         </div>
                     </div>
-                    <div class="infos flex flex_between ali_center">
+                    <div class="infos flex flex_between ali_center" v-if="item.show_status == 3 && item.is_del == 1">
                         <div class="left flex ali_center">
                             <div>  
-                                <div class="time"><van-checkbox v-model="checked1" >本人已经阅读《成交确认书》提货或转拍同意且签字</van-checkbox></div>
-                                <div class="time"><van-checkbox v-model="checked2" >本人已经阅读《委托仓储拍卖协议》提货或转拍同意且签字</van-checkbox></div>
+                                <div class="time"><van-checkbox v-model="checked1" ></van-checkbox>本人已经阅读<span @click="xieyi" style="color:green">《成交确认书》</span>提货或转拍同意且签字 </div>
+                                <div class="time"><van-checkbox v-model="checked2" ></van-checkbox>本人已经阅读<span @click="xieyi1" style="color:green">《委托仓储拍卖协议》</span>提货或转拍同意且签字 </div>
 
                             </div>
                         </div>
@@ -107,7 +112,41 @@ export default {
         // this.getData()
     },
     methods: {
-       
+        async jieshou(id, status){
+            let res = await $ajax('auctionauction1song_ss', {id: id, status: status})
+            if(!res) return false
+            // console.log(res)【2条加绒加厚款】小猫黑色送深灰色,3XL建议140-170
+
+            Toast(res.msg)
+            this.page = 1
+            this.list = []
+            this.getData()
+        },
+        async tuihui(id, status){
+            let res = await $ajax('auctionauction1song_ss', {id: id, status: status})
+            if(!res) return false
+            // console.log(res)
+            Toast(res.msg)
+            this.page = 1
+            this.list = []
+            this.getData()
+        },
+       xieyi(){
+            Dialog.alert({
+                title:'成交确认书',
+                message: this.dianpu.xieyi1,
+            }).then( () => {
+                
+            })
+       },
+       xieyi1(){
+           Dialog.alert({
+                title:'委托仓储拍卖协议',
+                message: this.dianpu.xieyi2,
+            }).then( () => {
+                
+            })
+       },
         async getData(){
             let res = await $ajax('auctionauction1mai_order_list', {show_status: this.status, page: this.page})
             if(!res) return false
@@ -309,6 +348,9 @@ export default {
                 font-size: 3.2vw;
                 // line-height: 6vw;
                 margin-top: 2.4vw;
+                display: flex;
+                align-items: center;
+                white-space: nowrap;
             }
         }
     }

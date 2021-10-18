@@ -101,6 +101,8 @@ export default {
     auctionauction1zhuan_order: `${common}do=mobile&r=auction.auction1.zhuan_order`, // 转订单
     auctionauction1zhuan_sxf: `${common}do=mobile&r=auction.auction1.zhuan_sxf`, // 转拍拍币
     auctionauction1sell_order_detail: `${common}do=mobile&r=auction.auction1.sell_order_detail`, // 卖单详情
+    auctionauction1song_ss: `${common}do=mobile&r=auction.auction1.song_ss`, // 买单转给别人接收或退回新加接口1
+
     
     
     

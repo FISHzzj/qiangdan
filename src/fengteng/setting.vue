@@ -106,7 +106,7 @@ export default {
             // console.log(wx.conten)
             // console.log(wx.conten.cont1)
             if(wx.conten && this.type == 1){
-                // console.log(3333333)
+                console.log(3333333)
                 this.fileList[0].url = wx.conten.cont1
                 console.log(this.fileList)
                 this.wnum = wx.conten.cont2

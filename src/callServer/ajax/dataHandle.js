@@ -665,12 +665,13 @@ export default {
     },
     auctionauction1(data){
         if ( mistake(data) ) return false
-        let {remai, lunbo, guanggao, yq_img} = data.result
+        let {remai, lunbo, guanggao, yq_img, is_shangc} = data.result
         return{
             remai,
             lunbo,
             guanggao,
-            yq_img
+            yq_img,
+            is_shangc
         }
 
     },
@@ -820,6 +821,12 @@ export default {
         return {
             list,
             dianpu
+        }
+    },
+    auctionauction1song_ss(data){
+        if ( mistake(data) ) return false
+        return {
+            msg: data.result.message
         }
     },
     auctionauction1mai_order_status(data){

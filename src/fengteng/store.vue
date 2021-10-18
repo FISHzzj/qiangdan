@@ -42,7 +42,7 @@
                 </div>
             </div>
             <!-- <div class="item" @click="$router.push('/ft_goodsList/bottom?title=下午场')">
-                <div class="status">风腾优品</div>
+                <div class="status">祥瑞昌拍</div>
                 <img src="@/assets/images/getOrdersHeader.png" alt="" class="cover" />
                 <div class="storeInfo flex ali_center">
                     <div class="name flex ali_center">

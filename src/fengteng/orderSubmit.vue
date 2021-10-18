@@ -68,7 +68,7 @@
         <div class="uploader">
             <div class="title">上传凭证</div>
             <div class="vantuploader flex ali_center ">
-                <van-uploader  v-model="fileList" :after-read="afterRead" :max-count="1" preview-size='200px' />
+                <van-uploader v-model="fileList" :after-read="afterRead" :max-count="1" preview-size='200px' />
             </div>
             
         </div>
@@ -104,7 +104,7 @@ export default {
             payType: '1',
             address: {},
             img:'https://img.yzcdn.cn/vant/cat.jpeg',
-            fileList: [{url: ""}],
+            fileList: [],
             qishu: "", 
             gid: "",
             id: "",
@@ -135,7 +135,7 @@ export default {
         },
         change(type) {
             this.payType = type;
-            if(type == 'zhifubao'){
+            if(type == '2'){
                 this.img = this.zfb_img
             }else {
                 this.img = this.wx_img

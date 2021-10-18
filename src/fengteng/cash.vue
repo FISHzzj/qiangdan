@@ -53,7 +53,7 @@
                 <input type="number" v-model="money" />
             </div>
         </div>
-        <div class="submit" @click="tixian">提现</div>
+        <div class="submit" @clic.once="tixian">提现</div>
     </div>
 </template>
 <script>

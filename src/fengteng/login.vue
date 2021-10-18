@@ -1,6 +1,6 @@
 <template>
     <div class="login">
-        <div class="title">欢迎登录风腾优品</div>
+        <div class="title">欢迎登录祥瑞昌拍</div>
         <van-tabs v-model="active">
             <van-tab title="密码"></van-tab>
             <van-tab title="验证码"></van-tab>

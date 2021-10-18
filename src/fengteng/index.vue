@@ -16,14 +16,14 @@
         </div>
         <div class="nav flex ali_center">
             <router-link :to="item.url" class="item flex ali_center" v-for="(item,index) in nav" :key="index" tag="div"  >
-                <div class="item flex ali_center" v-if="item.name == '商城' || is_shangc == 1">
+                <!-- <div class="item flex ali_center" style="width:100%;" v-if="item.name == '商城'">
+                    <img :src="item.img" alt=""  v-if="is_shangc == '1'" />
+                    <span v-if="is_shangc == '1'">商城</span>
+                </div> -->
+                <!-- <div class="item flex ali_center" style="width:100%;" > -->
                     <img :src="item.img" alt="" />
                     <span>{{item.name}}</span>
-                </div>
-                <div class="item flex ali_center" v-else>
-                    <img :src="item.img" alt="" />
-                    <span>{{item.name}}</span>
-                </div>
+                <!-- </div> -->
                 
             </router-link>
         </div>
@@ -119,12 +119,65 @@ export default {
         async getData(){
             let res = await $ajax('auctionauction1', {})
             if(!res) return false
+            console.log(res);
             let {remai, lunbo, guanggao, yq_img, is_shangc} = res
             this.remai = remai
             this.lunbo = lunbo
             this.guanggao = guanggao
             this.yq_img = yq_img
             this.is_shangc = is_shangc
+            if(this.is_shangc == 1){
+                this.nav = [
+                    {
+                        img: require("@/assets/images/icon/chongbi1.png"),
+                        name: "订单中心",
+                        url: "/ft_buyorder"
+                    },
+                    {
+                        img: require("@/assets/images/icon/tibi1.png"),
+                        name: "手续费充值",
+                        url: "/ft_wallet"
+                    },
+                    {
+                        img: require("@/assets/images/icon/yaoqinghaoyou1.png"),
+                        name: "我的代理",
+                        url: "/ft_team"
+                    },
+                    {
+                        img: require("@/assets/images/icon/shouyi1.png"),
+                        name: "邀请好友",
+                        url: "/ft_invite"
+                    },
+                    {
+                        img: require("@/assets/images/icon/chongbi1.png"),
+                        name: "商城",
+                        url: "/ft_market"
+                    },
+                ]
+            }else{
+                this.nav = [
+                    {
+                        img: require("@/assets/images/icon/chongbi1.png"),
+                        name: "订单中心",
+                        url: "/ft_buyorder"
+                    },
+                    {
+                        img: require("@/assets/images/icon/tibi1.png"),
+                        name: "手续费充值",
+                        url: "/ft_wallet"
+                    },
+                    {
+                        img: require("@/assets/images/icon/yaoqinghaoyou1.png"),
+                        name: "我的代理",
+                        url: "/ft_team"
+                    },
+                    {
+                        img: require("@/assets/images/icon/shouyi1.png"),
+                        name: "邀请好友",
+                        url: "/ft_invite"
+                    }
+                ]
+            }
 
         },
         goitem(e) {
@@ -196,6 +249,7 @@ export default {
                 line-height: 7vw;
                 font-size: 3.47vw;
                 font-weight: 600;
+                white-space: nowrap;
             }
         }
     }

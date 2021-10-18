@@ -105,7 +105,7 @@
       </div>
 
     </div>
-    <div @click="getmoney" v-if="titletop == '卖单详情'" style="margin-top: 50px;">
+    <div @click="getmoney" v-if="titletop == '卖单详情'" style="position: fixed;bottom: 2vw;left: 4vw;">
       <van-button type="primary" block>确认收款</van-button>
     </div>
 
@@ -241,7 +241,10 @@ export default {
       console.log(res)
       Toast(res.msg)
       this.$router.push({
-        name: 'ft_store'
+        name: 'ft_saleorder',
+        query:{
+          status:3
+        }
       })
     }
   }

@@ -50,7 +50,7 @@
                             
                         </div>
                         <div class="right">
-                            <!-- <van-button v-if="item.show_status == 2 " type="primary" size="mini" @click="queren">确认收款</van-button> -->
+                            <van-button v-if="item.show_status == 2 " type="primary" size="mini" @click="godetail(item.show_status, item.id, item.qishu)">确认收款</van-button>
 
                         </div>
                     </div>
@@ -78,6 +78,14 @@ export default {
             mobile: "",
             avatar: "",
         }
+    },
+    created(){
+        let status = this.$route.query.status;
+        console.log(status)
+        if(status){
+            this.status = status
+        }
+
     },
     mounted(){
         // this.getData()
